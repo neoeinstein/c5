@@ -41,7 +41,7 @@ using System;
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version
-//      Minor Version 
+//      Minor Version
 //      Build Number
 //      Revision
 //
@@ -77,7 +77,7 @@ using System;
 //
 #if STRONGNAME
 [assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile("..\\..\\..\\c5.snk")]
+[assembly: AssemblyKeyFile("..\\c5.snk")]
 #endif
 //[assembly: AssemblyKeyName("")]
 

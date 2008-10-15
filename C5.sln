@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserGuideExamples", "UserGu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreProcess", "PreProcess\PreProcess.csproj", "{6222CA51-7D1A-4D42-B6A7-B5CE9608C18F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Strong Name Key", "Strong Name Key", "{2EEE2D02-D5DD-4FED-926C-8BEEE21570ED}"
+	ProjectSection(SolutionItems) = preProject
+		C5.snk = C5.snk
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
