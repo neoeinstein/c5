@@ -1,0 +1,3 @@
+*.tex	diff=tex
+*.pdf	binary
+*.ps	binary
