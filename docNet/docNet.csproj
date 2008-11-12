@@ -35,25 +35,9 @@
     <WarningLevel>4</WarningLevel>
     <IncrementalBuild>false</IncrementalBuild>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'DebugSnk' ">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\DebugSnk\</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
-    <DocumentationFile>docnet.xml</DocumentationFile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'ReleaseSnk' ">
-    <OutputPath>bin\ReleaseSnk\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml">
-      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.2.30703\System.XML.dll</HintPath>
-      <Name>System.XML</Name>
-    </Reference>
+    <Reference Include="System.Xml" />
     <ProjectReference Include="..\C5\C5.csproj">
       <Project>{D70489CD-ABDA-48FF-BD1E-BE3F7495BE71}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>

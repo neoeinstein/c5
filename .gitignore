@@ -10,7 +10,7 @@ _ReSharper*
 
 *.bak
 
-C5/c5.xml
+C5/C5.xml
 C5/trees/RedBlackTreeBag.cs
 C5/arrays/HashedArrayList.cs
 C5/linkedlists/HashedLinkedList.cs

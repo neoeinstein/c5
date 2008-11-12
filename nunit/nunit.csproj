@@ -34,18 +34,6 @@
     <WarningLevel>4</WarningLevel>
     <IncrementalBuild>false</IncrementalBuild>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'DebugSnk' ">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\DebugSnk\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'ReleaseSnk' ">
-    <OutputPath>bin\ReleaseSnk\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\C5\C5.csproj">
       <Project>{D70489CD-ABDA-48FF-BD1E-BE3F7495BE71}</Project>
