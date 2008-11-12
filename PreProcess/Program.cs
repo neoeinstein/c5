@@ -63,7 +63,8 @@ namespace PreProcess
     }
     static void Main(string[] args)
     {
-      System.Environment.CurrentDirectory = @"..\..\..\C5";
+      if (args.Length > 0)
+        System.Environment.CurrentDirectory = args[0];
       preprocess("trees", "RedBlackTreeSet.cs", "RedBlackTreeBag.cs", "BAG", "TreeSet", "TreeBag");
       preprocess("arrays", "ArrayList.cs", "HashedArrayList.cs", "HASHINDEX", "ArrayList", "HashedArrayList");
       preprocess("linkedlists", "LinkedList.cs", "HashedLinkedList.cs", "HASHINDEX", "LinkedList", "HashedLinkedList");
