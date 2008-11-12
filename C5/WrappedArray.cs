@@ -936,7 +936,7 @@ namespace C5
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {
-      throw new Exception("The method or operation is not implemented.");
+      return GetEnumerator();
     }
 
     #endregion
