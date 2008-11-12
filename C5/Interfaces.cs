@@ -722,11 +722,6 @@ namespace C5
     bool FIFO { get; set;}
 
     /// <summary>
-    /// 
-    /// </summary>
-    bool IsFixedSize { get; }
-
-    /// <summary>
     /// On this list, this indexer is read/write.
     /// </summary>
     /// <exception cref="IndexOutOfRangeException"> if index is negative or
