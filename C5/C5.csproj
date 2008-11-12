@@ -103,7 +103,7 @@
     </Compile>
     <Compile Include="hashing\HashDictionary.cs">
     </Compile>
-    <Compile Include="hashing\HashTable.cs">
+    <Compile Include="hashing\HashSet.cs">
     </Compile>
     <Compile Include="heaps\IntervalHeap.cs">
     </Compile>
