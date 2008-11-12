@@ -291,14 +291,14 @@ namespace C5UnitTests.hashtable.dictionary
     public void Keys()
     {
       SCG.IEnumerator<string> keys = dict.Keys.GetEnumerator();
-
-      Assert.IsTrue(keys.MoveNext());
-      Assert.AreEqual("R", keys.Current);
-      Assert.IsTrue(keys.MoveNext());
-      Assert.AreEqual("T", keys.Current);
-      Assert.IsTrue(keys.MoveNext());
-      Assert.AreEqual("S", keys.Current);
-      Assert.IsFalse(keys.MoveNext());
+      IDictionary<string, string> d2 = (IDictionary<string, string>) dict.Clone();
+      while(d2.Count > 0)
+      {
+        Assert.IsTrue(keys.MoveNext());
+        Assert.IsTrue(d2.Contains(keys.Current));
+        d2.Remove(keys.Current);
+      }
+      Assert.IsFalse (keys.MoveNext ());
     }
 
 
@@ -306,32 +306,37 @@ namespace C5UnitTests.hashtable.dictionary
     public void Values()
     {
       SCG.IEnumerator<string> values = dict.Values.GetEnumerator();
-
-      Assert.IsTrue(values.MoveNext());
-      Assert.AreEqual("C", values.Current);
-      Assert.IsTrue(values.MoveNext());
-      Assert.AreEqual("B", values.Current);
-      Assert.IsTrue(values.MoveNext());
-      Assert.AreEqual("A", values.Current);
+      IDictionary<string, string> d2 = (IDictionary<string, string>)dict.Clone();
+      while (d2.Count > 0)
+      {
+        KeyValuePair<string, string> pair;
+        Assert.IsTrue(values.MoveNext());
+        Assert.IsTrue(d2.Find(kvp => kvp.Value == values.Current, out pair));
+        d2.Remove(pair.Key);
+      }
       Assert.IsFalse(values.MoveNext());
     }
 
     [Test]
     public void Fun()
     {
+      Assert.AreEqual("A", dict.Fun("S"));
       Assert.AreEqual("B", dict.Fun("T"));
+      Assert.AreEqual("C", dict.Fun("R"));
     }
 
 
     [Test]
     public void NormalUse()
     {
-      Assert.IsTrue(dictenum.MoveNext());
-      Assert.AreEqual(dictenum.Current, new KeyValuePair<string, string>("R", "C"));
-      Assert.IsTrue(dictenum.MoveNext());
-      Assert.AreEqual(dictenum.Current, new KeyValuePair<string, string>("T", "B"));
-      Assert.IsTrue(dictenum.MoveNext());
-      Assert.AreEqual(dictenum.Current, new KeyValuePair<string, string>("S", "A"));
+      IDictionary<string, string> d2 = (IDictionary<string, string>)dict.Clone();
+      while (d2.Count > 0)
+      {
+        KeyValuePair<string, string> pair;
+        Assert.IsTrue(dictenum.MoveNext());
+        Assert.IsTrue(d2.Find(kvp => kvp.Value == dictenum.Current.Value && kvp.Key == dictenum.Current.Key, out pair));
+        d2.Remove(pair.Key);
+      }
       Assert.IsFalse(dictenum.MoveNext());
     }
   }
