@@ -78,6 +78,7 @@ namespace C5
   /// via the static <see cref="P:C5.SByteEqualityComparer.Default"/> property</para>
   /// </summary>
   [Serializable]
+  [CLSCompliant(false)]
   public class SByteEqualityComparer : SCG.IEqualityComparer<sbyte>
   {
     static SByteEqualityComparer cached;
@@ -214,6 +215,7 @@ namespace C5
   /// via the static <see cref="P:C5.UShortEqualityComparer.Default"/> property</para>
   /// </summary>
   [Serializable]
+  [CLSCompliant(false)]
   public class UShortEqualityComparer : SCG.IEqualityComparer<ushort>
   {
     static UShortEqualityComparer cached;
@@ -310,6 +312,7 @@ namespace C5
   /// via the static <see cref="P:C5.UIntEqualityComparer.Default"/> property</para>
   /// </summary>
   [Serializable]
+  [CLSCompliant(false)]
   public class UIntEqualityComparer : SCG.IEqualityComparer<uint>
   {
     static UIntEqualityComparer cached;
@@ -406,6 +409,7 @@ namespace C5
   /// via the static <see cref="P:C5.ULongEqualityComparer.Default"/> property</para>
   /// </summary>
   [Serializable]
+  [CLSCompliant(false)]
   public class ULongEqualityComparer : SCG.IEqualityComparer<ulong>
   {
     static ULongEqualityComparer cached;
