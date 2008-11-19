@@ -1,4 +1,9 @@
-﻿using System;
+﻿// This file should only contain assembly level attributes.
+// Do not add any class or struct definitions as it may disable the ability of the tool to
+// update the file.
+
+using System;
+
 using System.Runtime.CompilerServices;
 using MbUnit.Pex;
 using Microsoft.Pex.Framework.Instrumentation;
