@@ -42,8 +42,18 @@ namespace C5
     [Tested]
     public static void IntroSort<T>(T[] array, int start, int count, SCG.IComparer<T> comparer)
     {
-      if (start < 0 || count < 0 || start + count > array.Length)
-        throw new ArgumentOutOfRangeException();
+      if (array == null)
+        throw new ArgumentNullException("array", "Array must not be null in order to be sorted.");
+      if (comparer == null)
+        throw new ArgumentNullException("comparer", "Comparer must not be null to sort an array.");
+      if (0 > start || start >= array.Length)
+        throw new ArgumentOutOfRangeException("start", start, "Index must be within the bounds of the array.");
+      if (0 > count || count > array.Length)
+        throw new ArgumentOutOfRangeException("count", count, "Count must be between 0 and the length of the array.");
+	  if (start + count > array.Length)
+        throw new ArgumentOutOfRangeException("count", count, "Cannot sort items beyond the end of the array.");
+      if (count <= 1)
+        return;
       new Sorter<T>(array, comparer).IntroSort(start, start + count);
     }
 
@@ -55,6 +65,10 @@ namespace C5
     [Tested]
     public static void IntroSort<T>(T[] array)
     {
+      if (array == null)
+        throw new ArgumentNullException();
+      if (array.Length <= 1)
+        return;
       new Sorter<T>(array, Comparer<T>.Default).IntroSort(0, array.Length);
     }
 
@@ -71,8 +85,18 @@ namespace C5
     [Tested]
     public static void InsertionSort<T>(T[] array, int start, int count, SCG.IComparer<T> comparer)
     {
-      if (start < 0 || count < 0 || start + count > array.Length)
-        throw new ArgumentOutOfRangeException();
+      if (array == null)
+        throw new ArgumentNullException("array", "Array must not be null in order to be sorted.");
+      if (comparer == null)
+        throw new ArgumentNullException("comparer", "Comparer must not be null to sort an array.");
+      if (0 > start || start >= array.Length)
+        throw new ArgumentOutOfRangeException("start", start, "Index must be within the bounds of the array.");
+      if (0 > count || count > array.Length)
+        throw new ArgumentOutOfRangeException("count", count, "Count must be between 0 and the length of the array.");
+	  if (start + count > array.Length)
+        throw new ArgumentOutOfRangeException("count", count, "Cannot sort items beyond the end of the array.");
+      if (count <= 1)
+        return;
       new Sorter<T>(array, comparer).InsertionSort(start, start + count);
     }
 
@@ -89,8 +113,18 @@ namespace C5
     [Tested]
     public static void HeapSort<T>(T[] array, int start, int count, SCG.IComparer<T> comparer)
     {
-      if (start < 0 || count < 0 || start + count > array.Length)
-        throw new ArgumentOutOfRangeException();
+      if (array == null)
+        throw new ArgumentNullException("array", "Array must not be null in order to be sorted.");
+      if (comparer == null)
+        throw new ArgumentNullException("comparer", "Comparer must not be null to sort an array.");
+      if (0 > start || start >= array.Length)
+        throw new ArgumentOutOfRangeException("start", start, "Index must be within the bounds of the array.");
+      if (0 > count || count > array.Length)
+        throw new ArgumentOutOfRangeException("count", count, "Count must be between 0 and the length of the array.");
+	  if (start + count > array.Length)
+        throw new ArgumentOutOfRangeException("count", count, "Cannot sort items beyond the end of the array.");
+      if (count <= 1)
+        return;
       new Sorter<T>(array, comparer).HeapSort(start, start + count);
     }
 
