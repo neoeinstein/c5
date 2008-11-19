@@ -33,6 +33,9 @@
   <ItemGroup>
     <Reference Include="Gallio" />
     <Reference Include="MbUnit" />
+    <Reference Include="MbUnit.Pex" />
+    <Reference Include="Microsoft.Pex.Framework" />
+    <Reference Include="Microsoft.Pex.Graphs" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -53,7 +56,24 @@
     <Compile Include="Exceptions\ReadOnlyCollectionExceptionFixture.cs" />
     <Compile Include="Exceptions\UnlistenableEventExceptionFixture.cs" />
     <Compile Include="Exceptions\ViewDisposedExceptionFixture.cs" />
+    <Compile Include="Properties\PexAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortingFixture.cs" />
+    <Compile Include="SortingFixture.HeapSort.g.cs">
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixture.InsertionSort.g.cs">
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixture.IntroSort_Full.g.cs">
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixture.IntroSort_Short.g.cs">
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixture.IntroSort_WorstCase.g.cs">
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\C5\C5.csproj">
