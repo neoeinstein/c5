@@ -41,6 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\CollectionModifiedExceptionFixture.cs" />
+    <Compile Include="Exceptions\DuplicateNotAllowedExceptionFixture.cs" />
+    <Compile Include="Exceptions\FixedSizeCollectionExceptionFixture.cs" />
+    <Compile Include="Exceptions\IncompatibleViewExceptionFixture.cs" />
+    <Compile Include="Exceptions\InternalExceptionFixture.cs" />
+    <Compile Include="Exceptions\InvalidPriorityQueueHandleExceptionFixture.cs" />
+    <Compile Include="Exceptions\NoSuchItemExceptionFixture.cs" />
+    <Compile Include="Exceptions\NotAViewExceptionFixture.cs" />
+    <Compile Include="Exceptions\NotComparableExceptionFixture.cs" />
+    <Compile Include="Exceptions\ReadOnlyCollectionExceptionFixture.cs" />
+    <Compile Include="Exceptions\UnlistenableEventExceptionFixture.cs" />
+    <Compile Include="Exceptions\ViewDisposedExceptionFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
