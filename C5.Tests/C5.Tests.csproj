@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -44,7 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Gallio\MbUnit.Pex.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Pex.Framework" />
+    <Reference Include="Microsoft.Pex.Framework">
+      <HintPath>C:\WINDOWS\assembly\GAC_MSIL\Microsoft.Pex.Framework\0.9.40114.0__76a274db078248c8\Microsoft.Pex.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Pex.Graphs" />
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -52,6 +53,15 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="mscorlib">
+      <HintPath>c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="MbUnit">
+      <HintPath>d:\dev\C5\C5.Tests\bin\Debug\MbUnit.dll</HintPath>
+    </Reference>
+    <Reference Include="Gallio">
+      <HintPath>d:\dev\C5\C5.Tests\bin\Debug\Gallio.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\CollectionModifiedExceptionFixture.cs" />
@@ -69,27 +79,34 @@
     <Compile Include="Properties\PexAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortingFixture.cs" />
-    <Compile Include="SortingFixture.HeapSort.g.cs">
-      <DependentUpon>SortingFixture.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SortingFixture.InsertionSort.g.cs">
-      <DependentUpon>SortingFixture.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SortingFixture.IntroSort_Full.g.cs">
-      <DependentUpon>SortingFixture.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SortingFixture.IntroSort_Short.g.cs">
-      <DependentUpon>SortingFixture.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SortingFixture.IntroSort_WorstCase.g.cs">
-      <DependentUpon>SortingFixture.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\C5\C5.csproj">
       <Project>{D70489CD-ABDA-48FF-BD1E-BE3F7495BE71}</Project>
       <Name>C5</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SortingFixtureIntroSort_ShortInt3201.g.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixtureIntroSort_FullInt320Int32Int322.g.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixtureInsertionSortInt320Int32Int323.g.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixtureHeapSortInt320Int32Int324.g.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixtureIntroSort_WorstCaseInt325.g.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

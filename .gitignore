@@ -3,6 +3,7 @@ obj/
 debug/
 release/
 
+*.old
 *.cache
 *.suo
 *.user
