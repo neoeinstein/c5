@@ -82,3 +82,4 @@ using System;
 //[assembly: AssemblyKeyName("")]
 
 [assembly: CLSCompliant(true)]
+[assembly: InternalsVisibleTo("C5.Tests")]

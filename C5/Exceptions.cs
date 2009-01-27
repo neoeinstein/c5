@@ -20,7 +20,7 @@
 */
 
 using System;
-using System.Diagnostics;
+using System.Runtime.Serialization;
 using SCG = System.Collections.Generic;
 
 namespace C5
@@ -28,9 +28,47 @@ namespace C5
   /// <summary>
   /// An exception to throw from library code when an internal inconsistency is encountered.
   /// </summary>
+  [Serializable]
   public class InternalException : Exception
   {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InternalException"/> class.
+    /// </summary>
+    internal InternalException() { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InternalException"/>
+    /// class with a specified error message.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
     internal InternalException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InternalException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    internal InternalException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InternalException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected InternalException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
   }
 
   /// <summary>
@@ -38,53 +76,143 @@ namespace C5
   /// <para>This exception will be thrown unconditionally when an update operation 
   /// (method or set property) is called. No check is made to see if the update operation, 
   /// if allowed, would actually change the collection. </para>
+  /// <seealso cref="GuardedCollectionValue{T}"/>
   /// </summary>
   [Serializable]
-  public class ReadOnlyCollectionException : Exception
+  public class ReadOnlyCollectionException : InvalidOperationException
   {
     /// <summary>
-    /// Create a simple exception with no further explanation.
+    /// Initializes a new instance of the <see cref="ReadOnlyCollectionException"/> class.
     /// </summary>
-    public ReadOnlyCollectionException() : base() { }
+    public ReadOnlyCollectionException() { }
+
     /// <summary>
-    /// Create the exception with an explanation of the reason.
+    /// Initializes a new instance of the <see cref="ReadOnlyCollectionException"/>
+    /// class with a specified error message.
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message that describes the error.</param>
     public ReadOnlyCollectionException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ReadOnlyCollectionException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    public ReadOnlyCollectionException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ReadOnlyCollectionException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected ReadOnlyCollectionException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
   }
 
   /// <summary>
-  /// 
+  /// An exception thrown when an attempt is made to add or remove members from a fixed-size
+  /// collection, such as <see cref="WrappedArray{T}"/>
   /// </summary>
   [Serializable]
-  public class FixedSizeCollectionException : Exception
+  public class FixedSizeCollectionException : InvalidOperationException
   {
     /// <summary>
-    /// Create a simple exception with no further explanation.
+    /// Initializes a new instance of the <see cref="FixedSizeCollectionException"/> class.
     /// </summary>
-    public FixedSizeCollectionException() : base() { }
+    public FixedSizeCollectionException() { }
+
     /// <summary>
-    /// Create the exception with an explanation of the reason.
+    /// Initializes a new instance of the <see cref="FixedSizeCollectionException"/>
+    /// class with a specified error message.
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message that describes the error.</param>
     public FixedSizeCollectionException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FixedSizeCollectionException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    public FixedSizeCollectionException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FixedSizeCollectionException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected FixedSizeCollectionException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
   }
 
   /// <summary>
-  /// 
+  /// An exception thrown when an attempt is made to listen to an event for which
+  /// the current object does not raise events.
   /// </summary>
   [Serializable]
   public class UnlistenableEventException : Exception
   {
     /// <summary>
-    /// Create a simple exception with no further explanation.
+    /// Initializes a new instance of the <see cref="UnlistenableEventException"/> class.
     /// </summary>
-    public UnlistenableEventException() : base() { }
+      public UnlistenableEventException() { }
+
     /// <summary>
-    /// Create the exception with an explanation of the reason.
+    /// Initializes a new instance of the <see cref="UnlistenableEventException"/>
+    /// class with a specified error message.
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message that describes the error.</param>
     public UnlistenableEventException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UnlistenableEventException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    public UnlistenableEventException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UnlistenableEventException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected UnlistenableEventException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
   }
 
   /// <summary>
@@ -92,22 +220,51 @@ namespace C5
   /// the underlying collection has been modified.
   /// </summary>
   [Serializable]
-  public class CollectionModifiedException : Exception
+  public class CollectionModifiedException : InvalidOperationException
   {
     /// <summary>
-    /// Create a simple exception with no further explanation.
+    /// Initializes a new instance of the <see cref="CollectionModifiedException"/> class.
     /// </summary>
-    public CollectionModifiedException() : base() { }
+    public CollectionModifiedException() { }
+
     /// <summary>
-    /// Create the exception with an explanation of the reason.
+    /// Initializes a new instance of the <see cref="CollectionModifiedException"/>
+    /// class with a specified error message.
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message that describes the error.</param>
     public CollectionModifiedException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CollectionModifiedException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    public CollectionModifiedException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CollectionModifiedException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected CollectionModifiedException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
   }
 
   /// <summary>
-  /// An excption thrown when trying to access a view (a list view on a <see cref="T:C5.IList`1"/> or 
-  /// a snapshot on a <see cref="T:C5.IPersistentSorted`1"/>)
+  /// An excption thrown when trying to access a view (a list view on a <see cref="IList{T}"/> or 
+  /// a snapshot on a <see cref="IPersistentSorted{T}"/>)
   /// that has been invalidated by some earlier operation.
   /// <para>
   /// The typical scenario is a view on a list that hash been invalidated by a call to 
@@ -115,112 +272,288 @@ namespace C5
   /// </para>
   /// </summary>
   [Serializable]
-  public class ViewDisposedException : Exception
+  public class ViewDisposedException : InvalidOperationException
   {
     /// <summary>
-    /// Create a simple exception with no further explanation.
+    /// Initializes a new instance of the <see cref="ViewDisposedException"/> class.
     /// </summary>
-    public ViewDisposedException() : base() { }
+    public ViewDisposedException() { }
+
     /// <summary>
-    /// Create the exception with an explanation of the reason.
+    /// Initializes a new instance of the <see cref="ViewDisposedException"/>
+    /// class with a specified error message.
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message that describes the error.</param>
     public ViewDisposedException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ViewDisposedException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    public ViewDisposedException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ViewDisposedException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected ViewDisposedException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
   }
 
   /// <summary>
   /// An exception thrown by a lookup or lookup with update operation that does not 
   /// find the lookup item and has no other means to communicate failure.
   /// <para>The typical scenario is a lookup by key in a dictionary with an indexer,
-  /// see e.g. <see cref="P:C5.IDictionary`2.Item(`0)"/></para>
+  /// see e.g. <see cref="P:IDictionary{K,V}.Item"/></para>
   /// </summary>
   [Serializable]
   public class NoSuchItemException : Exception
   {
     /// <summary>
-    /// Create a simple exception with no further explanation.
+    /// Initializes a new instance of the <see cref="NoSuchItemException"/> class.
     /// </summary>
-    public NoSuchItemException() : base() { }
+    public NoSuchItemException() { }
+
     /// <summary>
-    /// Create the exception with an explanation of the reason.
+    /// Initializes a new instance of the <see cref="NoSuchItemException"/>
+    /// class with a specified error message.
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message that describes the error.</param>
     public NoSuchItemException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NoSuchItemException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    public NoSuchItemException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NoSuchItemException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected NoSuchItemException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
   }
 
   /// <summary>
-  /// An exception thrown by an operation on a list (<see cref="T:C5.IList`1"/>)
+  /// An exception thrown by an operation on a list (<see cref="IList{T}"/>)
   /// that only makes sense for a view, not for an underlying list.
   /// </summary>
   [Serializable]
   public class NotAViewException : Exception
   {
     /// <summary>
-    /// Create a simple exception with no further explanation.
+    /// Initializes a new instance of the <see cref="NotAViewException"/> class.
     /// </summary>
-    public NotAViewException() : base() { }
+    public NotAViewException() { }
+
     /// <summary>
-    /// Create the exception with an explanation of the reason.
+    /// Initializes a new instance of the <see cref="NotAViewException"/>
+    /// class with a specified error message.
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message that describes the error.</param>
     public NotAViewException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NotAViewException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    public NotAViewException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NotAViewException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected NotAViewException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
   }
 
   /// <summary>
   /// An exception thrown when an operation attempts to create a duplicate in a collection with set semantics 
-  /// (<see cref="P:C5.IExtensible`1.AllowsDuplicates"/> is false) or attempts to create a duplicate key in a dictionary.
+  /// (<see cref="IExtensible{T}.AllowsDuplicates"/> is false) or attempts to create a duplicate key in a dictionary.
   /// <para>With collections this can only happen with Insert operations on lists, since the Add operations will
   /// not try to create duplictes and either ignore the failure or report it in a bool return value.
   /// </para>
-  /// <para>With dictionaries this can happen with the <see cref="M:C5.IDictionary`2.Add(`0,`1)"/> metod.</para>
+  /// <para>With dictionaries this can happen with the <see cref="IDictionary{K,V}.Add"/> method.</para>
   /// </summary>
   [Serializable]
   public class DuplicateNotAllowedException : Exception
   {
     /// <summary>
-    /// Create a simple exception with no further explanation.
+    /// Initializes a new instance of the <see cref="DuplicateNotAllowedException"/> class.
     /// </summary>
-    public DuplicateNotAllowedException() : base() { }
+    public DuplicateNotAllowedException() { }
+
     /// <summary>
-    /// Create the exception with an explanation of the reason.
+    /// Initializes a new instance of the <see cref="DuplicateNotAllowedException"/>
+    /// class with a specified error message.
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message that describes the error.</param>
     public DuplicateNotAllowedException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DuplicateNotAllowedException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    public DuplicateNotAllowedException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DuplicateNotAllowedException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected DuplicateNotAllowedException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
   }
 
   /// <summary>
-  /// 
+  /// An exception thrown when a given handle is invalid.  This can be due to an attempt to add
+  /// a handle to the queue when that handle is already in use or an attempt to use the handle
+  /// to reference an object no longer in the queue or associated with a different queue.
   /// </summary>
   [Serializable]
-  public class InvalidPriorityQueueHandleException : Exception
+  public class InvalidPriorityQueueHandleException : InvalidOperationException
   {
     /// <summary>
-    /// Create a simple exception with no further explanation.
+    /// Initializes a new instance of the <see cref="InvalidPriorityQueueHandleException"/> class.
     /// </summary>
-    public InvalidPriorityQueueHandleException() : base() { }
+    public InvalidPriorityQueueHandleException() { }
+
     /// <summary>
-    /// Create the exception with an explanation of the reason.
+    /// Initializes a new instance of the <see cref="InvalidPriorityQueueHandleException"/>
+    /// class with a specified error message.
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message that describes the error.</param>
     public InvalidPriorityQueueHandleException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InvalidPriorityQueueHandleException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    public InvalidPriorityQueueHandleException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InvalidPriorityQueueHandleException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected InvalidPriorityQueueHandleException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
   }
 
   /// <summary>
-  /// An exception thrown by an operation that need to construct a natural
-  /// comparer for a type.
+  /// An exception thrown when an operation needs to make a comparison between two objects
+  /// but they are not comparable, i.e. do not implement <see cref="IComparable{T}"/>.
   /// </summary>
   [Serializable]
   public class NotComparableException : Exception
   {
     /// <summary>
-    /// Create a simple exception with no further explanation.
+    /// Initializes a new instance of the <see cref="NotComparableException"/> class.
     /// </summary>
-    public NotComparableException() : base() { }
+    public NotComparableException() { }
+
     /// <summary>
-    /// Create the exception with an explanation of the reason.
+    /// Initializes a new instance of the <see cref="NotComparableException"/>
+    /// class with a specified error message.
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message that describes the error.</param>
     public NotComparableException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NotComparableException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    public NotComparableException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NotComparableException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected NotComparableException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
   }
 
   /// <summary>
@@ -231,14 +564,42 @@ namespace C5
   public class IncompatibleViewException : Exception
   {
     /// <summary>
-    /// Create a simple exception with no further explanation.
+    /// Initializes a new instance of the <see cref="IncompatibleViewException"/> class.
     /// </summary>
-    public IncompatibleViewException() : base() { }
-    /// <summary>
-    /// Create the exception with an explanation of the reason.
-    /// </summary>
-    /// <param name="message"></param>
-    public IncompatibleViewException(string message) : base(message) { }
-  }
+    public IncompatibleViewException() { }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IncompatibleViewException"/>
+    /// class with a specified error message.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    public IncompatibleViewException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IncompatibleViewException"/>
+    /// class with a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="inner">
+    /// The exception that is the cause of the current exception, or a null reference if
+    /// no inner exception is specified.
+    /// </param>
+    public IncompatibleViewException(string message, Exception inner) : base(message, inner) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IncompatibleViewException"/>
+    /// class with serialized data.
+    /// </summary>
+    /// <param name="info">
+    /// The <see cref="SerializationInfo"/> that holds the serialized object data about
+    /// the exception being thrown.
+    /// </param>
+    /// <param name="context">
+    /// The <see cref="StreamingContext"/> that contains contextual information about
+    /// the source or destination.
+    /// </param>
+    protected IncompatibleViewException(SerializationInfo info, StreamingContext context) 
+        : base(info, context) { }
+  }
 }

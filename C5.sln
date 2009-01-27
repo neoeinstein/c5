@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Strong Name Key", "Strong N
 		C5.snk = C5.snk
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C5.Tests", "C5.Tests\C5.Tests.csproj", "{71E033DE-B26A-4AEE-982F-0997AA63D1F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,14 @@ Global
 		{6222CA51-7D1A-4D42-B6A7-B5CE9608C18F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6222CA51-7D1A-4D42-B6A7-B5CE9608C18F}.ReleaseSnk|Any CPU.ActiveCfg = Release|Any CPU
 		{6222CA51-7D1A-4D42-B6A7-B5CE9608C18F}.ReleaseSnk|Any CPU.Build.0 = Release|Any CPU
+		{71E033DE-B26A-4AEE-982F-0997AA63D1F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71E033DE-B26A-4AEE-982F-0997AA63D1F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71E033DE-B26A-4AEE-982F-0997AA63D1F9}.DebugSnk|Any CPU.ActiveCfg = Debug|Any CPU
+		{71E033DE-B26A-4AEE-982F-0997AA63D1F9}.DebugSnk|Any CPU.Build.0 = Debug|Any CPU
+		{71E033DE-B26A-4AEE-982F-0997AA63D1F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71E033DE-B26A-4AEE-982F-0997AA63D1F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71E033DE-B26A-4AEE-982F-0997AA63D1F9}.ReleaseSnk|Any CPU.ActiveCfg = Release|Any CPU
+		{71E033DE-B26A-4AEE-982F-0997AA63D1F9}.ReleaseSnk|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
