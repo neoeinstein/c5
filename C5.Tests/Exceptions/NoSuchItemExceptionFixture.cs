@@ -4,8 +4,9 @@ using MbUnit.Framework.ContractVerifiers;
 namespace C5.Tests.Exceptions
 {
     [Category("Exceptions")]
-    [VerifyExceptionContract(typeof(NoSuchItemException))]
     public class NoSuchItemExceptionFixture
     {
+        [VerifyContract]
+        public readonly IContract ExceptionTests = new ExceptionContract<NoSuchItemException>();
     }
 }
