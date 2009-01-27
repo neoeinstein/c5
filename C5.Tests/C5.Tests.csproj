@@ -32,9 +32,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gallio" />
-    <Reference Include="MbUnit" />
-    <Reference Include="MbUnit.Pex" />
+    <Reference Include="Gallio, Version=0.0.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Gallio\Gallio.dll</HintPath>
+    </Reference>
+    <Reference Include="MbUnit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Gallio\MbUnit.dll</HintPath>
+    </Reference>
+    <Reference Include="MbUnit.Pex, Version=0.0.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Gallio\MbUnit.Pex.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Pex.Framework" />
     <Reference Include="Microsoft.Pex.Graphs" />
     <Reference Include="System" />
