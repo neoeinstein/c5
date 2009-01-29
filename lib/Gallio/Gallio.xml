@@ -4085,6 +4085,9 @@
     <member name="F:Gallio.Framework.Pattern.PatternAttributeTargets.TestConstructor">
       <summary>Valid attribute targets for test constructors. This field is constant and read-only.</summary>
     </member>
+    <member name="F:Gallio.Framework.Pattern.PatternAttributeTargets.TestContract">
+      <summary>Valid attribute targets for test contracts. This field is constant and read-only.</summary>
+    </member>
     <member name="F:Gallio.Framework.Pattern.PatternAttributeTargets.TestMethod">
       <summary>Valid attribute targets for test methods. This field is constant and read-only.</summary>
     </member>

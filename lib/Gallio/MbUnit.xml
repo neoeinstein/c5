@@ -692,6 +692,18 @@
       <param name="messageArgs">The custom message arguments, or null if none</param>
       <exception cref="T:Gallio.Framework.TestInconclusiveException">Thrown always</exception>
     </member>
+    <member name="M:MbUnit.Framework.Assert.IsAssignableFrom``1(System.Object)">
+      <summary>Verifies that an object may be assigned to a variable of the specified type.</summary>
+      <typeparam name="TExpected">The Type to compare with the object's Type</typeparam>
+      <param name="actualValue">The object under examination</param>
+    </member>
+    <member name="M:MbUnit.Framework.Assert.IsAssignableFrom``1(System.Object,System.String,System.Object[])">
+      <summary>Verifies that an object may be assigned to a variable of the specified type.</summary>
+      <typeparam name="TExpected">The Type to compare with the object's Type</typeparam>
+      <param name="actualValue">The object under examination</param>
+      <param name="messageFormat">The custom assertion message format, or null if none</param>
+      <param name="messageArgs">The custom assertion message arguments, or null if none</param>
+    </member>
     <member name="M:MbUnit.Framework.Assert.IsAssignableFrom(System.Type,System.Object)">
       <summary>Verifies that an object may be assigned to a variable of the specified type.</summary>
       <param name="expectedType">The Type to compare with the object's Type</param>
@@ -728,6 +740,22 @@
       <param name="messageArgs">The custom assertion message arguments, or null if none</param>
       <exception cref="T:Gallio.Framework.Assertions.AssertionException">Thrown if the verification failed unless the current <see cref="P:Gallio.Framework.Assertions.AssertionContext.AssertionFailureBehavior" /> indicates otherwise</exception>
     </member>
+    <member name="M:MbUnit.Framework.Assert.IsInstanceOfType``1(System.Object)">
+      <summary>Verifies that an actual value is an instance of some expected type.</summary>
+      <typeparam name="TExpected">The expected type</typeparam>
+      <param name="actualValue">The actual value</param>
+      <exception cref="T:Gallio.Framework.Assertions.AssertionException">Thrown if the verification failed unless the current <see cref="P:Gallio.Framework.Assertions.AssertionContext.AssertionFailureBehavior" /> indicates otherwise</exception>
+      <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="expectedType" /> is null</exception>
+    </member>
+    <member name="M:MbUnit.Framework.Assert.IsInstanceOfType``1(System.Object,System.String,System.Object[])">
+      <summary>Verifies that an actual value is an instance of some expected type.</summary>
+      <typeparam name="TExpected">The expected type</typeparam>
+      <param name="actualValue">The actual value</param>
+      <param name="messageFormat">The custom assertion message format, or null if none</param>
+      <param name="messageArgs">The custom assertion message arguments, or null if none</param>
+      <exception cref="T:Gallio.Framework.Assertions.AssertionException">Thrown if the verification failed unless the current <see cref="P:Gallio.Framework.Assertions.AssertionContext.AssertionFailureBehavior" /> indicates otherwise</exception>
+      <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="expectedType" /> is null</exception>
+    </member>
     <member name="M:MbUnit.Framework.Assert.IsInstanceOfType(System.Type,System.Object)">
       <summary>Verifies that an actual value is an instance of some expected type.</summary>
       <param name="expectedType">The expected type</param>
@@ -743,6 +771,18 @@
       <param name="messageArgs">The custom assertion message arguments, or null if none</param>
       <exception cref="T:Gallio.Framework.Assertions.AssertionException">Thrown if the verification failed unless the current <see cref="P:Gallio.Framework.Assertions.AssertionContext.AssertionFailureBehavior" /> indicates otherwise</exception>
       <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="expectedType" /> is null</exception>
+    </member>
+    <member name="M:MbUnit.Framework.Assert.IsNotAssignableFrom``1(System.Object)">
+      <summary>Verifies that an object may not be assigned to a variable of the specified type.</summary>
+      <typeparam name="TExpected">The Type to compare with the object's Type</typeparam>
+      <param name="actualValue">The object under examination</param>
+    </member>
+    <member name="M:MbUnit.Framework.Assert.IsNotAssignableFrom``1(System.Object,System.String,System.Object[])">
+      <summary>Verifies that an object may not be assigned to a variable of the specified type.</summary>
+      <typeparam name="TExpected">The Type to compare with the object's Type</typeparam>
+      <param name="actualValue">The object under examination</param>
+      <param name="messageFormat">The custom assertion message format, or null if none</param>
+      <param name="messageArgs">The custom assertion message arguments, or null if none</param>
     </member>
     <member name="M:MbUnit.Framework.Assert.IsNotAssignableFrom(System.Type,System.Object)">
       <summary>Verifies that an object may not be assigned to a variable of the specified type.</summary>
@@ -767,6 +807,22 @@
       <param name="messageFormat">The custom assertion message format, or null if none</param>
       <param name="messageArgs">The custom assertion message arguments, or null if none</param>
       <exception cref="T:Gallio.Framework.Assertions.AssertionException">Thrown if the verification failed unless the current <see cref="P:Gallio.Framework.Assertions.AssertionContext.AssertionFailureBehavior" /> indicates otherwise</exception>
+    </member>
+    <member name="M:MbUnit.Framework.Assert.IsNotInstanceOfType``1(System.Object)">
+      <summary>Verifies that an actual value is not an instance of some unexpected type.</summary>
+      <typeparam name="TUnexpected">The unexpected type</typeparam>
+      <param name="actualValue">The actual value</param>
+      <exception cref="T:Gallio.Framework.Assertions.AssertionException">Thrown if the verification failed unless the current <see cref="P:Gallio.Framework.Assertions.AssertionContext.AssertionFailureBehavior" /> indicates otherwise</exception>
+      <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="unexpectedType" /> is null</exception>
+    </member>
+    <member name="M:MbUnit.Framework.Assert.IsNotInstanceOfType``1(System.Object,System.String,System.Object[])">
+      <summary>Verifies that an actual value is not an instance of some unexpected type.</summary>
+      <typeparam name="TUnexpected">The unexpected type</typeparam>
+      <param name="actualValue">The actual value</param>
+      <param name="messageFormat">The custom assertion message format, or null if none</param>
+      <param name="messageArgs">The custom assertion message arguments, or null if none</param>
+      <exception cref="T:Gallio.Framework.Assertions.AssertionException">Thrown if the verification failed unless the current <see cref="P:Gallio.Framework.Assertions.AssertionContext.AssertionFailureBehavior" /> indicates otherwise</exception>
+      <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="unexpectedType" /> is null</exception>
     </member>
     <member name="M:MbUnit.Framework.Assert.IsNotInstanceOfType(System.Type,System.Object)">
       <summary>Verifies that an actual value is not an instance of some unexpected type.</summary>

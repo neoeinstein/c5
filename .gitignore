@@ -4,7 +4,7 @@ debug/
 release/
 
 *.old
-*.cache
+*.[Cc]ache
 *.suo
 *.user
 _ReSharper*
