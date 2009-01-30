@@ -1,3 +1,4 @@
+*.cs	diff
 *.snk	binary
 *.dll	binary
 *.exe	binary

@@ -17,6 +17,7 @@ namespace C5.Tests
     {
         [PexMethod(MaxConditions = 4000)]
         [Description("Constructs a specially designed array that triggers quicksort's worst-case running time.")]
+        [Parallelizable]
         // Examples: {1, 3, 2, 4} and {1, 5, 3, 7, 2, 4, 6, 8}
         public void IntroSort_WorstCase(int k)
         {
@@ -44,6 +45,7 @@ namespace C5.Tests
 
         [PexMethod]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentNullException))]
+        [Parallelizable]
         public void IntroSort_Short<T>(T[] arr)
         {
             var sorted = arr == null ? null : (T[])arr.Clone();
@@ -58,6 +60,7 @@ namespace C5.Tests
         [PexMethod]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentNullException))]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentOutOfRangeException))]
+        [Parallelizable]
         public void IntroSort_Full<T>(T[] arr, int start, int count)
         {
             var sorted = arr == null ? null : (T[])arr.Clone();
@@ -72,6 +75,7 @@ namespace C5.Tests
         [PexMethod]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentNullException))]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentOutOfRangeException))]
+        [Parallelizable]
         public void InsertionSort<T>(T[] arr, int start, int count)
         {
             var sorted = arr == null ? null : (T[])arr.Clone();
@@ -86,6 +90,7 @@ namespace C5.Tests
         [PexMethod]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentNullException))]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentOutOfRangeException))]
+        [Parallelizable]
         public void HeapSort<T>(T[] arr, int start, int count)
         {
             var sorted = arr == null ? null : (T[])arr.Clone();
