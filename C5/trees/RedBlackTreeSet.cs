@@ -2229,7 +2229,7 @@ namespace C5
     /// <param name="filter">The filter delegate defining the predicate.</param>
     /// <returns>The new indexed sorted collection.</returns>
     [Tested]
-    public IIndexedSorted<T> FindAll(Fun<T, bool> filter)
+    public IIndexedSorted<T> FindAll(Predicate<T> filter)
     {
       if (!isValid)
         throw new ViewDisposedException("Snapshot has been disposed");
@@ -2310,7 +2310,7 @@ namespace C5
     /// <param name="c">The comparion relation to use for the result.</param>
     /// <returns>The new sorted collection.</returns>
     [Tested]
-    public IIndexedSorted<V> Map<V>(Fun<T, V> mapper, SCG.IComparer<V> c)
+    public IIndexedSorted<V> Map<V>(Converter<T, V> mapper, SCG.IComparer<V> c)
     {
       if (!isValid)
         throw new ViewDisposedException("Snapshot has been disposed");

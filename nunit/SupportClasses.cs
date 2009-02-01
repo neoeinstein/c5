@@ -137,9 +137,9 @@ namespace C5UnitTests
   public class FunEnumerable : SCG.IEnumerable<int>
   {
     int size;
-    Fun<int, int> f;
+    Converter<int, int> f;
 
-    public FunEnumerable(int size, Fun<int, int> f)
+    public FunEnumerable(int size, Converter<int, int> f)
     {
       this.size = size; this.f = f;
     }
@@ -490,4 +490,10 @@ namespace C5UnitTests
     }
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
+  /// <typeparam name="R"></typeparam>
+  /// <returns></returns>
+  public delegate R Creator<R>();
 }

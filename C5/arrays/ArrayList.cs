@@ -988,7 +988,7 @@ namespace C5
     /// <param name="filter">The filter delegate defining the predicate.</param>
     /// <returns>The new list.</returns>
     [Tested]
-    public virtual IList<T> FindAll(Fun<T, bool> filter)
+    public virtual IList<T> FindAll(Predicate<T> filter)
     {
       validitycheck();
       int stamp = this.stamp;
@@ -1035,7 +1035,7 @@ namespace C5
     /// <returns>The new list.</returns>
 #endif
     [Tested]
-    public virtual IList<V> Map<V>(Fun<T, V> mapper)
+    public virtual IList<V> Map<V>(Converter<T, V> mapper)
     {
       validitycheck();
 
@@ -1067,7 +1067,7 @@ namespace C5
     /// <param name="itemequalityComparer">The item equalityComparer to use for the new list</param>
     /// <returns>The new list.</returns>
 #endif
-    public virtual IList<V> Map<V>(Fun<T, V> mapper, SCG.IEqualityComparer<V> itemequalityComparer)
+    public virtual IList<V> Map<V>(Converter<T, V> mapper, SCG.IEqualityComparer<V> itemequalityComparer)
     {
       validitycheck();
 
@@ -1076,7 +1076,7 @@ namespace C5
       return map<V>(mapper, res);
     }
 
-    private IList<V> map<V>(Fun<T, V> mapper, ArrayList<V> res)
+    private IList<V> map<V>(Converter<T, V> mapper, ArrayList<V> res)
     {
       int stamp = this.stamp;
       if (size > 0)
@@ -1805,7 +1805,7 @@ namespace C5
     /// 
     /// </summary>
     /// <param name="predicate"></param>
-    void RemoveAll(Fun<T, bool> predicate)
+    void RemoveAll(Predicate<T> predicate)
     {
       updatecheck();
       if (size == 0)
@@ -1970,7 +1970,7 @@ namespace C5
     /// 
     /// </summary>
     /// <param name="predicate"></param>
-    void RetainAll(Fun<T, bool> predicate)
+    void RetainAll(Predicate<T> predicate)
     {
       updatecheck();
       if (size == 0)

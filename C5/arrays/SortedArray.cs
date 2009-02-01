@@ -290,7 +290,7 @@ namespace C5
     /// <param name="f">The filter delegate defining the predicate.</param>
     /// <returns>The new indexed sorted collection.</returns>
     [Tested]
-    public IIndexedSorted<T> FindAll(Fun<T, bool> f)
+    public IIndexedSorted<T> FindAll(Predicate<T> f)
     {
       SortedArray<T> res = new SortedArray<T>(comparer);
       int j = 0, rescap = res.array.Length;
@@ -323,7 +323,7 @@ namespace C5
     /// <param name="c">The comparion relation to use for the result.</param>
     /// <returns>The new sorted collection.</returns>
     [Tested]
-    public IIndexedSorted<V> Map<V>(Fun<T, V> m, SCG.IComparer<V> c)
+    public IIndexedSorted<V> Map<V>(Converter<T, V> m, SCG.IComparer<V> c)
     {
       SortedArray<V> res = new SortedArray<V>(size, c);
 

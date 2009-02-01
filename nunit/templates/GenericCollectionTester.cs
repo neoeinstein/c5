@@ -41,7 +41,7 @@ namespace C5UnitTests.Templates
       }
     }
 
-    public virtual void Test(Fun<U> factory)
+    public virtual void Test(Creator<U> factory)
     {
       foreach (MethodInfo minfo in testMethods)
       {

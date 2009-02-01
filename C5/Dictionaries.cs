@@ -661,7 +661,7 @@ namespace C5
     /// <summary>
     /// 
     /// </summary>
-    public virtual Fun<K, V> Fun { get { return delegate(K k) { return this[k]; }; } }
+    public virtual Converter<K, V> Fun { get { return delegate(K k) { return this[k]; }; } }
 
     /// <summary>
     /// Indexer by key for dictionary. 

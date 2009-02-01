@@ -26,14 +26,16 @@ using SCG = System.Collections.Generic;
 
 namespace MultiCollection
 {
+  public delegate T Chooser<T>();
+
   class BasicCollectionValue<T> : CollectionValueBase<T>, ICollectionValue<T>
   {
     SCG.IEnumerable<T> enumerable;
-    Fun<T> chooser;
+    Chooser<T> chooser;
     int count;
     //TODO: add delegate for checking validity!
 
-    public BasicCollectionValue(SCG.IEnumerable<T> e, Fun<T> chooser, int c) { enumerable = e; count = c; this.chooser = chooser; }
+    public BasicCollectionValue(SCG.IEnumerable<T> e, Chooser<T> chooser, int c) { enumerable = e; count = c; this.chooser = chooser; }
 
     public override int Count { get { return count; } }
 

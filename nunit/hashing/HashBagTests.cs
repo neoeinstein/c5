@@ -33,7 +33,7 @@ namespace C5UnitTests.hashtable.bag
     [Test]
     public void TestEvents()
     {
-      Fun<CollectionOfInt> factory = delegate() { return new CollectionOfInt(TenEqualityComparer.Default); };
+      Creator<CollectionOfInt> factory = delegate() { return new CollectionOfInt(TenEqualityComparer.Default); };
       new C5UnitTests.Templates.Events.CollectionTester<CollectionOfInt>().Test(factory);
     }
 
@@ -396,7 +396,7 @@ namespace C5UnitTests.hashtable.bag
   public class FindPredicate
   {
     private HashBag<int> list;
-    Fun<int, bool> pred;
+    Predicate<int> pred;
 
     [SetUp]
     public void Init()

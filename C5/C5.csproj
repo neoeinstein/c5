@@ -74,9 +74,19 @@
     <Compile Include="Comparer.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Delegates.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="Exceptions.cs" />
+    <Compile Include="Exceptions\CollectionModifiedException.cs" />
+    <Compile Include="Exceptions\DuplicateNotAllowedException.cs" />
+    <Compile Include="Exceptions\FixedSizeCollectionException.cs" />
+    <Compile Include="Exceptions\IncompatibleViewException.cs" />
+    <Compile Include="Exceptions\InternalException.cs" />
+    <Compile Include="Exceptions\InvalidPriorityQueueHandleException.cs" />
+    <Compile Include="Exceptions\NoSuchItemException.cs" />
+    <Compile Include="Exceptions\NotAViewException.cs" />
+    <Compile Include="Exceptions\NotComparableException.cs" />
+    <Compile Include="Exceptions\ReadOnlyCollectionException.cs" />
+    <Compile Include="Exceptions\UnlistenableEventException.cs" />
+    <Compile Include="Exceptions\ViewDisposedException.cs" />
     <Compile Include="Formatting.cs" />
     <Compile Include="Hashers.cs" />
     <Compile Include="Events.cs" />
@@ -84,8 +94,23 @@
     </Compile>
     <Compile Include="Dictionaries.cs">
     </Compile>
-    <Compile Include="Interfaces.cs">
-    </Compile>
+    <Compile Include="Interfaces\ICollection.cs" />
+    <Compile Include="Interfaces\ICollectionValue.cs" />
+    <Compile Include="Interfaces\IDictionary.cs" />
+    <Compile Include="Interfaces\IDirectedCollectionValue.cs" />
+    <Compile Include="Interfaces\IDirectedEnumerable.cs" />
+    <Compile Include="Interfaces\IExtensible.cs" />
+    <Compile Include="Interfaces\IIndexed.cs" />
+    <Compile Include="Interfaces\IIndexedSorted.cs" />
+    <Compile Include="Interfaces\IList.cs" />
+    <Compile Include="Interfaces\IPersistentSorted.cs" />
+    <Compile Include="Interfaces\IPriorityQueue.cs" />
+    <Compile Include="Interfaces\IPriorityQueueHandle.cs" />
+    <Compile Include="Interfaces\IQueue.cs" />
+    <Compile Include="Interfaces\ISequenced.cs" />
+    <Compile Include="Interfaces\ISorted.cs" />
+    <Compile Include="Interfaces\ISortedDictionary.cs" />
+    <Compile Include="Interfaces\IStack.cs" />
     <Compile Include="linkedlists\HashedLinkedList.cs" />
     <Compile Include="Random.cs" />
     <Compile Include="Records.cs" />

@@ -12,7 +12,7 @@ namespace TreeTraversal
     public static void Main(String[] args)
     {
       Tree<int> t = MakeTree(1, 15);
-      Act<int> act = delegate(int val) { Console.Write("{0} ", val); };
+      Action<int> act = delegate(int val) { Console.Write("{0} ", val); };
       Console.WriteLine("Depth-first:");
       Tree<int>.DepthFirst(t, act);
       Console.WriteLine("\nBreadth-first:");
@@ -48,7 +48,7 @@ namespace TreeTraversal
       this.val = val; this.t1 = t1; this.t2 = t2;
     }
 
-    public static void DepthFirst(Tree<T> t, Act<T> act)
+    public static void DepthFirst(Tree<T> t, Action<T> act)
     {
       IStack<Tree<T>> work = new ArrayList<Tree<T>>();
       work.Push(t);
@@ -64,7 +64,7 @@ namespace TreeTraversal
       }
     }
 
-    public static void BreadthFirst(Tree<T> t, Act<T> act)
+    public static void BreadthFirst(Tree<T> t, Action<T> act)
     {
       IQueue<Tree<T>> work = new CircularQueue<Tree<T>>();
       work.Enqueue(t);
@@ -80,7 +80,7 @@ namespace TreeTraversal
       }
     }
 
-    public static void Traverse(Tree<T> t, Act<T> act, IList<Tree<T>> work)
+    public static void Traverse(Tree<T> t, Action<T> act, IList<Tree<T>> work)
     {
       work.Clear();
       work.Add(t);

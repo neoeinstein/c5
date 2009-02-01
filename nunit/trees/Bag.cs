@@ -35,7 +35,7 @@ namespace C5UnitTests.trees.TreeBag
     [Test]
     public void TestEvents()
     {
-      Fun<CollectionOfInt> factory = delegate() { return new CollectionOfInt(TenEqualityComparer.Default); };
+      Creator<CollectionOfInt> factory = delegate() { return new CollectionOfInt(TenEqualityComparer.Default); };
       new C5UnitTests.Templates.Events.SortedIndexedTester<CollectionOfInt>().Test(factory);
     }
 
@@ -689,7 +689,7 @@ namespace C5UnitTests.trees.TreeBag
   public class FindPredicate
   {
     private TreeBag<int> list;
-    Fun<int, bool> pred;
+    Predicate<int> pred;
 
     [SetUp]
     public void Init()
@@ -1584,7 +1584,7 @@ namespace C5UnitTests.trees.TreeBag
       [Test]
       public void InternalEnum()
       {
-        Assert.IsTrue(IC.eq(snap.FindAll(new Fun<int, bool>(twomodeleven)), 13, 13, 35));
+        Assert.IsTrue(IC.eq(snap.FindAll(new Predicate<int>(twomodeleven)), 13, 13, 35));
       }
 
 
@@ -2150,7 +2150,7 @@ namespace C5UnitTests.trees.TreeBag
       {
         Simple simple1 = new Simple();
 
-        tree.Apply(new Act<int>(simple1.apply));
+        tree.Apply(new Action<int>(simple1.apply));
         Assert.AreEqual(0, simple1.appfield1);
         Assert.AreEqual(0, simple1.appfield2);
 
@@ -2159,7 +2159,7 @@ namespace C5UnitTests.trees.TreeBag
         for (int i = 0; i < 10; i++) tree.Add(i);
         tree.Add(2);
 
-        tree.Apply(new Act<int>(simple2.apply));
+        tree.Apply(new Action<int>(simple2.apply));
         Assert.AreEqual(11, simple2.appfield1);
         Assert.AreEqual(289, simple2.appfield2);
       }
@@ -2168,79 +2168,79 @@ namespace C5UnitTests.trees.TreeBag
       [Test]
       public void All()
       {
-        Assert.IsTrue(tree.All(new Fun<int, bool>(never)));
-        Assert.IsTrue(tree.All(new Fun<int, bool>(even)));
-        Assert.IsTrue(tree.All(new Fun<int, bool>(always)));
+        Assert.IsTrue(tree.All(new Predicate<int>(never)));
+        Assert.IsTrue(tree.All(new Predicate<int>(even)));
+        Assert.IsTrue(tree.All(new Predicate<int>(always)));
         for (int i = 0; i < 10; i++) tree.Add(i);
 
-        Assert.IsFalse(tree.All(new Fun<int, bool>(never)));
-        Assert.IsFalse(tree.All(new Fun<int, bool>(even)));
-        Assert.IsTrue(tree.All(new Fun<int, bool>(always)));
+        Assert.IsFalse(tree.All(new Predicate<int>(never)));
+        Assert.IsFalse(tree.All(new Predicate<int>(even)));
+        Assert.IsTrue(tree.All(new Predicate<int>(always)));
         tree.Clear();
         for (int i = 0; i < 10; i++) tree.Add(i * 2);
 
-        Assert.IsFalse(tree.All(new Fun<int, bool>(never)));
-        Assert.IsTrue(tree.All(new Fun<int, bool>(even)));
-        Assert.IsTrue(tree.All(new Fun<int, bool>(always)));
+        Assert.IsFalse(tree.All(new Predicate<int>(never)));
+        Assert.IsTrue(tree.All(new Predicate<int>(even)));
+        Assert.IsTrue(tree.All(new Predicate<int>(always)));
         tree.Clear();
         for (int i = 0; i < 10; i++) tree.Add(i * 2 + 1);
 
-        Assert.IsFalse(tree.All(new Fun<int, bool>(never)));
-        Assert.IsFalse(tree.All(new Fun<int, bool>(even)));
-        Assert.IsTrue(tree.All(new Fun<int, bool>(always)));
+        Assert.IsFalse(tree.All(new Predicate<int>(never)));
+        Assert.IsFalse(tree.All(new Predicate<int>(even)));
+        Assert.IsTrue(tree.All(new Predicate<int>(always)));
       }
 
 
       [Test]
       public void Exists()
       {
-        Assert.IsFalse(tree.Exists(new Fun<int, bool>(never)));
-        Assert.IsFalse(tree.Exists(new Fun<int, bool>(even)));
-        Assert.IsFalse(tree.Exists(new Fun<int, bool>(always)));
+        Assert.IsFalse(tree.Exists(new Predicate<int>(never)));
+        Assert.IsFalse(tree.Exists(new Predicate<int>(even)));
+        Assert.IsFalse(tree.Exists(new Predicate<int>(always)));
         for (int i = 0; i < 10; i++) tree.Add(i);
 
-        Assert.IsFalse(tree.Exists(new Fun<int, bool>(never)));
-        Assert.IsTrue(tree.Exists(new Fun<int, bool>(even)));
-        Assert.IsTrue(tree.Exists(new Fun<int, bool>(always)));
+        Assert.IsFalse(tree.Exists(new Predicate<int>(never)));
+        Assert.IsTrue(tree.Exists(new Predicate<int>(even)));
+        Assert.IsTrue(tree.Exists(new Predicate<int>(always)));
         tree.Clear();
         for (int i = 0; i < 10; i++) tree.Add(i * 2);
 
-        Assert.IsFalse(tree.Exists(new Fun<int, bool>(never)));
-        Assert.IsTrue(tree.Exists(new Fun<int, bool>(even)));
-        Assert.IsTrue(tree.Exists(new Fun<int, bool>(always)));
+        Assert.IsFalse(tree.Exists(new Predicate<int>(never)));
+        Assert.IsTrue(tree.Exists(new Predicate<int>(even)));
+        Assert.IsTrue(tree.Exists(new Predicate<int>(always)));
         tree.Clear();
         for (int i = 0; i < 10; i++) tree.Add(i * 2 + 1);
 
-        Assert.IsFalse(tree.Exists(new Fun<int, bool>(never)));
-        Assert.IsFalse(tree.Exists(new Fun<int, bool>(even)));
-        Assert.IsTrue(tree.Exists(new Fun<int, bool>(always)));
+        Assert.IsFalse(tree.Exists(new Predicate<int>(never)));
+        Assert.IsFalse(tree.Exists(new Predicate<int>(even)));
+        Assert.IsTrue(tree.Exists(new Predicate<int>(always)));
       }
 
 
       [Test]
       public void FindAll()
       {
-        Assert.AreEqual(0, tree.FindAll(new Fun<int, bool>(never)).Count);
+        Assert.AreEqual(0, tree.FindAll(new Predicate<int>(never)).Count);
         for (int i = 0; i < 10; i++)
           tree.Add(i);
         tree.Add(2);
 
-        Assert.AreEqual(0, tree.FindAll(new Fun<int, bool>(never)).Count);
-        Assert.AreEqual(11, tree.FindAll(new Fun<int, bool>(always)).Count);
-        Assert.AreEqual(6, tree.FindAll(new Fun<int, bool>(even)).Count);
-        Assert.IsTrue(((TreeBag<int>)tree.FindAll(new Fun<int, bool>(even))).Check("R"));
+        Assert.AreEqual(0, tree.FindAll(new Predicate<int>(never)).Count);
+        Assert.AreEqual(11, tree.FindAll(new Predicate<int>(always)).Count);
+        Assert.AreEqual(6, tree.FindAll(new Predicate<int>(even)).Count);
+        Assert.IsTrue(((TreeBag<int>)tree.FindAll(new Predicate<int>(even))).Check("R"));
       }
 
 
       [Test]
       public void Map()
       {
-        Assert.AreEqual(0, tree.Map(new Fun<int, string>(themap), new SC()).Count);
+        Assert.AreEqual(0, tree.Map(new Converter<int, string>(themap), new SC()).Count);
         for (int i = 0; i < 14; i++)
           tree.Add(i * i * i);
         tree.Add(1);
 
-        IIndexedSorted<string> res = tree.Map(new Fun<int, string>(themap), new SC());
+        IIndexedSorted<string> res = tree.Map(new Converter<int, string>(themap), new SC());
 
         Assert.IsTrue(((TreeBag<string>)res).Check("R"));
         Assert.AreEqual(15, res.Count);
@@ -2261,7 +2261,7 @@ namespace C5UnitTests.trees.TreeBag
         for (int i = 0; i < 11; i++)
           tree.Add(i * i * i);
 
-        ISorted<string> res = tree.Map(new Fun<int, string>(badmap), new SC());
+        ISorted<string> res = tree.Map(new Converter<int, string>(badmap), new SC());
       }
 
 
@@ -2385,7 +2385,7 @@ namespace C5UnitTests.trees.TreeBag
       [Test]
       public void EmptyEmpty()
       {
-        tree.AddAll(new FunEnumerable(0, new Fun<int, int>(sqr)));
+        tree.AddAll(new FunEnumerable(0, new Converter<int, int>(sqr)));
         Assert.AreEqual(0, tree.Count);
         Assert.IsTrue(tree.Check());
       }
@@ -2396,7 +2396,7 @@ namespace C5UnitTests.trees.TreeBag
       {
         for (int i = 4; i < 9; i++) tree.Add(i);
 
-        tree.AddAll(new FunEnumerable(0, new Fun<int, int>(sqr)));
+        tree.AddAll(new FunEnumerable(0, new Converter<int, int>(sqr)));
         Assert.AreEqual(5, tree.Count);
         Assert.IsTrue(tree.Check());
       }
@@ -2405,7 +2405,7 @@ namespace C5UnitTests.trees.TreeBag
       [Test]
       public void EmptySome()
       {
-        tree.AddAll(new FunEnumerable(4, new Fun<int, int>(sqr)));
+        tree.AddAll(new FunEnumerable(4, new Converter<int, int>(sqr)));
         Assert.AreEqual(4, tree.Count);
         Assert.IsTrue(tree.Check());
         Assert.AreEqual(0, tree[0]);
@@ -2421,7 +2421,7 @@ namespace C5UnitTests.trees.TreeBag
         for (int i = 5; i < 9; i++) tree.Add(i);
         tree.Add(1);
 
-        tree.AddAll(new FunEnumerable(4, new Fun<int, int>(sqr)));
+        tree.AddAll(new FunEnumerable(4, new Converter<int, int>(sqr)));
         Assert.AreEqual(9, tree.Count);
         Assert.IsTrue(tree.Check());
         Assert.IsTrue(IC.eq(tree, 0, 1, 1, 4, 5, 6, 7, 8, 9));
@@ -2455,7 +2455,7 @@ namespace C5UnitTests.trees.TreeBag
       [Test]
       public void EmptyEmpty()
       {
-        tree.AddSorted(new FunEnumerable(0, new Fun<int, int>(sqr)));
+        tree.AddSorted(new FunEnumerable(0, new Converter<int, int>(sqr)));
         Assert.AreEqual(0, tree.Count);
         Assert.IsTrue(tree.Check());
       }
@@ -2466,7 +2466,7 @@ namespace C5UnitTests.trees.TreeBag
       {
         for (int i = 4; i < 9; i++) tree.Add(i);
 
-        tree.AddSorted(new FunEnumerable(0, new Fun<int, int>(sqr)));
+        tree.AddSorted(new FunEnumerable(0, new Converter<int, int>(sqr)));
         Assert.AreEqual(5, tree.Count);
         Assert.IsTrue(tree.Check());
       }
@@ -2475,7 +2475,7 @@ namespace C5UnitTests.trees.TreeBag
       [Test]
       public void EmptySome()
       {
-        tree.AddSorted(new FunEnumerable(4, new Fun<int, int>(sqr)));
+        tree.AddSorted(new FunEnumerable(4, new Converter<int, int>(sqr)));
         Assert.AreEqual(4, tree.Count);
         Assert.IsTrue(tree.Check());
         Assert.AreEqual(0, tree[0]);
@@ -2487,7 +2487,7 @@ namespace C5UnitTests.trees.TreeBag
       [Test]
       public void EmptySome2()
       {
-        tree.AddSorted(new FunEnumerable(4, new Fun<int, int>(step)));
+        tree.AddSorted(new FunEnumerable(4, new Converter<int, int>(step)));
         //tree.dump();
         Assert.AreEqual(4, tree.Count);
         Assert.IsTrue(tree.Check());
@@ -2504,7 +2504,7 @@ namespace C5UnitTests.trees.TreeBag
         for (int i = 5; i < 9; i++) tree.Add(i);
         tree.Add(1);
 
-        tree.AddSorted(new FunEnumerable(4, new Fun<int, int>(sqr)));
+        tree.AddSorted(new FunEnumerable(4, new Converter<int, int>(sqr)));
         Assert.AreEqual(9, tree.Count);
         Assert.IsTrue(tree.Check());
         Assert.IsTrue(IC.eq(tree, 0, 1, 1, 4, 5, 6, 7, 8, 9));
@@ -2515,7 +2515,7 @@ namespace C5UnitTests.trees.TreeBag
       [ExpectedException(typeof(ArgumentException), "Argument not sorted")]
       public void EmptyBad()
       {
-        tree.AddSorted(new FunEnumerable(9, new Fun<int, int>(bad)));
+        tree.AddSorted(new FunEnumerable(9, new Converter<int, int>(bad)));
       }
 
 

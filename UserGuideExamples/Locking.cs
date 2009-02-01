@@ -42,9 +42,9 @@ namespace Locking {
       Console.WriteLine("coll has {0} items, should be {1}", to.Count, count);
     }
 
-    public static void RunTwoThreads(Act run) {
-      Thread t1 = new Thread(new ThreadStart(run)),
-             t2 = new Thread(new ThreadStart(run));
+    public static void RunTwoThreads(ThreadStart run) {
+      Thread t1 = new Thread(run),
+             t2 = new Thread(run);
       t1.Start(); t2.Start();
       t1.Join(); t2.Join();
     }

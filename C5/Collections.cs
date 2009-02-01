@@ -492,7 +492,7 @@ namespace C5
     /// </summary>
     /// <param name="action">The action delegate</param>
     [Tested]
-    public virtual void Apply(Act<T> action)
+    public virtual void Apply(Action<T> action)
     {
       foreach (T item in this)
         action(item);
@@ -508,7 +508,7 @@ namespace C5
     /// defining the predicate</param>
     /// <returns>True if such an item exists</returns>
     [Tested]
-    public virtual bool Exists(Fun<T, bool> predicate)
+    public virtual bool Exists(Predicate<T> predicate)
     {
       foreach (T item in this)
         if (predicate(item))
@@ -525,7 +525,7 @@ namespace C5
     /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
     /// <param name="item"></param>
     /// <returns>True is such an item exists</returns>
-    public virtual bool Find(Fun<T, bool> predicate, out T item)
+    public virtual bool Find(Predicate<T> predicate, out T item)
     {
       foreach (T jtem in this)
         if (predicate(jtem))
@@ -545,7 +545,7 @@ namespace C5
     /// defining the predicate</param>
     /// <returns>True if all items satisfies the predicate</returns>
     [Tested]
-    public virtual bool All(Fun<T, bool> predicate)
+    public virtual bool All(Predicate<T> predicate)
     {
       foreach (T item in this)
         if (!predicate(item))
@@ -562,7 +562,7 @@ namespace C5
     /// (<see cref="T:C5.Fun`2"/> with <code>R = bool</code>) 
     /// defining the predicate</param>
     /// <returns>The filtered enumerable</returns>
-    public virtual SCG.IEnumerable<T> Filter(Fun<T, bool> predicate)
+    public virtual SCG.IEnumerable<T> Filter(Predicate<T> predicate)
     {
       foreach (T item in this)
         if (predicate(item))
@@ -652,7 +652,7 @@ namespace C5
     /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
     /// <param name="item"></param>
     /// <returns>True is such an item exists</returns>
-    public virtual bool FindLast(Fun<T, bool> predicate, out T item)
+    public virtual bool FindLast(Predicate<T> predicate, out T item)
     {
       foreach (T jtem in Backwards())
         if (predicate(jtem))
@@ -1007,7 +1007,7 @@ namespace C5
     /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
     /// <param name="item"></param>
     /// <returns>True is such an item exists</returns>
-    public virtual bool FindLast(Fun<T, bool> predicate, out T item)
+    public virtual bool FindLast(Predicate<T> predicate, out T item)
     {
       foreach (T jtem in Backwards())
         if (predicate(jtem))
@@ -1153,7 +1153,7 @@ namespace C5
     /// <param name="predicate">A delegate 
     /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
     /// <returns>the index, if found, a negative value else</returns>
-    public int FindIndex(Fun<T, bool> predicate)
+    public int FindIndex(Predicate<T> predicate)
     {
       int index = 0;
       foreach (T item in this)
@@ -1172,7 +1172,7 @@ namespace C5
     /// <param name="predicate">A delegate 
     /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
     /// <returns>the index, if found, a negative value else</returns>
-    public int FindLastIndex(Fun<T, bool> predicate)
+    public int FindLastIndex(Predicate<T> predicate)
     {
       int index = Count - 1;
       foreach (T item in Backwards())

@@ -22,23 +22,23 @@ class FooBar {
     } 
   }
 
-  public Fun<int,double> Fun {
+  public Converter<int,double> Fun {
     get { 
       return delegate(int x) { return this[x]; };
     }
   }
 
-  public Act<int> Act {
+  public Action<int> Act {
     get { 
       return delegate(int x) { double junk = this[x]; };
     }
   }
   
-  public static implicit operator Fun<int,double>(FooBar fb) {
+  public static implicit operator Converter<int,double>(FooBar fb) {
     return delegate(int x) { return fb[x]; };
   }  
 
-  public static implicit operator Act<int>(FooBar fb) {
+  public static implicit operator Action<int>(FooBar fb) {
     return delegate(int x) { double junk = fb[x]; };
   }  
 }

@@ -33,7 +33,7 @@ namespace C5UnitTests.arrays.circularqueue
     [Test]
     public void TestEvents()
     {
-      Fun<CollectionOfInt> factory = delegate() { return new CollectionOfInt(); };
+      Creator<CollectionOfInt> factory = delegate() { return new CollectionOfInt(); };
       new C5UnitTests.Templates.Events.QueueTester<CollectionOfInt>().Test(factory);
       new C5UnitTests.Templates.Events.StackTester<CollectionOfInt>().Test(factory);
     }
