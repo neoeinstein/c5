@@ -298,7 +298,7 @@ namespace MultiDictionary2 {
   // listeners are added to and removed from value collections.
   
   public class MultiHashDictionary<K,V> : HashDictionary<K, ICollection<V>> {
-    private int count = 0;      // Cached value count, updated by events only
+    private int count = 0;      // Cached value count, updated by Events only
 
     private void IncrementCount(Object sender, ItemCountEventArgs<V> args) {
       count += args.Count;
@@ -431,7 +431,7 @@ namespace MultiDictionary2 {
   public class MultiHashDictionary<K,V,VC> : HashDictionary<K, VC> 
     where VC : ICollection<V>, new()
   {
-    private int count = 0;      // Cached value count, updated by events only
+    private int count = 0;      // Cached value count, updated by Events only
 
     private void IncrementCount(Object sender, ItemCountEventArgs<V> args) {
       count += args.Count;

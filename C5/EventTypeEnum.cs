@@ -18,31 +18,52 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 */
+
 using System;
-using System.Diagnostics;
-using SCG = System.Collections.Generic;
+
 namespace C5
 {
-  /// <summary>
-  /// A custom attribute to mark methods and properties as being tested 
-  /// sufficiently in the regression test suite.
-  /// </summary>
-  [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-  public sealed class TestedAttribute : Attribute
-  {
-
     /// <summary>
-    /// Optional reference to test case
+    /// 
     /// </summary>
-    [Tested]
-    public string via;
-
-
-    /// <summary>
-    /// Pretty print attribute value
-    /// </summary>
-    /// <returns>"Tested via " + via</returns>
-    [Tested]
-    public override string ToString() { return "Tested via " + via; }
-  }
+    [Flags]
+    public enum EventTypeEnum
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        None = 0x00000000,
+        /// <summary>
+        /// 
+        /// </summary>
+        Changed = 0x00000001,
+        /// <summary>
+        /// 
+        /// </summary>
+        Cleared = 0x00000002,
+        /// <summary>
+        /// 
+        /// </summary>
+        Added = 0x00000004,
+        /// <summary>
+        /// 
+        /// </summary>
+        Removed = 0x00000008,
+        /// <summary>
+        /// 
+        /// </summary>
+        Basic = Changed | Cleared | Added | Removed,
+        /// <summary>
+        /// 
+        /// </summary>
+        Inserted = 0x00000010,
+        /// <summary>
+        /// 
+        /// </summary>
+        RemovedAt = 0x00000020,
+        /// <summary>
+        /// 
+        /// </summary>
+        All = Basic | Inserted | RemovedAt,
+    }
 }

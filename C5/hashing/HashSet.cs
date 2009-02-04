@@ -350,7 +350,7 @@ namespace C5
     /// <param name="item"></param>
     /// <param name="add">If true, add item to table if not found.</param>
     /// <param name="update">If true, update table entry if item found.</param>
-    /// <param name="raise">If true raise events</param>
+    /// <param name="raise">If true raise Events</param>
     /// <returns>True if found</returns>
     private bool searchoradd(ref T item, bool add, bool update, bool raise)
     {
@@ -450,7 +450,7 @@ namespace C5
               b.item = item;
             }
             if (raise && update)
-              raiseForUpdate(item, olditem);
+              RaiseForUpdate(item, olditem);
             // bug20071112:
             item = olditem;
             return true;
@@ -571,7 +571,7 @@ namespace C5
         expand();
     notfound:
       if (raise && add)
-        raiseForAdd(item);
+        RaiseForAdd(item);
       if (update)
         item = default(T);
       return false;
@@ -853,15 +853,15 @@ namespace C5
     /// The complexity of the Contains operation
     /// </summary>
     /// <value>Always returns Speed.Constant</value>
-    [Tested]
-    public virtual Speed ContainsSpeed { [Tested]get { return Speed.Constant; } }
+    
+    public virtual Speed ContainsSpeed { get { return Speed.Constant; } }
 
     /// <summary>
     /// Check if an item is in the set 
     /// </summary>
     /// <param name="item">The item to look for</param>
     /// <returns>True if set contains item</returns>
-    [Tested]
+    
     public virtual bool Contains(T item) { return searchoradd(ref item, false, false, false); }
 
 
@@ -872,7 +872,7 @@ namespace C5
     /// <param name="item">On entry, the item to look for.
     /// On exit the item found, if any</param>
     /// <returns>True if set contains item</returns>
-    [Tested]
+    
     public virtual bool Find(ref T item) { return searchoradd(ref item, false, false, false); }
 
 
@@ -882,7 +882,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item object to update with</param>
     /// <returns>True if item was found (and updated)</returns>
-    [Tested]
+    
     public virtual bool Update(T item)
     { updatecheck(); return searchoradd(ref item, false, true, true); }
 
@@ -905,7 +905,7 @@ namespace C5
     /// <param name="item">On entry, the item to look for or add.
     /// On exit the actual object found, if any.</param>
     /// <returns>True if item was found</returns>
-    [Tested]
+    
     public virtual bool FindOrAdd(ref T item)
     { updatecheck(); return searchoradd(ref item, true, false, true); }
 
@@ -917,7 +917,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to look for and update or add</param>
     /// <returns>True if item was updated</returns>
-    [Tested]
+    
     public virtual bool UpdateOrAdd(T item)
     { updatecheck(); return searchoradd(ref item, true, true, true); }
 
@@ -939,7 +939,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to remove</param>
     /// <returns>True if item was (found and) removed </returns>
-    [Tested]
+    
     public virtual bool Remove(T item)
     {
       updatecheck();
@@ -949,7 +949,7 @@ namespace C5
 				if (size<resizethreshhold/2 && resizethreshhold>8)
 					shrink();
 #endif
-        raiseForRemove(item);
+        RaiseForRemove(item);
         return true;
       }
       else
@@ -963,7 +963,7 @@ namespace C5
     /// <param name="item">The value to remove.</param>
     /// <param name="removeditem">The removed value.</param>
     /// <returns>True if item was found.</returns>
-    [Tested]
+    
     public virtual bool Remove(T item, out T removeditem)
     {
       updatecheck();
@@ -974,7 +974,7 @@ namespace C5
 				if (size<resizethreshhold/2 && resizethreshhold>8)
 					shrink();
 #endif
-        raiseForRemove(removeditem);
+        RaiseForRemove(removeditem);
         return true;
       }
       else
@@ -987,7 +987,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U"></typeparam>
     /// <param name="items">The items to remove.</param>
-    [Tested]
+    
     public virtual void RemoveAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       updatecheck();
@@ -1013,7 +1013,7 @@ namespace C5
     /// <summary>
     /// Remove all items from the set, resetting internal table to initial size.
     /// </summary>
-    [Tested]
+    
     public virtual void Clear()
     {
       updatecheck();
@@ -1021,8 +1021,8 @@ namespace C5
       clear();
       if (ActiveEvents != 0 && oldsize > 0)
       {
-        raiseCollectionCleared(true, oldsize);
-        raiseCollectionChanged();
+        RaiseCollectionCleared(true, oldsize);
+        RaiseCollectionChanged();
       }
     }
 
@@ -1032,7 +1032,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U"></typeparam>
     /// <param name="items">The items to retain</param>
-    [Tested]
+    
     public virtual void RetainAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       updatecheck();
@@ -1076,9 +1076,9 @@ namespace C5
 #endif
 
       if ((ActiveEvents & EventTypeEnum.Removed) != 0)
-        raiseForRemoveAll(wasRemoved);
+        RaiseForRemoveAll(wasRemoved);
       else if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
     /// <summary>
@@ -1088,7 +1088,7 @@ namespace C5
     /// <param name="items">The items to look for.</param>
     /// <typeparam name="U"></typeparam>
     /// <returns>True if all items are found.</returns>
-    [Tested]
+    
     public virtual bool ContainsAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       foreach (U item in items)
@@ -1102,7 +1102,7 @@ namespace C5
     /// Create an array containing all items in this set (in enumeration order).
     /// </summary>
     /// <returns>The array</returns>
-    [Tested]
+    
     public override T[] ToArray()
     {
       T[] res = new T[size];
@@ -1157,7 +1157,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to look for.</param>
     /// <returns>1 if item is in set, 0 else</returns>
-    [Tested]
+    
     public virtual int ContainsCount(T item) { return Contains(item) ? 1 : 0; }
 
     /// <summary>
@@ -1179,7 +1179,7 @@ namespace C5
     /// Remove all (at most 1) copies of item from this set.
     /// </summary>
     /// <param name="item">The item to remove</param>
-    [Tested]
+    
     public virtual void RemoveAllCopies(T item) { Remove(item); }
 
     #endregion
@@ -1192,7 +1192,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NoSuchItemException">if collection is empty.</exception>
     /// <returns></returns>
-    [Tested]
+    
     public override T Choose()
     {
       int len = table.Length;
@@ -1211,7 +1211,7 @@ namespace C5
     /// Create an enumerator for this set.
     /// </summary>
     /// <returns>The enumerator</returns>
-    [Tested]
+    
     public override SCG.IEnumerator<T> GetEnumerator()
     {
       int index = -1;
@@ -1301,8 +1301,8 @@ namespace C5
     /// Report if this is a set collection.
     /// </summary>
     /// <value>Always false</value>
-    [Tested]
-    public virtual bool AllowsDuplicates { [Tested]get { return false; } }
+    
+    public virtual bool AllowsDuplicates { get { return false; } }
 
     /// <summary>
     /// By convention this is true for any collection with set semantics.
@@ -1316,7 +1316,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to add.</param>
     /// <returns>True if item was added (i.e. not found)</returns>
-    [Tested]
+    
     public virtual bool Add(T item)
     {
       updatecheck();
@@ -1327,7 +1327,7 @@ namespace C5
     /// Add an item to this set.
     /// </summary>
     /// <param name="item">The item to add.</param>
-    [Tested]
+    
     void SCG.ICollection<T>.Add(T item)
     {
         Add(item);
@@ -1341,7 +1341,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U">The type of items to add</typeparam>
     /// <param name="items">The items to add</param>
-    [Tested]
+    
     public virtual void AddAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       updatecheck();
@@ -1362,9 +1362,9 @@ namespace C5
       //TODO: implement a RaiseForAddAll() method
       if (raiseAdded & wasChanged)
         foreach (T item in wasAdded)
-          raiseItemsAdded(item, 1);
+          RaiseItemsAdded(item, 1);
       if (((ActiveEvents & EventTypeEnum.Changed) != 0 && wasChanged))
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
 
@@ -1376,7 +1376,7 @@ namespace C5
     /// Test internal structure of data (invariants)
     /// </summary>
     /// <returns>True if pass</returns>
-    [Tested]
+    
     public virtual bool Check()
     {
       int count = 0;
@@ -1551,7 +1551,6 @@ namespace C5
     /// Produce statistics on distribution of bucket sizes. Current implementation is incomplete.
     /// </summary>
     /// <returns>Histogram data.</returns>
-    [Tested(via = "Manually")]
     public ISortedDictionary<int, int> BucketCostDistribution()
     {
       TreeDictionary<int, int> res = new TreeDictionary<int, int>();

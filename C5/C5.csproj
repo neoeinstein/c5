@@ -69,12 +69,14 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Attributes.cs" />
     <Compile Include="Builtin.cs" />
+    <Compile Include="CollectionValueBase.cs" />
     <Compile Include="Comparer.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EnumerableBase.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="EventTypeEnum.cs" />
     <Compile Include="Exceptions\CollectionModifiedException.cs" />
     <Compile Include="Exceptions\DuplicateNotAllowedException.cs" />
     <Compile Include="Exceptions\FixedSizeCollectionException.cs" />

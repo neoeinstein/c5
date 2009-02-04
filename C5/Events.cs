@@ -26,57 +26,13 @@ using SCG = System.Collections.Generic;
 namespace C5
 {
   /// <summary>
-  /// 
-  /// </summary>
-  [Flags]
-  public enum EventTypeEnum
-  {
-    /// <summary>
-    /// 
-    /// </summary>
-    None = 0x00000000,
-    /// <summary>
-    /// 
-    /// </summary>
-    Changed = 0x00000001,
-    /// <summary>
-    /// 
-    /// </summary>
-    Cleared = 0x00000002,
-    /// <summary>
-    /// 
-    /// </summary>
-    Added = 0x00000004,
-    /// <summary>
-    /// 
-    /// </summary>
-    Removed = 0x00000008,
-    /// <summary>
-    /// 
-    /// </summary>
-    Basic = 0x0000000f,
-    /// <summary>
-    /// 
-    /// </summary>
-    Inserted = 0x00000010,
-    /// <summary>
-    /// 
-    /// </summary>
-    RemovedAt = 0x00000020,
-    /// <summary>
-    /// 
-    /// </summary>
-    All = 0x0000003f
-  }
-
-  /// <summary>
-  /// Holds the real events for a collection
+  /// Holds the real Events for a collection
   /// </summary>
   /// <typeparam name="T"></typeparam>
   [Serializable]
   internal sealed class EventBlock<T>
   {
-    internal EventTypeEnum events;
+    internal EventTypeEnum Events;
 
     event CollectionChangedHandler<T> collectionChanged;
     internal event CollectionChangedHandler<T> CollectionChanged
@@ -84,16 +40,16 @@ namespace C5
       add
       {
         collectionChanged += value;
-        events |= EventTypeEnum.Changed;
+        Events |= EventTypeEnum.Changed;
       }
       remove
       {
         collectionChanged -= value;
         if (collectionChanged == null)
-          events &= ~EventTypeEnum.Changed;
+          Events &= ~EventTypeEnum.Changed;
       }
     }
-    internal void raiseCollectionChanged(object sender)
+    internal void RaiseCollectionChanged(object sender)
     { if (collectionChanged != null) collectionChanged(sender); }
 
     event CollectionClearedHandler<T> collectionCleared;
@@ -102,18 +58,18 @@ namespace C5
       add
       {
         collectionCleared += value;
-        events |= EventTypeEnum.Cleared;
+        Events |= EventTypeEnum.Cleared;
       }
       remove
       {
         collectionCleared -= value;
         if (collectionCleared == null)
-          events &= ~EventTypeEnum.Cleared;
+          Events &= ~EventTypeEnum.Cleared;
       }
     }
-    internal void raiseCollectionCleared(object sender, bool full, int count)
+    internal void RaiseCollectionCleared(object sender, bool full, int count)
     { if (collectionCleared != null) collectionCleared(sender, new ClearedEventArgs(full, count)); }
-    internal void raiseCollectionCleared(object sender, bool full, int count, int? start)
+    internal void RaiseCollectionCleared(object sender, bool full, int count, int? start)
     { if (collectionCleared != null) collectionCleared(sender, new ClearedRangeEventArgs(full, count, start)); }
 
     event ItemsAddedHandler<T> itemsAdded;
@@ -122,16 +78,16 @@ namespace C5
       add
       {
         itemsAdded += value;
-        events |= EventTypeEnum.Added;
+        Events |= EventTypeEnum.Added;
       }
       remove
       {
         itemsAdded -= value;
         if (itemsAdded == null)
-          events &= ~EventTypeEnum.Added;
+          Events &= ~EventTypeEnum.Added;
       }
     }
-    internal void raiseItemsAdded(object sender, T item, int count)
+    internal void RaiseItemsAdded(object sender, T item, int count)
     { if (itemsAdded != null) itemsAdded(sender, new ItemCountEventArgs<T>(item, count)); }
 
     event ItemsRemovedHandler<T> itemsRemoved;
@@ -140,16 +96,16 @@ namespace C5
       add
       {
         itemsRemoved += value;
-        events |= EventTypeEnum.Removed;
+        Events |= EventTypeEnum.Removed;
       }
       remove
       {
         itemsRemoved -= value;
         if (itemsRemoved == null)
-          events &= ~EventTypeEnum.Removed;
+          Events &= ~EventTypeEnum.Removed;
       }
     }
-    internal void raiseItemsRemoved(object sender, T item, int count)
+    internal void RaiseItemsRemoved(object sender, T item, int count)
     { if (itemsRemoved != null) itemsRemoved(sender, new ItemCountEventArgs<T>(item, count)); }
 
     event ItemInsertedHandler<T> itemInserted;
@@ -158,16 +114,16 @@ namespace C5
       add
       {
         itemInserted += value;
-        events |= EventTypeEnum.Inserted;
+        Events |= EventTypeEnum.Inserted;
       }
       remove
       {
         itemInserted -= value;
         if (itemInserted == null)
-          events &= ~EventTypeEnum.Inserted;
+          Events &= ~EventTypeEnum.Inserted;
       }
     }
-    internal void raiseItemInserted(object sender, T item, int index)
+    internal void RaiseItemInserted(object sender, T item, int index)
     { if (itemInserted != null) itemInserted(sender, new ItemAtEventArgs<T>(item, index)); }
 
     event ItemRemovedAtHandler<T> itemRemovedAt;
@@ -176,16 +132,16 @@ namespace C5
       add
       {
         itemRemovedAt += value;
-        events |= EventTypeEnum.RemovedAt;
+        Events |= EventTypeEnum.RemovedAt;
       }
       remove
       {
         itemRemovedAt -= value;
         if (itemRemovedAt == null)
-          events &= ~EventTypeEnum.RemovedAt;
+          Events &= ~EventTypeEnum.RemovedAt;
       }
     }
-    internal void raiseItemRemovedAt(object sender, T item, int index)
+    internal void RaiseItemRemovedAt(object sender, T item, int index)
     { if (itemRemovedAt != null) itemRemovedAt(sender, new ItemAtEventArgs<T>(item, index)); }
   }
 
@@ -466,7 +422,7 @@ namespace C5
   /// <summary>
   /// The type of event raised after the Clear() operation on a collection.
   /// <para/>
-  /// Note: The Clear() operation will not fire ItemsRemoved events. 
+  /// Note: The Clear() operation will not fire ItemsRemoved Events. 
   /// </summary>
   /// <param name="sender"></param>
   /// <param name="eventArgs"></param>
@@ -481,7 +437,7 @@ namespace C5
   /// Note: an Update operation will fire an ItemsRemoved and an ItemsAdded event.
   /// <para/>
   /// Note: When an item is inserted into a list (<see cref="T:C5.IList`1"/>), both
-  /// ItemInserted and ItemsAdded events will be fired.
+  /// ItemInserted and ItemsAdded Events will be fired.
   /// </summary>
   /// <param name="sender"></param>
   /// <param name="eventArgs">An object with the item that was added</param>
@@ -493,7 +449,7 @@ namespace C5
   /// in an internally consistent state and before the corresponding CollectionChanged 
   /// event is raised.
   /// <para/>
-  /// Note: The Clear() operation will not fire ItemsRemoved events. 
+  /// Note: The Clear() operation will not fire ItemsRemoved Events. 
   /// <para/>
   /// Note: an Update operation will fire an ItemsRemoved and an ItemsAdded event.
   /// <para/>

@@ -66,7 +66,7 @@ namespace C5
   [Serializable]
   class SByteComparer : SCG.IComparer<sbyte>
   {
-    [Tested]
+    
     public int Compare(sbyte item1, sbyte item2) { 
       return item1 > item2 ? 1 : item1 < item2 ? -1 : 0; 
     }
@@ -88,14 +88,14 @@ namespace C5
     /// 
     /// </summary>
     /// <value></value>
-    [Tested]
+    
     public static SByteEqualityComparer Default { get { return cached ?? (cached = new SByteEqualityComparer()); } }
     /// <summary>
     /// Get the hash code of this sbyte, that is, itself
     /// </summary>
     /// <param name="item">The sbyte</param>
     /// <returns>The same</returns>
-    [Tested]
+    
     public int GetHashCode(sbyte item) { return item.GetHashCode(); }
 
 
@@ -105,7 +105,7 @@ namespace C5
     /// <param name="item1">first sbyte</param>
     /// <param name="item2">second sbyte</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(sbyte item1, sbyte item2) { return item1 == item2; }
   }
 
@@ -154,7 +154,7 @@ namespace C5
   [Serializable]
   class ShortComparer : SCG.IComparer<short>
   {
-    [Tested]
+    
     public int Compare(short item1, short item2) { 
       return item1 > item2 ? 1 : item1 < item2 ? -1 : 0; 
     }
@@ -175,14 +175,14 @@ namespace C5
     /// 
     /// </summary>
     /// <value></value>
-    [Tested]
+    
     public static ShortEqualityComparer Default { get { return cached ?? (cached = new ShortEqualityComparer()); } }
     /// <summary>
     /// Get the hash code of this short, that is, itself
     /// </summary>
     /// <param name="item">The short</param>
     /// <returns>The same</returns>
-    [Tested]
+    
     public int GetHashCode(short item) { return item.GetHashCode(); }
 
 
@@ -192,7 +192,7 @@ namespace C5
     /// <param name="item1">first short</param>
     /// <param name="item2">second short</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(short item1, short item2) { return item1 == item2; }
   }
 
@@ -202,7 +202,7 @@ namespace C5
   [Serializable]
   class UShortComparer : SCG.IComparer<ushort>
   {
-    [Tested]
+    
     public int Compare(ushort item1, ushort item2)
     {
       return item1 > item2 ? 1 : item1 < item2 ? -1 : 0;
@@ -225,14 +225,14 @@ namespace C5
     /// 
     /// </summary>
     /// <value></value>
-    [Tested]
+    
     public static UShortEqualityComparer Default { get { return cached ?? (cached = new UShortEqualityComparer()); } }
     /// <summary>
     /// Get the hash code of this ushort, that is, itself
     /// </summary>
     /// <param name="item">The ushort</param>
     /// <returns>The same</returns>
-    [Tested]
+    
     public int GetHashCode(ushort item) { return item.GetHashCode(); }
 
 
@@ -242,7 +242,7 @@ namespace C5
     /// <param name="item1">first ushort</param>
     /// <param name="item2">second ushort</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(ushort item1, ushort item2) { return item1 == item2; }
   }
 
@@ -252,7 +252,7 @@ namespace C5
   [Serializable]
   class IntComparer : SCG.IComparer<int>
   {
-    [Tested]
+    
     public int Compare(int item1, int item2) { 
       return item1 > item2 ? 1 : item1 < item2 ? -1 : 0; 
     }
@@ -272,14 +272,14 @@ namespace C5
     /// 
     /// </summary>
     /// <value></value>
-    [Tested]
+    
     public static IntEqualityComparer Default { get { return cached ?? (cached = new IntEqualityComparer()); } }
     /// <summary>
     /// Get the hash code of this integer, that is, itself
     /// </summary>
     /// <param name="item">The integer</param>
     /// <returns>The same</returns>
-    [Tested]
+    
     public int GetHashCode(int item) { return item; }
 
 
@@ -289,7 +289,7 @@ namespace C5
     /// <param name="item1">first integer</param>
     /// <param name="item2">second integer</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(int item1, int item2) { return item1 == item2; }
   }
 
@@ -299,7 +299,7 @@ namespace C5
   [Serializable]
   class UIntComparer : SCG.IComparer<uint>
   {
-    [Tested]
+    
     public int Compare(uint item1, uint item2)
     {
       return item1 > item2 ? 1 : item1 < item2 ? -1 : 0;
@@ -321,14 +321,14 @@ namespace C5
     /// 
     /// </summary>
     /// <value></value>
-    [Tested]
+    
     public static UIntEqualityComparer Default { get { return cached ?? (cached = new UIntEqualityComparer()); } }
     /// <summary>
     /// Get the hash code of this unsigned integer
     /// </summary>
     /// <param name="item">The integer</param>
     /// <returns>The same bit pattern as a signed integer</returns>
-    [Tested]
+    
     public int GetHashCode(uint item) { return item.GetHashCode(); }
 
 
@@ -338,7 +338,7 @@ namespace C5
     /// <param name="item1">first unsigned integer</param>
     /// <param name="item2">second unsigned integer</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(uint item1, uint item2) { return item1 == item2; }
   }
 
@@ -348,7 +348,7 @@ namespace C5
   [Serializable]
   class LongComparer : SCG.IComparer<long>
   {
-    [Tested]
+    
     public int Compare(long item1, long item2)
     {
       return item1 > item2 ? 1 : item1 < item2 ? -1 : 0;
@@ -369,14 +369,14 @@ namespace C5
     /// 
     /// </summary>
     /// <value></value>
-    [Tested]
+    
     public static LongEqualityComparer Default { get { return cached ?? (cached = new LongEqualityComparer()); } }
     /// <summary>
     /// Get the hash code of this long integer
     /// </summary>
     /// <param name="item">The long integer</param>
     /// <returns>The hash code</returns>
-    [Tested]
+    
     public int GetHashCode(long item) { return item.GetHashCode(); }
 
 
@@ -386,7 +386,7 @@ namespace C5
     /// <param name="item1">first long integer</param>
     /// <param name="item2">second long integer</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(long item1, long item2) { return item1 == item2; }
   }
 
@@ -396,7 +396,7 @@ namespace C5
   [Serializable]
   class ULongComparer : SCG.IComparer<ulong>
   {
-    [Tested]
+    
     public int Compare(ulong item1, ulong item2)
     {
       return item1 > item2 ? 1 : item1 < item2 ? -1 : 0;
@@ -418,14 +418,14 @@ namespace C5
     /// 
     /// </summary>
     /// <value></value>
-    [Tested]
+    
     public static ULongEqualityComparer Default { get { return cached ?? (cached = new ULongEqualityComparer()); } }
     /// <summary>
     /// Get the hash code of this unsigned long integer
     /// </summary>
     /// <param name="item">The unsigned long integer</param>
     /// <returns>The hash code</returns>
-    [Tested]
+    
     public int GetHashCode(ulong item) { return item.GetHashCode(); }
 
 
@@ -435,7 +435,7 @@ namespace C5
     /// <param name="item1">first unsigned long integer</param>
     /// <param name="item2">second unsigned long integer</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(ulong item1, ulong item2) { return item1 == item2; }
   }
 
@@ -463,14 +463,14 @@ namespace C5
     /// 
     /// </summary>
     /// <value></value>
-    [Tested]
+    
     public static FloatEqualityComparer Default { get { return cached ?? (cached = new FloatEqualityComparer()); } }
     /// <summary>
     /// Get the hash code of this float
     /// </summary>
     /// <param name="item">The float</param>
     /// <returns>The same</returns>
-    [Tested]
+    
     public int GetHashCode(float item) { return item.GetHashCode(); }
 
 
@@ -480,7 +480,7 @@ namespace C5
     /// <param name="item1">first float</param>
     /// <param name="item2">second float</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(float item1, float item2) { return item1 == item2; }
   }
   #endregion
@@ -506,14 +506,14 @@ namespace C5
     /// 
     /// </summary>
     /// <value></value>
-    [Tested]
+    
     public static DoubleEqualityComparer Default { get { return cached ?? (cached = new DoubleEqualityComparer()); } }
     /// <summary>
     /// Get the hash code of this double
     /// </summary>
     /// <param name="item">The double</param>
     /// <returns>The same</returns>
-    [Tested]
+    
     public int GetHashCode(double item) { return item.GetHashCode(); }
 
 
@@ -523,7 +523,7 @@ namespace C5
     /// <param name="item1">first double</param>
     /// <param name="item2">second double</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(double item1, double item2) { return item1 == item2; }
   }
   #endregion
@@ -532,7 +532,7 @@ namespace C5
   [Serializable]
   class DecimalComparer : SCG.IComparer<decimal>
   {
-    [Tested]
+    
     public int Compare(decimal item1, decimal item2)
     {
       return item1 > item2 ? 1 : item1 < item2 ? -1 : 0;
@@ -553,14 +553,14 @@ namespace C5
     /// 
     /// </summary>
     /// <value></value>
-    [Tested]
+    
     public static DecimalEqualityComparer Default { get { return cached ?? (cached = new DecimalEqualityComparer()); } }
     /// <summary>
     /// Get the hash code of this decimal.
     /// </summary>
     /// <param name="item">The decimal</param>
     /// <returns>The hash code</returns>
-    [Tested]
+    
     public int GetHashCode(decimal item) { return item.GetHashCode(); }
 
 
@@ -570,7 +570,7 @@ namespace C5
     /// <param name="item1">first decimal</param>
     /// <param name="item2">second decimal</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(decimal item1, decimal item2) { return item1 == item2; }
   }
 

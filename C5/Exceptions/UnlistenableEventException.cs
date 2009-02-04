@@ -27,7 +27,7 @@ namespace C5
 {
     /// <summary>
     /// An exception thrown when an attempt is made to listen to an event for which
-    /// the current object does not raise events.
+    /// the current object does not raise Events.
     /// </summary>
     [Serializable]
     public class UnlistenableEventException : Exception

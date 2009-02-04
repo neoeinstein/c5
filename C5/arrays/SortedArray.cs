@@ -191,7 +191,7 @@ namespace C5
     /// </summary>
     /// <param name="bot">The lower bound (inclusive)</param>
     /// <returns>The number of matcing items.</returns>
-    [Tested]
+    
     public int CountFrom(T bot)
     {
       int lo;
@@ -207,7 +207,7 @@ namespace C5
     /// <param name="bot">The lower bound (inclusive)</param>
     /// <param name="top">The upper bound (exclusive)</param>
     /// <returns>The number of matcing items.</returns>
-    [Tested]
+    
     public int CountFromTo(T bot, T top)
     {
       int lo, hi;
@@ -223,7 +223,7 @@ namespace C5
     /// </summary>
     /// <param name="top">The upper bound (exclusive)</param>
     /// <returns>The number of matcing items.</returns>
-    [Tested]
+    
     public int CountTo(T top)
     {
       int hi;
@@ -238,7 +238,7 @@ namespace C5
     /// </summary>
     /// <param name="bot">The lower bound (inclusive).</param>
     /// <returns>The result directed collection.</returns>
-    [Tested]
+    
     public IDirectedCollectionValue<T> RangeFrom(T bot)
     {
       int lo;
@@ -254,7 +254,7 @@ namespace C5
     /// <param name="bot">The lower bound (inclusive).</param>
     /// <param name="top">The upper bound (exclusive).</param>
     /// <returns>The result directed collection.</returns>
-    [Tested]
+    
     public IDirectedCollectionValue<T> RangeFromTo(T bot, T top)
     {
       int lo, hi;
@@ -273,7 +273,7 @@ namespace C5
     /// </summary>
     /// <param name="top">The upper bound (exclusive).</param>
     /// <returns>The result directed collection.</returns>
-    [Tested]
+    
     public IDirectedCollectionValue<T> RangeTo(T top)
     {
       int hi;
@@ -289,7 +289,7 @@ namespace C5
     /// </summary>
     /// <param name="f">The filter delegate defining the predicate.</param>
     /// <returns>The new indexed sorted collection.</returns>
-    [Tested]
+    
     public IIndexedSorted<T> FindAll(Predicate<T> f)
     {
       SortedArray<T> res = new SortedArray<T>(comparer);
@@ -322,7 +322,7 @@ namespace C5
     /// <param name="m">The delegate definging the map.</param>
     /// <param name="c">The comparion relation to use for the result.</param>
     /// <returns>The new sorted collection.</returns>
-    [Tested]
+    
     public IIndexedSorted<V> Map<V>(Converter<T, V> m, SCG.IComparer<V> c)
     {
       SortedArray<V> res = new SortedArray<V>(size, c);
@@ -455,7 +455,7 @@ namespace C5
     /// supplied  value is less than or equal to the minimum of this collection.)</exception>
     /// <param name="item">The item to find the predecessor for.</param>
     /// <returns>The predecessor.</returns>
-    [Tested]
+    
     public T Predecessor(T item)
     {
       int lo;
@@ -476,7 +476,7 @@ namespace C5
     /// supplied  value is greater than or equal to the maximum of this collection.)</exception>
     /// <param name="item">The item to find the successor for.</param>
     /// <returns>The successor.</returns>
-    [Tested]
+    
     public T Successor(T item)
     {
       int hi;
@@ -498,7 +498,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to find the weak predecessor for.</param>
     /// <returns>The weak predecessor.</returns>
-    [Tested]
+    
     public T WeakPredecessor(T item)
     {
       int lo;
@@ -520,7 +520,7 @@ namespace C5
     /// supplied  value is greater than the maximum of this collection.)</exception>
     /// <param name="item">The item to find the weak successor for.</param>
     /// <returns>The weak successor.</returns>
-    [Tested]
+    
     public T WeakSuccessor(T item)
     {
       int hi;
@@ -552,7 +552,7 @@ namespace C5
     /// <param name="highIsValid">True if the cut function is negative somewhere
     /// on this collection.</param>
     /// <returns></returns>
-    [Tested]
+    
     public bool Cut(IComparable<T> c, out T low, out bool lowIsValid, out T high, out bool highIsValid)
     {
       int lbest = -1, rbest = size;
@@ -640,7 +640,7 @@ namespace C5
     /// Create a directed collection with the same items as this collection.
     /// </summary>
     /// <returns>The result directed collection.</returns>
-    [Tested]
+    
     public IDirectedCollectionValue<T> RangeAll()
     { return new Range(this, 0, size, true); }
 
@@ -653,7 +653,7 @@ namespace C5
     /// </summary>
     /// <param name="items">The collection to add.</param>
     /// <typeparam name="U"></typeparam>
-    [Tested]
+    
     public void AddSorted<U>(SCG.IEnumerable<U> items) where U : T
     {
       //Unless items have <=1 elements we would expect it to be
@@ -694,7 +694,7 @@ namespace C5
     /// Remove all items of this collection above or at a supplied threshold.
     /// </summary>
     /// <param name="low">The lower threshold (inclusive).</param>
-    [Tested]
+    
     public void RemoveRangeFrom(T low)
     {
       int lowind;
@@ -719,7 +719,7 @@ namespace C5
     /// </summary>
     /// <param name="low">The lower threshold (inclusive).</param>
     /// <param name="hi">The upper threshold (exclusive).</param>
-    [Tested]
+    
     public void RemoveRangeFromTo(T low, T hi)
     {
       int lowind, highind;
@@ -745,7 +745,7 @@ namespace C5
     /// Remove all items of this collection below a supplied threshold.
     /// </summary>
     /// <param name="hi">The upper threshold (exclusive).</param>
-    [Tested]
+    
     public void RemoveRangeTo(T hi)
     {
       int highind;
@@ -767,10 +767,10 @@ namespace C5
     private void raiseForRemoveRange(T[] removed)
     {
        foreach(T item in removed)
-         raiseItemsRemoved(item, 1);
+         RaiseItemsRemoved(item, 1);
 
        if(removed.Length > 0)
-         raiseCollectionChanged();
+         RaiseCollectionChanged();
     }
 
     #endregion
@@ -781,21 +781,21 @@ namespace C5
     /// in terms of the size of this collection (worst-case).
     /// </summary>
     /// <value>Speed.Log</value>
-    [Tested]
-    public Speed ContainsSpeed { [Tested]get { return Speed.Log; } }
+    
+    public Speed ContainsSpeed { get { return Speed.Log; } }
 
     /// <summary>
     /// Remove all items from this collection, resetting internal array size.
     /// </summary>
-    [Tested]
+    
     override public void Clear()
     {
       int oldCount = size;
       base.Clear();
       if(oldCount > 0)
       {
-        raiseCollectionCleared(true, oldCount);
-        raiseCollectionChanged();
+        RaiseCollectionCleared(true, oldCount);
+        RaiseCollectionChanged();
       }
     }
 
@@ -805,7 +805,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to check for.</param>
     /// <returns>True if the items is in this collection.</returns>
-    [Tested]
+    
     public bool Contains(T item)
     {
       int ind;
@@ -821,7 +821,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to look for.</param>
     /// <returns>True if the items is in this collection.</returns>
-    [Tested]
+    
     public bool Find(ref T item)
     {
       int ind;
@@ -844,7 +844,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to look for.</param>
     /// <returns>True if the item was added (hence not found).</returns>
-    [Tested]
+    
     public bool FindOrAdd(ref T item)
     {
       updatecheck();
@@ -862,7 +862,7 @@ namespace C5
       Array.Copy(array, ind, array, ind + 1, size - ind);
       array[ind] = item;
       size++;
-      raiseForAdd(item);
+      RaiseForAdd(item);
       return false;
     }
 
@@ -876,7 +876,7 @@ namespace C5
     /// </summary>
     /// <param name="item">Value to update.</param>
     /// <returns>True if the item was found and hence updated.</returns>
-    [Tested]
+    
     public bool Update(T item)
     { T olditem; return Update(item, out olditem); }
 
@@ -896,7 +896,7 @@ namespace C5
       {
         olditem = array[ind];
         array[ind] = item;
-        raiseForUpdate(item, olditem);
+        RaiseForUpdate(item, olditem);
         return true;
       }
 
@@ -912,7 +912,7 @@ namespace C5
     /// </summary>
     /// <param name="item">Value to add or update.</param>
     /// <returns>True if the item was found and updated (hence not added).</returns>
-    [Tested]
+    
     public bool UpdateOrAdd(T item)
     { T olditem; return UpdateOrAdd(item, out olditem); }
 
@@ -932,7 +932,7 @@ namespace C5
       {
         olditem = array[ind];
         array[ind] = item;
-        raiseForUpdate(item, olditem);
+        RaiseForUpdate(item, olditem);
         return true;
       }
 
@@ -942,7 +942,7 @@ namespace C5
       array[ind] = item;
       size++;
       olditem = default(T);
-      raiseForAdd(item);
+      RaiseForAdd(item);
       return false;
     }
 
@@ -953,7 +953,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to remove.</param>
     /// <returns>True if the item was found (and removed).</returns>
-    [Tested]
+    
     public bool Remove(T item)
     {
       int ind;
@@ -964,7 +964,7 @@ namespace C5
         T removeditem = array[ind];
         Array.Copy(array, ind + 1, array, ind, size - ind - 1);
         array[--size] = default(T);
-        raiseForRemove(removeditem);
+        RaiseForRemove(removeditem);
         return true;
       }
 
@@ -982,7 +982,7 @@ namespace C5
     /// <param name="item">The value to remove.</param>
     /// <param name="removeditem">The removed value.</param>
     /// <returns>True if the item was found (and removed).</returns>
-    [Tested]
+    
     public bool Remove(T item, out T removeditem)
     {
       int ind;
@@ -993,7 +993,7 @@ namespace C5
         removeditem = array[ind];
         Array.Copy(array, ind + 1, array, ind, size - ind - 1);
         array[--size] = default(T);
-        raiseForRemove(removeditem);
+        RaiseForRemove(removeditem);
         return true;
       }
 
@@ -1007,7 +1007,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U"></typeparam>
     /// <param name="items">The items to remove.</param>
-    [Tested]
+    
     public void RemoveAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       //This is O(m*logn) with n bits extra storage
@@ -1041,7 +1041,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U"></typeparam>
     /// <param name="items">The items to retain.</param>
-    [Tested]
+    
     public void RetainAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       //This is O(m*logn) with n bits extra storage
@@ -1077,7 +1077,7 @@ namespace C5
     /// <param name="items">The </param>
     /// <typeparam name="U"></typeparam>
     /// <returns>True if all values in <code>items</code>is in this collection.</returns>
-    [Tested]
+    
     public bool ContainsAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       int tmp;
@@ -1096,7 +1096,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to count.</param>
     /// <returns>The number of copies found (0 or 1).</returns>
-    [Tested]
+    
     public int ContainsCount(T item)
     {
       int tmp;
@@ -1123,7 +1123,7 @@ namespace C5
     /// Remove all (0 or 1) items equivalent to a given value.
     /// </summary>
     /// <param name="item">The value to remove.</param>
-    [Tested]
+    
     public void RemoveAllCopies(T item) { Remove(item); }
 
 
@@ -1132,7 +1132,7 @@ namespace C5
     /// Only avaliable in DEBUG builds???
     /// </summary>
     /// <returns>True if check does not fail.</returns>
-    [Tested]
+    
     public override bool Check()
     {
       bool retval = true;
@@ -1169,8 +1169,8 @@ namespace C5
     /// 
     /// </summary>
     /// <value>False since this collection has set semantics</value>
-    [Tested]
-    public bool AllowsDuplicates { [Tested]get { return false; } }
+    
+    public bool AllowsDuplicates { get { return false; } }
 
     /// <summary>
     /// By convention this is true for any collection with set semantics.
@@ -1186,7 +1186,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to add.</param>
     /// <returns>True if item was added.</returns>
-    [Tested]
+    
     public bool Add(T item)
     {
       updatecheck();
@@ -1196,7 +1196,7 @@ namespace C5
       if (binarySearch(item, out ind)) return false;
 
       insert(ind, item);
-      raiseForAdd(item);
+      RaiseForAdd(item);
       return true;
     }
 
@@ -1204,7 +1204,7 @@ namespace C5
     /// Add an item to this collection if possible. 
     /// </summary>
     /// <param name="item">The item to add.</param>
-    [Tested]
+    
     void SCG.ICollection<T>.Add(T item)
     {
         Add(item);
@@ -1219,7 +1219,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U">The type of items to add</typeparam>
     /// <param name="items">The items to add</param>
-    [Tested]
+    
     public void AddAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       int toadd = EnumerableBase<U>.countItems(items), newsize = array.Length;
@@ -1261,9 +1261,9 @@ namespace C5
     {
       if ((ActiveEvents & EventTypeEnum.Added) != 0)
         for(int i = 0 ;i < numAdded; i += 1)
-          raiseItemsAdded(addedItems[i], 1);
+          RaiseItemsAdded(addedItems[i], 1);
       if (numAdded > 0)
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
     #endregion
@@ -1274,7 +1274,7 @@ namespace C5
     /// Find the current least item of this priority queue.
     /// </summary>
     /// <returns>The least item.</returns>
-    [Tested]
+    
     public T FindMin()
     {
       if (size == 0)
@@ -1287,7 +1287,7 @@ namespace C5
     /// Remove the least item from this  priority queue.
     /// </summary>
     /// <returns>The removed item.</returns>
-    [Tested]
+    
     public T DeleteMin()
     {
       updatecheck();
@@ -1299,7 +1299,7 @@ namespace C5
       size--;
       Array.Copy(array, 1, array, 0, size);
       array[size] = default(T);
-      raiseForRemove(retval);
+      RaiseForRemove(retval);
       return retval;
     }
 
@@ -1308,7 +1308,7 @@ namespace C5
     /// Find the current largest item of this priority queue.
     /// </summary>
     /// <returns>The largest item.</returns>
-    [Tested]
+    
     public T FindMax()
     {
       if (size == 0)
@@ -1322,7 +1322,7 @@ namespace C5
     /// Remove the largest item from this  priority queue.
     /// </summary>
     /// <returns>The removed item.</returns>
-    [Tested]
+    
     public T DeleteMax()
     {
       updatecheck();
@@ -1333,7 +1333,7 @@ namespace C5
 
       size--;
       array[size] = default(T);
-      raiseForRemove(retval);
+      RaiseForRemove(retval);
       return retval;
     }
 
@@ -1353,10 +1353,10 @@ namespace C5
     /// </summary>
     /// <value>The i'th item of this list.</value>
     /// <param name="i">the index to lookup</param>
-    [Tested]
+    
     public T this[int i]
     {
-      [Tested]
+      
       get
       {
         if (i < 0 || i >= size)
@@ -1377,7 +1377,7 @@ namespace C5
     /// </summary>
     /// <param name="item">Item to search for.</param>
     /// <returns>Index of item from start.</returns>
-    [Tested]
+    
     public int IndexOf(T item) { return indexOf(item); }
 
 
@@ -1386,7 +1386,7 @@ namespace C5
     /// </summary>
     /// <param name="item">Item to search for.</param>
     /// <returns>Index of of item from the end.</returns>
-    [Tested]
+    
     public int LastIndexOf(T item) { return indexOf(item); }
 
 
@@ -1397,7 +1397,7 @@ namespace C5
     /// </summary>
     /// <param name="i">The index of the item to remove.</param>
     /// <returns>The removed item.</returns>
-    [Tested]
+    
     public T RemoveAt(int i)
     {
       if (i < 0 || i >= size)
@@ -1410,7 +1410,7 @@ namespace C5
       size--;
       Array.Copy(array, i + 1, array, i, size - i);
       array[size] = default(T);
-      raiseForRemoveAt(i, retval);
+      RaiseForRemoveAt(i, retval);
       return retval;
     }
 
@@ -1420,7 +1420,7 @@ namespace C5
     /// </summary>
     /// <param name="start">The index of the first item to remove.</param>
     /// <param name="count">The number of items to remove.</param>
-    [Tested]
+    
     public void RemoveInterval(int start, int count)
     {
       updatecheck();
@@ -1435,8 +1435,8 @@ namespace C5
     {
       if (ActiveEvents != 0 && count > 0)
       {
-        raiseCollectionCleared(size == 0, count);
-        raiseCollectionChanged();
+        RaiseCollectionCleared(size == 0, count);
+        RaiseCollectionChanged();
       }
     }
 
@@ -1451,7 +1451,7 @@ namespace C5
     /// <code>foreach (T x in coll.Backwards()) {...}</code>
     /// </summary>
     /// <returns>The backwards collection.</returns>
-    [Tested]
+    
     IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards()
     { return Backwards(); }
 

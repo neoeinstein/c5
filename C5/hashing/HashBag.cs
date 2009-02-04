@@ -93,15 +93,15 @@ namespace C5
     /// The complexity of the Contains operation
     /// </summary>
     /// <value>Always returns Speed.Constant</value>
-    [Tested]
-    public virtual Speed ContainsSpeed { [Tested]get { return Speed.Constant; } }
+    
+    public virtual Speed ContainsSpeed { get { return Speed.Constant; } }
 
     /// <summary>
     /// Check if an item is in the bag 
     /// </summary>
     /// <param name="item">The item to look for</param>
     /// <returns>True if bag contains item</returns>
-    [Tested]
+    
     public virtual bool Contains(T item)
     { return dict.Contains(new KeyValuePair<T, int>(item, 0)); }
 
@@ -113,7 +113,7 @@ namespace C5
     /// <param name="item">On entry, the item to look for.
     /// On exit the item found, if any</param>
     /// <returns>True if bag contains item</returns>
-    [Tested]
+    
     public virtual bool Find(ref T item)
     {
       KeyValuePair<T, int> p = new KeyValuePair<T, int>(item, 0);
@@ -134,7 +134,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item object to update with</param>
     /// <returns>True if item was found (and updated)</returns>
-    [Tested]
+    
     public virtual bool Update(T item)
     { T olditem = default(T); return Update(item, out olditem); }
 
@@ -161,7 +161,7 @@ namespace C5
         p.Key = item;
         dict.Update(p);
         if (ActiveEvents != 0)
-          raiseForUpdate(item, olditem, p.Value);
+          RaiseForUpdate(item, olditem, p.Value);
         return true;
       }
 
@@ -178,7 +178,7 @@ namespace C5
     /// <param name="item">On entry, the item to look for or add.
     /// On exit the actual object found, if any.</param>
     /// <returns>True if item was found</returns>
-    [Tested]
+    
     public virtual bool FindOrAdd(ref T item)
     {
       updatecheck();
@@ -197,7 +197,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to look for and update or add</param>
     /// <returns>True if item was updated</returns>
-    [Tested]
+    
     public virtual bool UpdateOrAdd(T item)
     {
       updatecheck();
@@ -229,7 +229,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to remove</param>
     /// <returns>True if item was (found and) removed </returns>
-    [Tested]
+    
     public virtual bool Remove(T item)
     {
       KeyValuePair<T, int> p = new KeyValuePair<T, int>(item, 0);
@@ -246,7 +246,7 @@ namespace C5
           dict.Update(p);
         }
         if (ActiveEvents != 0)
-          raiseForRemove(p.Key);
+          RaiseForRemove(p.Key);
         return true;
       }
 
@@ -260,7 +260,7 @@ namespace C5
     /// <param name="item">The value to remove.</param>
     /// <param name="removeditem">The removed value.</param>
     /// <returns>True if item was found.</returns>
-    [Tested]
+    
     public virtual bool Remove(T item, out T removeditem)
     {
       updatecheck();
@@ -277,7 +277,7 @@ namespace C5
           dict.Update(p);
         }
         if (ActiveEvents != 0)
-          raiseForRemove(removeditem);
+          RaiseForRemove(removeditem);
 
         return true;
       }
@@ -291,7 +291,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U"></typeparam>
     /// <param name="items">The items to remove.</param>
-    [Tested]
+    
     public virtual void RemoveAll<U>(SCG.IEnumerable<U> items) where U : T
     {
 #warning Improve if items is a counting bag
@@ -322,7 +322,7 @@ namespace C5
     /// <summary>
     /// Remove all items from the bag, resetting internal table to initial size.
     /// </summary>
-    [Tested]
+    
     public virtual void Clear()
     {
       updatecheck();
@@ -332,9 +332,9 @@ namespace C5
       int oldsize = size;
       size = 0;
       if ((ActiveEvents & EventTypeEnum.Cleared) != 0)
-        raiseCollectionCleared(true, oldsize);
+        RaiseCollectionCleared(true, oldsize);
       if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
 
@@ -344,7 +344,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U"></typeparam>
     /// <param name="items">The items to retain</param>
-    [Tested]
+    
     public virtual void RetainAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       updatecheck();
@@ -395,9 +395,9 @@ namespace C5
       size = res.size;
 
       if ((ActiveEvents & EventTypeEnum.Removed) != 0)
-        raiseForRemoveAll(wasRemoved);
+        RaiseForRemoveAll(wasRemoved);
       else if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
     /// <summary>
@@ -407,7 +407,7 @@ namespace C5
     /// <param name="items">The items to look for.</param>
     /// <typeparam name="U"></typeparam>
     /// <returns>True if all items are found.</returns>
-    [Tested]
+    
     public virtual bool ContainsAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       HashBag<T> res = new HashBag<T>(itemequalityComparer);
@@ -426,7 +426,7 @@ namespace C5
     /// Create an array containing all items in this bag (in enumeration order).
     /// </summary>
     /// <returns>The array</returns>
-    [Tested]
+    
     public override T[] ToArray()
     {
       T[] res = new T[size];
@@ -445,7 +445,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to look for.</param>
     /// <returns>The count</returns>
-    [Tested]
+    
     public virtual int ContainsCount(T item)
     {
       KeyValuePair<T, int> p = new KeyValuePair<T, int>(item, 0);
@@ -475,7 +475,7 @@ namespace C5
     /// Remove all copies of item from this set.
     /// </summary>
     /// <param name="item">The item to remove</param>
-    [Tested]
+    
     public virtual void RemoveAllCopies(T item)
     {
       updatecheck();
@@ -487,9 +487,9 @@ namespace C5
         size -= p.Value;
         dict.Remove(p);
         if ((ActiveEvents & EventTypeEnum.Removed) != 0)
-          raiseItemsRemoved(p.Key, p.Value);
+          RaiseItemsRemoved(p.Key, p.Value);
         if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-          raiseCollectionChanged();
+          RaiseCollectionChanged();
       }
     }
 
@@ -505,7 +505,7 @@ namespace C5
     /// </summary>
     /// <param name="array">The array to copy to</param>
     /// <param name="index">The starting index.</param>
-    [Tested]
+    
     public override void CopyTo(T[] array, int index)
     {
       if (index < 0 || index + Count > array.Length)
@@ -524,8 +524,8 @@ namespace C5
     /// Report if this is a set collection.
     /// </summary>
     /// <value>Always true</value>
-    [Tested]
-    public virtual bool AllowsDuplicates { [Tested] get { return true; } }
+    
+    public virtual bool AllowsDuplicates {  get { return true; } }
 
     /// <summary>
     /// By convention this is true for any collection with set semantics.
@@ -539,13 +539,13 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to add.</param>
     /// <returns>Always true</returns>
-    [Tested]
+    
     public virtual bool Add(T item)
     {
       updatecheck();
       add(ref item);
       if (ActiveEvents != 0)
-        raiseForAdd(item);
+        RaiseForAdd(item);
       return true;
     }
 
@@ -553,7 +553,7 @@ namespace C5
     /// Add an item to this bag.
     /// </summary>
     /// <param name="item">The item to add.</param>
-    [Tested]
+    
     void SCG.ICollection<T>.Add(T item)
     {
         Add(item);
@@ -598,9 +598,9 @@ namespace C5
         return;
       if (mustRaiseAdded)
         foreach (T item in wasAdded)
-          raiseItemsAdded(item, 1);
+          RaiseItemsAdded(item, 1);
       if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
     #endregion
@@ -622,7 +622,7 @@ namespace C5
     /// Create an enumerator for this bag.
     /// </summary>
     /// <returns>The enumerator</returns>
-    [Tested]
+    
     public override SCG.IEnumerator<T> GetEnumerator()
     {
       int left;
@@ -666,7 +666,7 @@ namespace C5
     /// Test internal structure of data (invariants)
     /// </summary>
     /// <returns>True if pass</returns>
-    [Tested]
+    
     public virtual bool Check()
     {
       bool retval = dict.Check();

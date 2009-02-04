@@ -129,7 +129,7 @@ namespace C5
     /// 
     /// </summary>
     /// <param name="item"></param>
-    [Tested]
+    
     public virtual void Enqueue(T item)
     {
       if (!original)
@@ -141,14 +141,14 @@ namespace C5
       if (back == array.Length) back = 0;
       array[oldback] = item;
       if (ActiveEvents != 0)
-        raiseForAdd(item);
+        RaiseForAdd(item);
     }
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    [Tested]
+    
     public virtual T Dequeue()
     {
       if (!original)
@@ -162,7 +162,7 @@ namespace C5
       T retval = array[oldfront];
       array[oldfront] = default(T);
       if (ActiveEvents != 0)
-        raiseForRemove(retval);
+        RaiseForRemove(retval);
       return retval;
     }
 
@@ -181,7 +181,7 @@ namespace C5
       if (back == array.Length) back = 0;
       array[oldback] = item;
       if (ActiveEvents != 0)
-        raiseForAdd(item);
+        RaiseForAdd(item);
     }
 
     /// <summary>
@@ -201,7 +201,7 @@ namespace C5
       T retval = array[back];
       array[back] = default(T);
       if (ActiveEvents != 0)
-        raiseForRemove(retval);
+        RaiseForRemove(retval);
       return retval;
     }
     #endregion
@@ -222,7 +222,7 @@ namespace C5
     /// 
     /// </summary>
     /// <returns></returns>
-    [Tested]
+    
     public override T Choose()
     {
       if (size == 0)

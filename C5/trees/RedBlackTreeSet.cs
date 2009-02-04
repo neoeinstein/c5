@@ -384,10 +384,10 @@ namespace C5
       /// Undefined if enumerator is not valid (MoveNext hash been called returning true)
       /// </summary>
       /// <value>The current item of the enumerator.</value>
-      [Tested]
+      
       public T Current
       {
-        [Tested]
+        
         get
         {
           if (valid)
@@ -409,7 +409,7 @@ namespace C5
       /// <exception cref="CollectionModifiedException"/> if underlying tree was modified.
       /// </summary>
       /// <returns>True if enumerator is valid now</returns>
-      [Tested]
+      
       public bool MoveNext()
       {
         tree.modifycheck(stamp);
@@ -437,7 +437,7 @@ namespace C5
       /// <summary>
       /// Call Dispose(true) and then suppress finalization of this enumerator.
       /// </summary>
-      [Tested]
+      
       public void Dispose()
       {
         Dispose(true);
@@ -544,7 +544,7 @@ namespace C5
       /// <exception cref="CollectionModifiedException"/> if underlying tree was modified.
       /// </summary>
       /// <returns>True if enumerator is valid now</returns>
-      [Tested]
+      
       public bool MoveNext()
       {
         tree.modifycheck(stamp);//???
@@ -582,10 +582,10 @@ namespace C5
       /// Undefined if enumerator is not valid (MoveNext hash been called returning true)
       /// </summary>
       /// <value>The current value of the enumerator.</value>
-      [Tested]
+      
       public T Current
       {
-        [Tested]
+        
         get
         {
           if (valid)
@@ -599,7 +599,7 @@ namespace C5
 
       #region IDisposable Members
 
-      [Tested]
+      
       void System.IDisposable.Dispose()
       {
         tree = null;
@@ -678,7 +678,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NoSuchItemException">If tree is empty</exception>
     /// <returns></returns>
-    [Tested]
+    
     public override T Choose()
     {
       if (!isValid)
@@ -694,7 +694,7 @@ namespace C5
     /// Create an enumerator for this tree
     /// </summary>
     /// <returns>The enumerator</returns>
-    [Tested]
+    
     public override SCG.IEnumerator<T> GetEnumerator()
     {
       if (!isValid)
@@ -1015,7 +1015,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to add.</param>
     /// <returns>True if item was added.</returns>
-    [Tested]
+    
     public bool Add(T item)
     {
       if (!isValid)
@@ -1027,7 +1027,7 @@ namespace C5
       if (!add(item, ref jtem))
         return false;
       if (ActiveEvents != 0)
-        raiseForAdd(jtem);
+        RaiseForAdd(jtem);
       return true;
     }
 
@@ -1037,7 +1037,7 @@ namespace C5
     /// bag semantics, the item will always be added.
     /// </summary>
     /// <param name="item">The item to add.</param>
-    [Tested]
+    
     void SCG.ICollection<T>.Add(T item)
     {
         Add(item);
@@ -1066,7 +1066,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U">The type of items to add</typeparam>
     /// <param name="items">The items to add</param>
-    [Tested]
+    
     public void AddAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       if (!isValid)
@@ -1094,9 +1094,9 @@ namespace C5
       //TODO: implement a RaiseForAddAll() method
       if (raiseAdded)
         foreach (T item in wasAdded)
-          raiseItemsAdded(item, 1);
+          RaiseItemsAdded(item, 1);
       if (((ActiveEvents & EventTypeEnum.Changed) != 0))
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
 
@@ -1109,7 +1109,7 @@ namespace C5
     /// </summary>
     /// <param name="items">The collection to add.</param>
     /// <typeparam name="U"></typeparam>
-    [Tested]
+    
     public void AddSorted<U>(SCG.IEnumerable<U> items) where U : T
     {
       if (size > 0)
@@ -1271,10 +1271,10 @@ namespace C5
           foreach (T item in this)
             wasAdded.Enqueue(item);
           foreach (T item in wasAdded)
-            raiseItemsAdded(item, 1);
+            RaiseItemsAdded(item, 1);
         }
         if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-          raiseCollectionChanged();
+          RaiseCollectionChanged();
       }
       return;
     }
@@ -1284,13 +1284,13 @@ namespace C5
 #if BAG
     /// <summary></summary>
     /// <value>True since this collection has bag semantics.</value>
-    [Tested]
-    public bool AllowsDuplicates { [Tested]get { return true; } }
+    
+    public bool AllowsDuplicates { get { return true; } }
 #else
     /// <summary></summary>
     /// <value>False since this tree has set semantics.</value>
-    [Tested]
-    public bool AllowsDuplicates { [Tested]get { return false; } }
+    
+    public bool AllowsDuplicates { get { return false; } }
 #endif
     /// <summary>
     /// By convention this is true for any collection with set semantics.
@@ -1310,8 +1310,8 @@ namespace C5
     /// relevant).
     /// </summary>
     /// <value>Speed.Log</value>
-    [Tested]
-    public Speed ContainsSpeed { [Tested]get { return Speed.Log; } }
+    
+    public Speed ContainsSpeed { get { return Speed.Log; } }
 
     /// <summary>
     /// Check if this collection contains (an item equivalent to according to the
@@ -1319,7 +1319,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to check for.</param>
     /// <returns>True if the items is in this collection.</returns>
-    [Tested]
+    
     public bool Contains(T item)
     {
       if (!isValid)
@@ -1349,7 +1349,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to look for.</param>
     /// <returns>True if the items is in this collection.</returns>
-    [Tested]
+    
     public bool Find(ref T item)
     {
       if (!isValid)
@@ -1381,7 +1381,7 @@ namespace C5
     /// </summary>
     /// <param name="item"></param>
     /// <returns>True if item was found</returns>
-    [Tested]
+    
     public bool FindOrAdd(ref T item)
     {
       if (!isValid)
@@ -1394,7 +1394,7 @@ namespace C5
       {
         size++;
         if (ActiveEvents != 0 && !wasfound)
-          raiseForAdd(item);
+          RaiseForAdd(item);
         return wasfound;
       }
       else
@@ -1414,7 +1414,7 @@ namespace C5
     /// </summary>
     /// <param name="item">Value to update.</param>
     /// <returns>True if the item was found and hence updated.</returns>
-    [Tested]
+    
     public bool Update(T item)
     {
       T olditem = item;
@@ -1481,10 +1481,10 @@ namespace C5
 #endif
 #if BAG
           if (ActiveEvents != 0)
-            raiseForUpdate(item, olditem, items);
+            RaiseForUpdate(item, olditem, items);
 #else
           if (ActiveEvents != 0)
-            raiseForUpdate(item, olditem);
+            RaiseForUpdate(item, olditem);
 #endif
           return true;
         }
@@ -1509,7 +1509,7 @@ namespace C5
     /// </summary>
     /// <param name="item">Value to add or update.</param>
     /// <returns>True if the item was found and updated (hence not added).</returns>
-    [Tested]
+    
     public bool UpdateOrAdd(T item)
     { T olditem; return UpdateOrAdd(item, out olditem); }
 
@@ -1533,14 +1533,14 @@ namespace C5
       {
         size++;
         if (ActiveEvents != 0)
-          raiseForAdd(wasfound ? olditem : item);
+          RaiseForAdd(wasfound ? olditem : item);
         return wasfound;
       }
       else
       {
 #warning for bag implementation: count is wrong
         if (ActiveEvents != 0)
-          raiseForUpdate(item, olditem, 1);
+          RaiseForUpdate(item, olditem, 1);
         return true;
       }
     }
@@ -1552,7 +1552,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to remove.</param>
     /// <returns>True if the item was found (and removed).</returns>
-    [Tested]
+    
     public bool Remove(T item)
     {
       if (!isValid)
@@ -1564,7 +1564,7 @@ namespace C5
       int junk;
       bool retval = removeIterative(ref item, false, out junk);
       if (ActiveEvents != 0 && retval)
-        raiseForRemove(item);
+        RaiseForRemove(item);
       return retval;
     }
 
@@ -1578,7 +1578,7 @@ namespace C5
     /// <param name="item">The value to remove.</param>
     /// <param name="removeditem">The removed value.</param>
     /// <returns>True if the item was found (and removed).</returns>
-    [Tested]
+    
     public bool Remove(T item, out T removeditem)
     {
       if (!isValid)
@@ -1591,7 +1591,7 @@ namespace C5
       int junk;
       bool retval = removeIterative(ref removeditem, false, out junk);
       if (ActiveEvents != 0 && retval)
-        raiseForRemove(item);
+        RaiseForRemove(item);
       return retval;
     }
 
@@ -2074,7 +2074,7 @@ namespace C5
     /// <summary>
     /// Remove all items from this collection.
     /// </summary>
-    [Tested]
+    
     public void Clear()
     {
       if (!isValid)
@@ -2085,9 +2085,9 @@ namespace C5
       int oldsize = size;
       clear();
       if ((ActiveEvents & EventTypeEnum.Cleared) != 0)
-        raiseCollectionCleared(true, oldsize);
+        RaiseCollectionCleared(true, oldsize);
       if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
 
@@ -2105,7 +2105,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U"></typeparam>
     /// <param name="items">The items to remove.</param>
-    [Tested]
+    
     public void RemoveAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       if (!isValid)
@@ -2137,7 +2137,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U"></typeparam>
     /// <param name="items">The items to retain.</param>
-    [Tested]
+    
     public void RetainAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       if (!isValid)
@@ -2193,9 +2193,9 @@ namespace C5
       blackdepth = t.blackdepth;
       if (wasRemoved != null)
         foreach (KeyValuePair<T, int> p in wasRemoved)
-          raiseItemsRemoved(p.Key, p.Value);
+          RaiseItemsRemoved(p.Key, p.Value);
       if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
     /// <summary>
@@ -2207,7 +2207,7 @@ namespace C5
     /// <param name="items">The </param>
     /// <typeparam name="U"></typeparam>
     /// <returns>True if all values in <code>items</code>is in this collection.</returns>
-    [Tested]
+    
     public bool ContainsAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       //TODO: fix bag implementation
@@ -2228,7 +2228,7 @@ namespace C5
     /// </summary>
     /// <param name="filter">The filter delegate defining the predicate.</param>
     /// <returns>The new indexed sorted collection.</returns>
-    [Tested]
+    
     public IIndexedSorted<T> FindAll(Predicate<T> filter)
     {
       if (!isValid)
@@ -2309,7 +2309,7 @@ namespace C5
     /// <param name="mapper">The delegate definging the map.</param>
     /// <param name="c">The comparion relation to use for the result.</param>
     /// <returns>The new sorted collection.</returns>
-    [Tested]
+    
     public IIndexedSorted<V> Map<V>(Converter<T, V> mapper, SCG.IComparer<V> c)
     {
       if (!isValid)
@@ -2399,7 +2399,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to count.</param>
     /// <returns>The number of copies found.</returns>
-    [Tested]
+    
     public int ContainsCount(T item)
     {
       if (!isValid)
@@ -2507,7 +2507,7 @@ namespace C5
     /// Remove all items equivalent to a given value.
     /// </summary>
     /// <param name="item">The value to remove.</param>
-    [Tested]
+    
     public void RemoveAllCopies(T item)
     {
 #if BAG
@@ -2517,7 +2517,7 @@ namespace C5
       int removed;
       if (removeIterative(ref item, true, out removed) && ActiveEvents != 0)
       {
-        raiseForRemove(item, removed);
+        RaiseForRemove(item, removed);
       }
 #else
       Remove(item);
@@ -2573,8 +2573,8 @@ namespace C5
     /// </summary>
     /// <value>The i'th item of this list.</value>
     /// <param name="i">the index to lookup</param>
-    [Tested]
-    public T this[int i] { [Tested]	get { return findNode(i).item; } }
+    
+    public T this[int i] { 	get { return findNode(i).item; } }
 
     /// <summary>
     /// 
@@ -2591,7 +2591,7 @@ namespace C5
     /// <returns>Index of first occurrence from start of the item
     /// if found, else the two-complement 
     /// (always negative) of the index at which the item would be put if it was added.</returns>
-    [Tested]
+    
     public int IndexOf(T item)
     {
       if (!isValid)
@@ -2653,7 +2653,7 @@ namespace C5
     /// <returns>Index of last occurrence from the end of item if found, 
     /// else the two-complement (always negative) of the index at which 
     /// the item would be put if it was added.</returns>
-    [Tested]
+    
     public int LastIndexOf(T item)
     {
       if (!isValid)
@@ -2676,7 +2676,7 @@ namespace C5
     /// </summary>
     /// <param name="i">The index of the item to remove.</param>
     /// <returns>The removed item.</returns>
-    [Tested]
+    
     public T RemoveAt(int i)
     {
       if (!isValid)
@@ -2684,7 +2684,7 @@ namespace C5
       updatecheck();
       T retval = removeAt(i);
       if (ActiveEvents != 0)
-        raiseForRemove(retval);
+        RaiseForRemove(retval);
       return retval;
     }
 
@@ -2778,7 +2778,7 @@ namespace C5
     /// </summary>
     /// <param name="start">The index of the first item to remove.</param>
     /// <param name="count">The number of items to remove.</param>
-    [Tested]
+    
     public void RemoveInterval(int start, int count)
     {
       if (!isValid)
@@ -2799,9 +2799,9 @@ namespace C5
         removeAt(start);
 
       if ((ActiveEvents & EventTypeEnum.Cleared) != 0)
-        raiseCollectionCleared(false, count);
+        RaiseCollectionCleared(false, count);
       if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
 
@@ -2811,10 +2811,10 @@ namespace C5
     /// <value>The directed collection of items in a specific index interval.</value>
     /// <param name="start">The low index of the interval (inclusive).</param>
     /// <param name="end">The high index of the interval (exclusive).</param>
-    [Tested]
+    
     public IDirectedCollectionValue<T> this[int start, int end]
     {
-      [Tested]
+      
       get
       {
         checkRange(start, end - start);
@@ -2844,8 +2844,8 @@ namespace C5
 
       public override bool IsEmpty { get { return length == 0; } }
 
-      [Tested]
-      public override int Count { [Tested]get { return length; } }
+      
+      public override int Count { get { return length; } }
 
 
       public override Speed CountSpeed { get { return Speed.Constant; } }
@@ -2858,7 +2858,7 @@ namespace C5
         return tree[start];
       }
 
-      [Tested]
+      
       public override SCG.IEnumerator<T> GetEnumerator()
       {
 #if MAINTAIN_SIZE
@@ -3006,20 +3006,20 @@ namespace C5
       }
 
 
-      [Tested]
+      
       public override IDirectedCollectionValue<T> Backwards()
       { return new Interval(tree, start, length, !forwards); }
 
 
-      [Tested]
+      
       IDirectedEnumerable<T> C5.IDirectedEnumerable<T>.Backwards()
       { return Backwards(); }
 
 
-      [Tested]
+      
       public override EnumerationDirection Direction
       {
-        [Tested]
+        
         get
         {
           return forwards ? EnumerationDirection.Forwards : EnumerationDirection.Backwards;
@@ -3035,11 +3035,11 @@ namespace C5
     /// <code>foreach (T x in coll.Backwards()) {...}</code>
     /// </summary>
     /// <returns>The backwards collection.</returns>
-    [Tested]
+    
     public override IDirectedCollectionValue<T> Backwards() { return RangeAll().Backwards(); }
 
 
-    [Tested]
+    
     IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards() { return Backwards(); }
 
     #endregion
@@ -3057,7 +3057,7 @@ namespace C5
     /// Find the current least item of this priority queue.
     /// </summary>
     /// <returns>The least item.</returns>
-    [Tested]
+    
     public T FindMin()
     {
       if (!isValid)
@@ -3080,7 +3080,7 @@ namespace C5
     /// Remove the least item from this  priority queue.
     /// </summary>
     /// <returns>The removed item.</returns>
-    [Tested]
+    
     public T DeleteMin()
     {
       if (!isValid)
@@ -3097,8 +3097,8 @@ namespace C5
       T retval = deleteMin();
       if (ActiveEvents != 0)
       {
-        raiseItemsRemoved(retval, 1);
-        raiseCollectionChanged();
+        RaiseItemsRemoved(retval, 1);
+        RaiseCollectionChanged();
       }
       return retval;
     }
@@ -3134,7 +3134,7 @@ namespace C5
     /// Find the current largest item of this priority queue.
     /// </summary>
     /// <returns>The largest item.</returns>
-    [Tested]
+    
     public T FindMax()
     {
       if (!isValid)
@@ -3158,7 +3158,7 @@ namespace C5
     /// Remove the largest item from this  priority queue.
     /// </summary>
     /// <returns>The removed item.</returns>
-    [Tested]
+    
     public T DeleteMax()
     {
       if (!isValid)
@@ -3174,8 +3174,8 @@ namespace C5
       T retval = deleteMax();
       if (ActiveEvents != 0)
       {
-        raiseItemsRemoved(retval, 1);
-        raiseCollectionChanged();
+        RaiseItemsRemoved(retval, 1);
+        RaiseCollectionChanged();
       }
       return retval;
     }
@@ -3399,7 +3399,7 @@ namespace C5
     /// supplied  value is less than or equal to the minimum of this collection.)</exception>
     /// <param name="item">The item to find the predecessor for.</param>
     /// <returns>The predecessor.</returns>
-    [Tested]
+    
     public T Predecessor(T item)
     {
         T res;
@@ -3418,7 +3418,7 @@ namespace C5
     /// supplied  value is less than the minimum of this collection.)</exception>
     /// <param name="item">The item to find the weak predecessor for.</param>
     /// <returns>The weak predecessor.</returns>
-    [Tested]
+    
     public T WeakPredecessor(T item)
     {
         T res;
@@ -3437,7 +3437,7 @@ namespace C5
     /// supplied  value is greater than or equal to the maximum of this collection.)</exception>
     /// <param name="item">The item to find the successor for.</param>
     /// <returns>The successor.</returns>
-    [Tested]
+    
     public T Successor(T item)
     {
         T res;
@@ -3456,7 +3456,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to find the weak successor for.</param>
     /// <returns>The weak successor.</returns>
-    [Tested]
+    
     public T WeakSuccessor(T item)
     {
         T res;
@@ -3472,7 +3472,7 @@ namespace C5
     /// </summary>
     /// <param name="bot">The lower bound (inclusive).</param>
     /// <returns>The result directed collection.</returns>
-    [Tested]
+    
     public IDirectedCollectionValue<T> RangeFrom(T bot)
     {
       if (!isValid)
@@ -3487,7 +3487,7 @@ namespace C5
     /// <param name="bot">The lower bound (inclusive).</param>
     /// <param name="top">The upper bound (exclusive).</param>
     /// <returns>The result directed collection.</returns>
-    [Tested]
+    
     public IDirectedCollectionValue<T> RangeFromTo(T bot, T top)
     {
       if (!isValid)
@@ -3501,7 +3501,7 @@ namespace C5
     /// </summary>
     /// <param name="top">The upper bound (exclusive).</param>
     /// <returns>The result directed collection.</returns>
-    [Tested]
+    
     public IDirectedCollectionValue<T> RangeTo(T top)
     {
       if (!isValid)
@@ -3514,7 +3514,7 @@ namespace C5
     /// Create a directed collection with the same items as this collection.
     /// </summary>
     /// <returns>The result directed collection.</returns>
-    [Tested]
+    
     public IDirectedCollectionValue<T> RangeAll()
     {
       if (!isValid)
@@ -3523,15 +3523,15 @@ namespace C5
     }
 
 
-    [Tested]
+    
     IDirectedEnumerable<T> ISorted<T>.RangeFrom(T bot) { return RangeFrom(bot); }
 
 
-    [Tested]
+    
     IDirectedEnumerable<T> ISorted<T>.RangeFromTo(T bot, T top) { return RangeFromTo(bot, top); }
 
 
-    [Tested]
+    
     IDirectedEnumerable<T> ISorted<T>.RangeTo(T top) { return RangeTo(top); }
 
 
@@ -3600,7 +3600,7 @@ namespace C5
     /// <param name="highIsValid">True if the cut function is negative somewhere
     /// on this collection.</param>
     /// <returns></returns>
-    [Tested]
+    
     public bool Cut(IComparable<T> c, out T low, out bool lowIsValid, out T high, out bool highIsValid)
     {
       if (!isValid)
@@ -3690,7 +3690,7 @@ namespace C5
     /// </summary>
     /// <param name="bot">The lower bound (inclusive)</param>
     /// <returns>The number of matcing items.</returns>
-    [Tested]
+    
     public int CountFrom(T bot)
     {
       if (!isValid)
@@ -3705,7 +3705,7 @@ namespace C5
     /// <param name="bot">The lower bound (inclusive)</param>
     /// <param name="top">The upper bound (exclusive)</param>
     /// <returns>The number of matcing items.</returns>
-    [Tested]
+    
     public int CountFromTo(T bot, T top)
     {
       if (!isValid)
@@ -3722,7 +3722,7 @@ namespace C5
     /// </summary>
     /// <param name="top">The upper bound (exclusive)</param>
     /// <returns>The number of matcing items.</returns>
-    [Tested]
+    
     public int CountTo(T top)
     {
       if (!isValid)
@@ -3735,7 +3735,7 @@ namespace C5
     /// Remove all items of this collection above or at a supplied threshold.
     /// </summary>
     /// <param name="low">The lower threshold (inclusive).</param>
-    [Tested]
+    
     public void RemoveRangeFrom(T low)
     {
       if (!isValid)
@@ -3757,9 +3757,9 @@ namespace C5
           wasRemoved.Enqueue(item);
       }
       if (wasRemoved != null)
-        raiseForRemoveAll(wasRemoved);
+        RaiseForRemoveAll(wasRemoved);
       else if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
 
@@ -3768,7 +3768,7 @@ namespace C5
     /// </summary>
     /// <param name="low">The lower threshold (inclusive).</param>
     /// <param name="hi">The upper threshold (exclusive).</param>
-    [Tested]
+    
     public void RemoveRangeFromTo(T low, T hi)
     {
       if (!isValid)
@@ -3790,9 +3790,9 @@ namespace C5
           wasRemoved.Enqueue(item);
       }
       if (wasRemoved != null)
-        raiseForRemoveAll(wasRemoved);
+        RaiseForRemoveAll(wasRemoved);
       else if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
 
@@ -3800,7 +3800,7 @@ namespace C5
     /// Remove all items of this collection below a supplied threshold.
     /// </summary>
     /// <param name="hi">The upper threshold (exclusive).</param>
-    [Tested]
+    
     public void RemoveRangeTo(T hi)
     {
       if (!isValid)
@@ -3822,9 +3822,9 @@ namespace C5
           wasRemoved.Enqueue(item);
       }
       if (wasRemoved != null)
-        raiseForRemoveAll(wasRemoved);
+        RaiseForRemoveAll(wasRemoved);
       else if ((ActiveEvents & EventTypeEnum.Changed) != 0)
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
     }
 
     #endregion
@@ -3873,7 +3873,7 @@ namespace C5
     /// <summary>
     /// If this tree is a snapshot, remove registration in base tree
     /// </summary>
-    [Tested]
+    
     public void Dispose()
     {
 #if NCP
@@ -3919,7 +3919,7 @@ namespace C5
     /// Make a (read-only) snapshot of this collection.
     /// </summary>
     /// <returns>The snapshot.</returns>
-    [Tested]
+    
     public ISorted<T> Snapshot()
     {
 #if NCP
@@ -3968,7 +3968,7 @@ namespace C5
       EnumerationDirection direction;
 
 
-      [Tested]
+      
       public Range(TreeSet<T> basis, bool haslowend, T lowend, bool hashighend, T highend, EnumerationDirection direction)
       {
         this.basis = basis;
@@ -4014,7 +4014,7 @@ namespace C5
         private bool forwards;
 
         #endregion
-        [Tested]
+        
         public Enumerator(Range range)
         {
           comparer = range.basis.comparer;
@@ -4037,10 +4037,10 @@ namespace C5
         /// Undefined if enumerator is not valid (MoveNext hash been called returning true)
         /// </summary>
         /// <value>The current value of the enumerator.</value>
-        [Tested]
+        
         public T Current
         {
-          [Tested]
+          
           get
           {
             if (valid)
@@ -4062,7 +4062,7 @@ namespace C5
         /// <exception cref="CollectionModifiedException"/> if underlying tree was modified.
         /// </summary>
         /// <returns>True if enumerator is valid now</returns>
-        [Tested]
+        
         public bool MoveNext()
         {
           range.basis.modifycheck(range.stamp);
@@ -4222,7 +4222,7 @@ namespace C5
         }
 
 
-        [Tested]
+        
         public void Dispose()
         {
           comparer = null;
@@ -4261,12 +4261,12 @@ namespace C5
         return lowend;
       }
 
-      [Tested]
+      
       public override SCG.IEnumerator<T> GetEnumerator() { return new Enumerator(this); }
 
 
-      [Tested]
-      public override EnumerationDirection Direction { [Tested]get { return direction; } }
+      
+      public override EnumerationDirection Direction { get { return direction; } }
 
 
       #endregion
@@ -4290,7 +4290,7 @@ namespace C5
 
       #endregion
 
-      [Tested]
+      
       public override IDirectedCollectionValue<T> Backwards()
       {
         Range b = (Range)MemberwiseClone();
@@ -4300,14 +4300,14 @@ namespace C5
       }
 
 
-      [Tested]
+      
       IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards() { return Backwards(); }
 
 
       public override bool IsEmpty { get { return size == 0; } }
 
-      [Tested]
-      public override int Count { [Tested] get { return size; } }
+      
+      public override int Count {  get { return size; } }
 
       //TODO: check that this is correct
       public override Speed CountSpeed { get { return Speed.Constant; } }
@@ -4367,14 +4367,12 @@ namespace C5
     /// <summary>
     /// Print the tree structure to the console stdout.
     /// </summary>
-    [Tested(via = "Sawtooth")]
     public void dump() { dump(""); }
 
 
     /// <summary>
     /// Print the tree structure to the console stdout.
     /// </summary>
-    [Tested(via = "Sawtooth")]
     public void dump(string msg)
     {
       Console.WriteLine(String.Format(">>>>>>>>>>>>>>>>>>> dump {0} (count={1}, blackdepth={2}, depth={3}, gen={4})", msg, size, blackdepth,
@@ -4513,7 +4511,6 @@ namespace C5
     /// </summary>
     /// <param name="name">Title of dump</param>
     /// <returns>false if invariant violation</returns>
-    [Tested(via = "Sawtooth")]
     public bool Check(string name)
     {
       System.Text.StringBuilder e = new System.Text.StringBuilder();
@@ -4533,7 +4530,7 @@ namespace C5
     /// Checks red-black invariant. Dumps tree to console if bad
     /// </summary>
     /// <returns>false if invariant violation</returns>
-    [Tested]
+    
     public bool Check()
     {
       //return check("", System.IO.TextWriter.Null);

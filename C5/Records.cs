@@ -60,7 +60,7 @@ namespace C5
     /// </summary>
     /// <param name="x1"></param>
     /// <param name="x2"></param>
-    [Tested]
+    
     public Rec(T1 x1, T2 x2)
     {
       this.X1 = x1; this.X2 = x2;
@@ -71,7 +71,7 @@ namespace C5
     /// </summary>
     /// <param name="other"></param>
     /// <returns></returns>
-    [Tested]
+    
     public bool Equals(Rec<T1, T2> other)
     {
       return
@@ -84,7 +84,7 @@ namespace C5
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    [Tested]
+    
     public override bool Equals(object obj)
     {
       return obj is Rec<T1, T2> ? Equals((Rec<T1, T2>)obj) : false;
@@ -95,7 +95,7 @@ namespace C5
     /// <param name="record1"></param>
     /// <param name="record2"></param>
     /// <returns></returns>
-    [Tested]
+    
     public static bool operator ==(Rec<T1, T2> record1, Rec<T1, T2> record2)
     {
       return record1.Equals(record2);
@@ -106,7 +106,7 @@ namespace C5
     /// <param name="record1"></param>
     /// <param name="record2"></param>
     /// <returns></returns>
-    [Tested]
+    
     public static bool operator !=(Rec<T1, T2> record1, Rec<T1, T2> record2)
     {
       return !record1.Equals(record2);
@@ -115,7 +115,7 @@ namespace C5
     /// 
     /// </summary>
     /// <returns></returns>
-    [Tested]
+    
     public override int GetHashCode()
     {
       //TODO: don't use 0 as hashcode for null, but something else!
@@ -210,7 +210,7 @@ namespace C5
     /// <param name="x1"></param>
     /// <param name="x2"></param>
     /// <param name="x3"></param>
-    [Tested]
+    
     public Rec(T1 x1, T2 x2, T3 x3)
     {
       this.X1 = x1; this.X2 = x2; this.X3 = x3;
@@ -220,7 +220,7 @@ namespace C5
     /// </summary>
     /// <param name="other"></param>
     /// <returns></returns>
-    [Tested]
+    
     public bool Equals(Rec<T1, T2, T3> other)
     {
       return
@@ -234,7 +234,7 @@ namespace C5
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    [Tested]
+    
     public override bool Equals(object obj)
     {
       return obj is Rec<T1, T2, T3> ? Equals((Rec<T1, T2, T3>)obj) : false;
@@ -245,7 +245,7 @@ namespace C5
     /// <param name="record1"></param>
     /// <param name="record2"></param>
     /// <returns></returns>
-    [Tested]
+    
     public static bool operator ==(Rec<T1, T2, T3> record1, Rec<T1, T2, T3> record2)
     {
       return record1.Equals(record2);
@@ -256,7 +256,7 @@ namespace C5
     /// <param name="record1"></param>
     /// <param name="record2"></param>
     /// <returns></returns>
-    [Tested]
+    
     public static bool operator !=(Rec<T1, T2, T3> record1, Rec<T1, T2, T3> record2)
     {
       return !record1.Equals(record2);
@@ -265,7 +265,7 @@ namespace C5
     /// 
     /// </summary>
     /// <returns></returns>
-    [Tested]
+    
     public override int GetHashCode()
     {
       //TODO: don't use 0 as hashcode for null, but something else!
@@ -371,7 +371,7 @@ namespace C5
     /// <param name="x2"></param>
     /// <param name="x3"></param>
     /// <param name="x4"></param>
-    [Tested]
+    
     public Rec(T1 x1, T2 x2, T3 x3, T4 x4)
     {
       this.X1 = x1; this.X2 = x2; this.X3 = x3; this.X4 = x4;
@@ -381,7 +381,7 @@ namespace C5
     /// </summary>
     /// <param name="other"></param>
     /// <returns></returns>
-    [Tested]
+    
     public bool Equals(Rec<T1, T2, T3, T4> other)
     {
       return
@@ -396,7 +396,7 @@ namespace C5
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    [Tested]
+    
     public override bool Equals(object obj)
     {
       return obj is Rec<T1, T2, T3, T4> ? Equals((Rec<T1, T2, T3, T4>)obj) : false;
@@ -408,7 +408,7 @@ namespace C5
     /// <param name="record1"></param>
     /// <param name="record2"></param>
     /// <returns></returns>
-    [Tested]
+    
     public static bool operator ==(Rec<T1, T2, T3, T4> record1, Rec<T1, T2, T3, T4> record2)
     {
       return record1.Equals(record2);
@@ -419,7 +419,7 @@ namespace C5
     /// <param name="record1"></param>
     /// <param name="record2"></param>
     /// <returns></returns>
-    [Tested]
+    
     public static bool operator !=(Rec<T1, T2, T3, T4> record1, Rec<T1, T2, T3, T4> record2)
     {
       return !record1.Equals(record2);
@@ -429,7 +429,7 @@ namespace C5
     /// 
     /// </summary>
     /// <returns></returns>
-    [Tested]
+    
     public override int GetHashCode()
     {
       //TODO: don't use 0 as hashcode for null, but something else!

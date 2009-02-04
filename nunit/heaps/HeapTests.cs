@@ -102,7 +102,7 @@ namespace C5UnitTests.heaps
                 Acts.Remove, Acts.Changed, Acts.Remove, Acts.Changed, Acts.Add, Acts.Add, Acts.Add, Acts.Add, Acts.Changed };
       for (int i = 0; i < vals.Length; i++)
       {
-        //Console.WriteLine("{0}", events[cell]);
+        //Console.WriteLine("{0}", Events[cell]);
         Assert.AreEqual(acts[i], events[i].Key, "Action " + i);
         Assert.AreEqual(vals[i], events[i].Value, "Value " + i);
       }
@@ -134,7 +134,7 @@ namespace C5UnitTests.heaps
                 Acts.Remove, Acts.Changed, Acts.Remove, Acts.Changed, Acts.Add, Acts.Add, Acts.Add, Acts.Add, Acts.Changed };
       for (int i = 0; i < vals.Length; i++)
       {
-        //Console.WriteLine("{0}", events[cell]);
+        //Console.WriteLine("{0}", Events[cell]);
         Assert.AreEqual(vals[i], events[i].Value);
         Assert.AreEqual(acts[i], events[i].Key);
       }

@@ -33,13 +33,13 @@ namespace C5
     public interface ICollectionValue<T> : SCG.IEnumerable<T>, IShowable
     {
         /// <summary>
-        /// A flag bitmap of the events subscribable to by this collection.
+        /// A flag bitmap of the Events subscribable to by this collection.
         /// </summary>
         /// <value></value>
         EventTypeEnum ListenableEvents { get; }
 
         /// <summary>
-        /// A flag bitmap of the events currently subscribed to by this collection.
+        /// A flag bitmap of the Events currently subscribed to by this collection.
         /// </summary>
         /// <value></value>
         EventTypeEnum ActiveEvents { get; }

@@ -57,7 +57,7 @@ namespace C5
     /// Make a snapshot of the current state of this dictionary
     /// </summary>
     /// <returns>The snapshot</returns>
-    [Tested]
+    
     public SCG.IEnumerable<KeyValuePair<K, V>> Snapshot()
     {
       TreeDictionary<K, V> res = (TreeDictionary<K, V>)MemberwiseClone();

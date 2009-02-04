@@ -168,7 +168,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item</param>
     /// <returns>The hash code</returns>
-    [Tested]
+    
     public int GetHashCode(T item) { return item == null ? 0 : item.GetHashCode(); }
 
     /// <summary>
@@ -177,7 +177,7 @@ namespace C5
     /// <param name="item1">first item</param>
     /// <param name="item2">second item</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(T item1, T item2)
     {
       return item1 == null ? item2 == null : item1.Equals(item2);
@@ -319,7 +319,7 @@ namespace C5
     /// </summary>
     /// <param name="collection">The collection</param>
     /// <returns>The hash code</returns>
-    [Tested]
+    
     public int GetHashCode(T collection) { return collection.GetSequencedHashCode(); }
 
     /// <summary>
@@ -328,7 +328,7 @@ namespace C5
     /// <param name="collection1">first collection</param>
     /// <param name="collection2">second collection</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(T collection1, T collection2) { return collection1 == null ? collection2 == null : collection1.SequencedEquals(collection2); }
   }
 
@@ -354,7 +354,7 @@ namespace C5
     /// </summary>
     /// <param name="collection">The collection</param>
     /// <returns>The hash code</returns>
-    [Tested]
+    
     public int GetHashCode(T collection) { return collection.GetUnsequencedHashCode(); }
 
 
@@ -364,7 +364,7 @@ namespace C5
     /// <param name="collection1">first collection</param>
     /// <param name="collection2">second collection</param>
     /// <returns>True if equal</returns>
-    [Tested]
+    
     public bool Equals(T collection1, T collection2) { return collection1 == null ? collection2 == null : collection1.UnsequencedEquals(collection2); }
   }
 

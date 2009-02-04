@@ -49,7 +49,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NotComparableException">If T is not comparable</exception>
     /// <value>The comparer</value>
-    [Tested]
+    
     public static SCG.IComparer<T> Default
     {
       get
@@ -131,7 +131,7 @@ namespace C5
     /// <param name="item1">First item</param>
     /// <param name="item2">Second item</param>
     /// <returns>item1 &lt;=&gt; item2</returns>
-    [Tested]
+    
     public int Compare(T item1, T item2) { return item1 != null ? item1.CompareTo(item2) : item2 != null ? -1 : 0; }
   }
 
@@ -148,7 +148,7 @@ namespace C5
     /// <param name="item1">First item</param>
     /// <param name="item2">Second item</param>
     /// <returns>item1 &lt;=&gt; item2</returns>
-    [Tested]
+    
     public int Compare(T item1, T item2) { return item1 != null ? item1.CompareTo(item2) : item2 != null ? -1 : 0; }
   }
 

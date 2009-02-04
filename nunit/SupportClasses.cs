@@ -218,7 +218,7 @@ namespace C5UnitTests
     }
     public void Add(CollectionEvent<T> e) { happened.Add(e); }
     /// <summary>
-    /// Check that we have seen exactly the events in expected that match listenTo.
+    /// Check that we have seen exactly the Events in expected that match listenTo.
     /// </summary>
     /// <param name="expected"></param>
     public void Check(SCG.IEnumerable<CollectionEvent<T>> expected)

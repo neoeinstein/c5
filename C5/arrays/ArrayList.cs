@@ -678,10 +678,10 @@ namespace C5
     /// </summary>
     /// <exception cref="NoSuchItemException"> if this list is empty.</exception>
     /// <value>The first item in this list.</value>
-    [Tested]
+    
     public virtual T First
     {
-      [Tested]
+      
       get
       {
         validitycheck();
@@ -697,10 +697,10 @@ namespace C5
     /// </summary>
     /// <exception cref="NoSuchItemException"> if this list is empty.</exception>
     /// <value>The last item in this list.</value>
-    [Tested]
+    
     public virtual T Last
     {
-      [Tested]
+      
       get
       {
         validitycheck();
@@ -718,12 +718,12 @@ namespace C5
     /// </summary>
     /// <value>True if the <code>Remove()</code> operation removes from the
     /// start of the list, false if it removes from the end. The default for a new array list is false.</value>
-    [Tested]
+    
     public virtual bool FIFO
     {
-      [Tested]
+      
       get { validitycheck(); return fIFO; }
-      [Tested]
+      
       set { updatecheck(); fIFO = value; }
     }
 
@@ -755,10 +755,10 @@ namespace C5
     /// <value>The index'th item of this list.</value>
     /// <param name="index">The index of the item to fetch or store.</param>
 #endif
-    [Tested]
+    
     public virtual T this[int index]
     {
-      [Tested]
+      
       get
       {
         validitycheck();
@@ -767,7 +767,7 @@ namespace C5
 
         return array[offset + index];
       }
-      [Tested]
+      
       set
       {
         updatecheck();
@@ -792,7 +792,7 @@ namespace C5
 #else
         array[index] = value;
 #endif
-        (underlying ?? this).raiseForSetThis(index, value, item);
+        (underlying ?? this).RaiseForSetThis(index, value, item);
       }
     }
 
@@ -821,7 +821,7 @@ namespace C5
     /// <param name="index">The index at which to insert.</param>
     /// <param name="item">The item to insert.</param>
 #endif
-    [Tested]
+    
     public virtual void Insert(int index, T item)
     {
       updatecheck();
@@ -829,7 +829,7 @@ namespace C5
         throw new IndexOutOfRangeException();
 
       insert(index, item);
-      (underlying ?? this).raiseForInsert(index + offset, item);
+      (underlying ?? this).RaiseForInsert(index + offset, item);
     }
 
     /// <summary>
@@ -876,7 +876,7 @@ namespace C5
     /// <param name="items">Items to insert</param>
     /// <typeparam name="U"></typeparam>
 #endif
-    [Tested]
+    
     public virtual void InsertAll<U>(int index, SCG.IEnumerable<U> items) where U : T
     {
       updatecheck();
@@ -930,10 +930,10 @@ namespace C5
         if ((ActiveEvents & (EventTypeEnum.Added | EventTypeEnum.Inserted)) != 0)
           for (int j = index; j < index + added; j++)
           {
-            raiseItemInserted(array[j], j);
-            raiseItemsAdded(array[j], 1);
+            RaiseItemInserted(array[j], j);
+            RaiseItemsAdded(array[j], 1);
           }
-        raiseCollectionChanged();
+        RaiseCollectionChanged();
       }
     }
 
@@ -949,12 +949,12 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to insert.</param>
 #endif
-    [Tested]
+    
     public virtual void InsertFirst(T item)
     {
       updatecheck();
       insert(0, item);
-      (underlying ?? this).raiseForInsert(offset, item);
+      (underlying ?? this).RaiseForInsert(offset, item);
     }
 
 
@@ -970,12 +970,12 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to insert.</param>
 #endif
-    [Tested]
+    
     public virtual void InsertLast(T item)
     {
       updatecheck();
       insert(size, item);
-      (underlying ?? this).raiseForInsert(size - 1 + offset, item);
+      (underlying ?? this).RaiseForInsert(size - 1 + offset, item);
     }
 
 
@@ -987,7 +987,7 @@ namespace C5
     /// </summary>
     /// <param name="filter">The filter delegate defining the predicate.</param>
     /// <returns>The new list.</returns>
-    [Tested]
+    
     public virtual IList<T> FindAll(Predicate<T> filter)
     {
       validitycheck();
@@ -1034,7 +1034,7 @@ namespace C5
     /// <param name="mapper">The delegate defining the map.</param>
     /// <returns>The new list.</returns>
 #endif
-    [Tested]
+    
     public virtual IList<V> Map<V>(Converter<T, V> mapper)
     {
       validitycheck();
@@ -1101,7 +1101,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NoSuchItemException"> if this list is empty.</exception>
     /// <returns>The removed item.</returns>
-    [Tested]
+    
     public virtual T Remove()
     {
       updatecheck();
@@ -1109,7 +1109,7 @@ namespace C5
         throw new NoSuchItemException("List is empty");
 
       T item = removeAt(fIFO ? 0 : size - 1);
-      (underlying ?? this).raiseForRemove(item);
+      (underlying ?? this).RaiseForRemove(item);
       return item;
     }
 
@@ -1118,7 +1118,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NoSuchItemException"> if this list is empty.</exception>
     /// <returns>The removed item.</returns>
-    [Tested]
+    
     public virtual T RemoveFirst()
     {
       updatecheck();
@@ -1126,7 +1126,7 @@ namespace C5
         throw new NoSuchItemException("List is empty");
 
       T item = removeAt(0);
-      (underlying ?? this).raiseForRemoveAt(offset, item);
+      (underlying ?? this).RaiseForRemoveAt(offset, item);
       return item;
     }
 
@@ -1136,7 +1136,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NoSuchItemException"> if this list is empty.</exception>
     /// <returns>The removed item.</returns>
-    [Tested]
+    
     public virtual T RemoveLast()
     {
       updatecheck();
@@ -1144,7 +1144,7 @@ namespace C5
         throw new NoSuchItemException("List is empty");
 
       T item = removeAt(size - 1);
-      (underlying ?? this).raiseForRemoveAt(size + offset, item);
+      (underlying ?? this).RaiseForRemoveAt(size + offset, item);
       return item;
     }
 
@@ -1156,7 +1156,7 @@ namespace C5
     /// <param name="start">The index in this list of the start of the view.</param>
     /// <param name="count">The size of the view.</param>
     /// <returns>The new list view.</returns>
-    [Tested]
+    
     public virtual IList<T> View(int start, int count)
     {
       validitycheck();
@@ -1179,7 +1179,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to find.</param>
     /// <returns>The new list view.</returns>
-    [Tested]
+    
     public virtual IList<T> ViewOf(T item)
     {
       int index = indexOf(item);
@@ -1195,7 +1195,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to find.</param>
     /// <returns>The new list view.</returns>
-    [Tested]
+    
     public virtual IList<T> LastViewOf(T item)
     {
       int index = lastIndexOf(item);
@@ -1208,15 +1208,15 @@ namespace C5
     /// Null if this list is not a view.
     /// </summary>
     /// <value>Underlying list for view.</value>
-    [Tested]
-    public virtual IList<T> Underlying { [Tested]get { return underlying; } }
+    
+    public virtual IList<T> Underlying { get { return underlying; } }
 
 
     /// <summary>
     /// </summary>
     /// <value>Offset for this list view or 0 for an underlying list.</value>
-    [Tested]
-    public virtual int Offset { [Tested]get { return offset; } }
+    
+    public virtual int Offset { get { return offset; } }
 
     /// <summary>
     /// 
@@ -1232,7 +1232,7 @@ namespace C5
     /// would bring either end of the view outside the underlying list.</exception>
     /// <param name="offset">The signed amount to slide: positive to slide
     /// towards the end.</param>
-    [Tested]
+    
     public virtual IList<T> Slide(int offset)
     {
       if (!TrySlide(offset, size))
@@ -1250,7 +1250,7 @@ namespace C5
     /// <param name="offset">The signed amount to slide: positive to slide
     /// towards the end.</param>
     /// <param name="size">The new size of the view.</param>
-    [Tested]
+    
     public virtual IList<T> Slide(int offset, int size)
     {
       if (!TrySlide(offset, size))
@@ -1264,7 +1264,7 @@ namespace C5
     /// <exception cref="NotAViewException"> if this list is not a view.</exception>
     /// <param name="offset"></param>
     /// <returns></returns>
-    [Tested]
+    
     public virtual bool TrySlide(int offset)
     {
       return TrySlide(offset, size);
@@ -1277,7 +1277,7 @@ namespace C5
     /// <param name="offset"></param>
     /// <param name="size"></param>
     /// <returns></returns>
-    [Tested]
+    
     public virtual bool TrySlide(int offset, int size)
     {
       updatecheck();
@@ -1314,7 +1314,7 @@ namespace C5
     /// <summary>
     /// Reverst the list so the items are in the opposite sequence order.
     /// </summary>
-    [Tested]
+    
     public virtual void Reverse()
     {
       updatecheck();
@@ -1332,7 +1332,7 @@ namespace C5
 #endif
       //TODO: be more forgiving wrt. disposing
       disposeOverlappingViews(true);
-      (underlying ?? this).raiseCollectionChanged();
+      (underlying ?? this).RaiseCollectionChanged();
     }
 
     /// <summary>
@@ -1341,7 +1341,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NotComparableException">if T is not comparable</exception>
     /// <returns>True if the list is sorted, else false.</returns>
-    [Tested]
+    
     public bool IsSorted() { return IsSorted(Comparer<T>.Default); }
 
     /// <summary>
@@ -1349,7 +1349,7 @@ namespace C5
     /// </summary>
     /// <param name="c">The comparer defining the sorting order.</param>
     /// <returns>True if the list is sorted, else false.</returns>
-    [Tested]
+    
     public virtual bool IsSorted(SCG.IComparer<T> c)
     {
       validitycheck();
@@ -1376,7 +1376,7 @@ namespace C5
     /// Sort the items of the list according to a specific sorting order.
     /// </summary>
     /// <param name="comparer">The comparer defining the sorting order.</param>
-    [Tested]
+    
     public virtual void Sort(SCG.IComparer<T> comparer)
     {
       updatecheck();
@@ -1387,7 +1387,7 @@ namespace C5
 #if HASHINDEX
       reindex(offset, offset + size);
 #endif
-      (underlying ?? this).raiseCollectionChanged();
+      (underlying ?? this).RaiseCollectionChanged();
     }
 
 
@@ -1420,7 +1420,7 @@ namespace C5
 #if HASHINDEX
       reindex(offset, offset + size);
 #endif
-      (underlying ?? this).raiseCollectionChanged();
+      (underlying ?? this).RaiseCollectionChanged();
     }
     #endregion
 
@@ -1431,7 +1431,7 @@ namespace C5
     /// </summary>
     /// <param name="item">Item to search for.</param>
     /// <returns>Index of item from start.</returns>
-    [Tested]
+    
     public virtual int IndexOf(T item) { validitycheck(); return indexOf(item); }
 
 
@@ -1440,7 +1440,7 @@ namespace C5
     /// </summary>
     /// <param name="item">Item to search for.</param>
     /// <returns>Index of item from the end.</returns>
-    [Tested]
+    
     public virtual int LastIndexOf(T item) { validitycheck(); return lastIndexOf(item); }
 
 
@@ -1451,7 +1451,7 @@ namespace C5
     /// &gt;= the size of the collection.</exception>
     /// <param name="index">The index of the item to remove.</param>
     /// <returns>The removed item.</returns>
-    [Tested]
+    
     public virtual T RemoveAt(int index)
     {
       updatecheck();
@@ -1459,7 +1459,7 @@ namespace C5
         throw new IndexOutOfRangeException("Index out of range for sequenced collection");
 
       T item = removeAt(index);
-      (underlying ?? this).raiseForRemoveAt(offset + index, item);
+      (underlying ?? this).RaiseForRemoveAt(offset + index, item);
       return item;
     }
 
@@ -1471,7 +1471,7 @@ namespace C5
     /// and <code>count</code> does not describe a valid interval in the list</exception> 
     /// <param name="start">The index of the first item to remove.</param>
     /// <param name="count">The number of items to remove.</param>
-    [Tested]
+    
     public virtual void RemoveInterval(int start, int count)
     {
       updatecheck();
@@ -1500,8 +1500,8 @@ namespace C5
     {
       if (ActiveEvents != 0)
       {
-        raiseCollectionCleared(size == 0, count, start);
-        raiseCollectionChanged();
+        RaiseCollectionCleared(size == 0, count, start);
+        RaiseCollectionChanged();
       }
     }
     #endregion
@@ -1514,10 +1514,10 @@ namespace C5
     /// relevant).
     /// </summary>
     /// <value>Speed.Linear</value>
-    [Tested]
+    
     public virtual Speed ContainsSpeed
     {
-      [Tested]
+      
       get
       {
 #if HASHINDEX
@@ -1532,7 +1532,7 @@ namespace C5
     /// 
     /// </summary>
     /// <returns></returns>
-    [Tested]
+    
     public override int GetUnsequencedHashCode()
     { validitycheck(); return base.GetUnsequencedHashCode(); }
 
@@ -1541,7 +1541,7 @@ namespace C5
     /// </summary>
     /// <param name="that"></param>
     /// <returns></returns>
-    [Tested]
+    
     public override bool UnsequencedEquals(ICollection<T> that)
     { validitycheck(); return base.UnsequencedEquals(that); }
 
@@ -1551,7 +1551,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to check for.</param>
     /// <returns>True if the items is in this collection.</returns>
-    [Tested]
+    
     public virtual bool Contains(T item)
     { validitycheck(); return indexOf(item) >= 0; }
 
@@ -1563,7 +1563,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to look for.</param>
     /// <returns>True if the items is in this collection.</returns>
-    [Tested]
+    
     public virtual bool Find(ref T item)
     {
       validitycheck();
@@ -1588,7 +1588,7 @@ namespace C5
     /// </summary>
     /// <param name="item">Value to update.</param>
     /// <returns>True if the item was found and hence updated.</returns>
-    [Tested]
+    
     public virtual bool Update(T item)
     {
       T olditem;
@@ -1613,7 +1613,7 @@ namespace C5
 #if HASHINDEX
         itemIndex.Update(new KeyValuePair<T, int>(item, offset + i));
 #endif
-        (underlying ?? this).raiseForUpdate(item, olditem);
+        (underlying ?? this).RaiseForUpdate(item, olditem);
         return true;
       }
 
@@ -1628,7 +1628,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to look for.</param>
     /// <returns>True if the item was found (hence not added).</returns>
-    [Tested]
+    
     public virtual bool FindOrAdd(ref T item)
     {
       updatecheck();
@@ -1648,7 +1648,7 @@ namespace C5
     /// </summary>
     /// <param name="item">Value to update.</param>
     /// <returns>True if the item was found and hence updated.</returns>
-    [Tested]
+    
     public virtual bool UpdateOrAdd(T item)
     {
       updatecheck();
@@ -1683,7 +1683,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to remove.</param>
     /// <returns>True if the item was found (and removed).</returns>
-    [Tested]
+    
     public virtual bool Remove(T item)
     {
       updatecheck();
@@ -1694,7 +1694,7 @@ namespace C5
         return false;
 
       T removeditem = removeAt(i);
-      (underlying ?? this).raiseForRemove(removeditem);
+      (underlying ?? this).RaiseForRemove(removeditem);
       return true;
     }
 
@@ -1709,7 +1709,7 @@ namespace C5
     /// <param name="item">The value to remove.</param>
     /// <param name="removeditem">The removed value.</param>
     /// <returns>True if the item was found (and removed).</returns>
-    [Tested]
+    
     public virtual bool Remove(T item, out T removeditem)
     {
       updatecheck();
@@ -1723,7 +1723,7 @@ namespace C5
       }
 
       removeditem = removeAt(i);
-      (underlying ?? this).raiseForRemove(removeditem);
+      (underlying ?? this).RaiseForRemove(removeditem);
       return true;
     }
 
@@ -1735,7 +1735,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U"></typeparam>
     /// <param name="items">The items to remove.</param>
-    [Tested]
+    
     public virtual void RemoveAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       updatecheck();
@@ -1872,7 +1872,7 @@ namespace C5
     /// <summary>
     /// Remove all items from this collection, resetting internal array size.
     /// </summary>
-    [Tested]
+    
     public override void Clear()
     {
       if (underlying == null)
@@ -1899,7 +1899,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U"></typeparam>
     /// <param name="items">The items to retain.</param>
-    [Tested]
+    
     public virtual void RetainAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       updatecheck();
@@ -2042,7 +2042,7 @@ namespace C5
     /// <param name="items">The </param>
     /// <typeparam name="U"></typeparam>
     /// <returns>True if all values in <code>items</code>is in this collection.</returns>
-    [Tested]
+    
     public virtual bool ContainsAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       validitycheck();
@@ -2075,7 +2075,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The value to count.</param>
     /// <returns>The number of copies found.</returns>
-    [Tested]
+    
     public virtual int ContainsCount(T item)
     {
       validitycheck();
@@ -2128,7 +2128,7 @@ namespace C5
     /// Remove all items equal to a given one.
     /// </summary>
     /// <param name="item">The value to remove.</param>
-    [Tested]
+    
     public virtual void RemoveAllCopies(T item)
     {
 #if HASHINDEX
@@ -2175,7 +2175,7 @@ namespace C5
     /// Check the integrity of the internal data structures of this array list.
     /// </summary>
     /// <returns>True if check does not fail.</returns>
-    [Tested]
+    
     public override bool Check()
     {
       bool retval = true;
@@ -2265,10 +2265,10 @@ namespace C5
     /// 
     /// </summary>
     /// <value>True, indicating array list has bag semantics.</value>
-    [Tested]
+    
     public virtual bool AllowsDuplicates
     {
-      [Tested]
+      
       get
       {
 #if HASHINDEX
@@ -2301,7 +2301,7 @@ namespace C5
     /// </summary>
     /// <param name="item">The item to add.</param>
     /// <returns>True</returns>
-    [Tested]
+    
     public virtual bool Add(T item)
     {
       updatecheck();
@@ -2314,7 +2314,7 @@ namespace C5
 #if HASHINDEX
       reindex(size + offset);
 #endif
-      (underlying ?? this).raiseForAdd(item);
+      (underlying ?? this).RaiseForAdd(item);
       return true;
     }
 
@@ -2324,7 +2324,7 @@ namespace C5
     /// </summary>
     /// <typeparam name="U"></typeparam>
     /// <param name="items"></param>
-    [Tested]
+    
     public virtual void AddAll<U>(SCG.IEnumerable<U> items) where U : T
     {
       updatecheck();
@@ -2373,8 +2373,8 @@ namespace C5
     {
       if ((ActiveEvents & EventTypeEnum.Added) != 0)
         for (int i = start, end = start + added; i < end; i++)
-          raiseItemsAdded(array[i], 1);
-      raiseCollectionChanged();
+          RaiseItemsAdded(array[i], 1);
+      RaiseCollectionChanged();
     }
 
     #endregion
@@ -2388,7 +2388,7 @@ namespace C5
     /// <code>foreach (T x in coll.Backwards()) {...}</code>
     /// </summary>
     /// <returns>The backwards collection.</returns>
-    [Tested]
+    
     IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards() { return Backwards(); }
 
     #endregion
@@ -2398,8 +2398,8 @@ namespace C5
     /// 
     /// </summary>
     /// <value>The number of items in this collection</value>
-    [Tested]
-    public override int Count { [Tested]get { validitycheck(); return size; } }
+    
+    public override int Count { get { validitycheck(); return size; } }
     #endregion
 
     #region IEnumerable<T> Members
@@ -2408,7 +2408,7 @@ namespace C5
     /// Create an enumerator for the collection
     /// </summary>
     /// <returns>The enumerator</returns>
-    [Tested]
+    
     public override SCG.IEnumerator<T> GetEnumerator()
     {
       validitycheck();
@@ -2424,7 +2424,7 @@ namespace C5
     /// Push an item to the top of the stack.
     /// </summary>
     /// <param name="item">The item</param>
-    [Tested]
+    
     public virtual void Push(T item)
     {
       InsertLast(item);
@@ -2434,7 +2434,7 @@ namespace C5
     /// Pop the item at the top of the stack from the stack.
     /// </summary>
     /// <returns>The popped item.</returns>
-    [Tested]
+    
     public virtual T Pop()
     {
       return RemoveLast();
@@ -2448,7 +2448,7 @@ namespace C5
     /// Enqueue an item at the back of the queue. 
     /// </summary>
     /// <param name="item">The item</param>
-    [Tested]
+    
     public virtual void Enqueue(T item)
     {
       InsertLast(item);
@@ -2458,7 +2458,7 @@ namespace C5
     /// Dequeue an item from the front of the queue.
     /// </summary>
     /// <returns>The item</returns>
-    [Tested]
+    
     public virtual T Dequeue()
     {
       return RemoveFirst();

@@ -39,7 +39,7 @@ namespace C5
     /// <param name="start">Index of first position to sort</param>
     /// <param name="count">Number of elements to sort</param>
     /// <param name="comparer">IComparer&lt;T&gt; to sort by</param>
-    [Tested]
+    
     public static void IntroSort<T>(T[] array, int start, int count, SCG.IComparer<T> comparer)
     {
       if (array == null)
@@ -62,7 +62,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NotComparableException">If T is not comparable</exception>
     /// <param name="array">Array to sort</param>
-    [Tested]
+    
     public static void IntroSort<T>(T[] array)
     {
       if (array == null)
@@ -82,7 +82,7 @@ namespace C5
     /// <param name="start">Index of first position to sort</param>
     /// <param name="count">Number of elements to sort</param>
     /// <param name="comparer">IComparer&lt;T&gt; to sort by</param>
-    [Tested]
+    
     public static void InsertionSort<T>(T[] array, int start, int count, SCG.IComparer<T> comparer)
     {
       if (array == null)
@@ -110,7 +110,7 @@ namespace C5
     /// <param name="start">Index of first position to sort</param>
     /// <param name="count">Number of elements to sort</param>
     /// <param name="comparer">IComparer&lt;T&gt; to sort by</param>
-    [Tested]
+    
     public static void HeapSort<T>(T[] array, int start, int count, SCG.IComparer<T> comparer)
     {
       if (array == null)
