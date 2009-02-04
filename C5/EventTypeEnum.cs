@@ -1,4 +1,4 @@
-/*
+﻿/*
  Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -23,47 +23,17 @@ using System;
 
 namespace C5
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [Flags]
     public enum EventTypeEnum
     {
-        /// <summary>
-        /// 
-        /// </summary>
         None = 0x00000000,
-        /// <summary>
-        /// 
-        /// </summary>
         Changed = 0x00000001,
-        /// <summary>
-        /// 
-        /// </summary>
         Cleared = 0x00000002,
-        /// <summary>
-        /// 
-        /// </summary>
         Added = 0x00000004,
-        /// <summary>
-        /// 
-        /// </summary>
         Removed = 0x00000008,
-        /// <summary>
-        /// 
-        /// </summary>
         Basic = Changed | Cleared | Added | Removed,
-        /// <summary>
-        /// 
-        /// </summary>
         Inserted = 0x00000010,
-        /// <summary>
-        /// 
-        /// </summary>
         RemovedAt = 0x00000020,
-        /// <summary>
-        /// 
-        /// </summary>
         All = Basic | Inserted | RemovedAt,
     }
 }
