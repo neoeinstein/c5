@@ -17,7 +17,6 @@ namespace C5.Tests
     {
         [PexMethod(MaxConditions = 4000)]
         [Description("Constructs a specially designed array that triggers quicksort's worst-case running time.")]
-        [Parallelizable]
         // Examples: {1, 3, 2, 4} and {1, 5, 3, 7, 2, 4, 6, 8}
         public void IntroSort_WorstCase(int k)
         {
@@ -38,21 +37,20 @@ namespace C5.Tests
                 }
             }
 
-            PexStore.Value("array", arr);
+            PexObserve.Value("array", arr);
 
             IntroSort_Short(arr);
         }
 
         [PexMethod]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentNullException))]
-        [Parallelizable]
         public void IntroSort_Short<T>(T[] arr)
         {
             var sorted = arr == null ? null : (T[])arr.Clone();
 
             Sorting.IntroSort(sorted);
 
-            PexStore.Value("sorted", sorted);
+            PexObserve.Value("sorted", sorted);
 
             AssertSorted(sorted, arr);
         }
@@ -60,14 +58,13 @@ namespace C5.Tests
         [PexMethod]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentNullException))]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentOutOfRangeException))]
-        [Parallelizable]
         public void IntroSort_Full<T>(T[] arr, int start, int count)
         {
             var sorted = arr == null ? null : (T[])arr.Clone();
 
             Sorting.IntroSort(sorted, start, count, SCG.Comparer<T>.Default);
 
-            PexStore.Value("sorted", sorted);
+            PexObserve.Value("sorted", sorted);
 
             AssertSorted(sorted, arr, start, count);
         }
@@ -75,14 +72,13 @@ namespace C5.Tests
         [PexMethod]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentNullException))]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentOutOfRangeException))]
-        [Parallelizable]
         public void InsertionSort<T>(T[] arr, int start, int count)
         {
             var sorted = arr == null ? null : (T[])arr.Clone();
 
             Sorting.InsertionSort(sorted, start, count, SCG.Comparer<T>.Default);
 
-            PexStore.Value("sorted", sorted);
+            PexObserve.Value("sorted", sorted);
 
             AssertSorted(sorted, arr, start, count);
         }
@@ -90,14 +86,13 @@ namespace C5.Tests
         [PexMethod]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentNullException))]
         [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentOutOfRangeException))]
-        [Parallelizable]
         public void HeapSort<T>(T[] arr, int start, int count)
         {
             var sorted = arr == null ? null : (T[])arr.Clone();
 
             Sorting.HeapSort(sorted, start, count, SCG.Comparer<T>.Default);
 
-            PexStore.Value("sorted", sorted);
+            PexObserve.Value("sorted", sorted);
 
             AssertSorted(sorted, arr, start, count);
         }
