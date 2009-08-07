@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProductVersion>9.0.21022</ProductVersion>
@@ -17,8 +18,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
-    <StartupObject>
-    </StartupObject>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,6 +29,11 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="BeforeBuild" command="PreProcess/bin/Debug/PreProcess.exe ${ProjectDir}" workingdir="${SolutionDir}" externalConsole="true" pauseExternalConsole="true" />
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,6 +52,8 @@
     <ErrorReport>prompt</ErrorReport>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\C5.snk</AssemblyOriginatorKeyFile>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseSnk|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -56,10 +64,10 @@
     <ErrorReport>prompt</ErrorReport>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\C5.snk</AssemblyOriginatorKeyFile>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System">
-    </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -92,10 +100,8 @@
     <Compile Include="Formatting.cs" />
     <Compile Include="Hashers.cs" />
     <Compile Include="Events.cs" />
-    <Compile Include="Collections.cs">
-    </Compile>
-    <Compile Include="Dictionaries.cs">
-    </Compile>
+    <Compile Include="Collections.cs" />
+    <Compile Include="Dictionaries.cs" />
     <Compile Include="Interfaces\ICollection.cs" />
     <Compile Include="Interfaces\ICollectionValue.cs" />
     <Compile Include="Interfaces\IDictionary.cs" />
@@ -120,28 +126,17 @@
     <Compile Include="ViewSupport.cs" />
     <Compile Include="MappedEnumerators.cs" />
     <Compile Include="WrappedArray.cs" />
-    <Compile Include="Wrappers.cs">
-    </Compile>
-    <Compile Include="arrays\ArrayList.cs">
-    </Compile>
-    <Compile Include="arrays\SortedArray.cs">
-    </Compile>
-    <Compile Include="hashing\HashBag.cs">
-    </Compile>
-    <Compile Include="hashing\HashDictionary.cs">
-    </Compile>
-    <Compile Include="hashing\HashSet.cs">
-    </Compile>
-    <Compile Include="heaps\IntervalHeap.cs">
-    </Compile>
-    <Compile Include="linkedlists\LinkedList.cs">
-    </Compile>
-    <Compile Include="trees\RedBlackTreeSet.cs">
-    </Compile>
-    <Compile Include="trees\RedBlackTreeBag.cs">
-    </Compile>
-    <Compile Include="trees\RedBlackTreeDictionary.cs">
-    </Compile>
+    <Compile Include="Wrappers.cs" />
+    <Compile Include="arrays\ArrayList.cs" />
+    <Compile Include="arrays\SortedArray.cs" />
+    <Compile Include="hashing\HashBag.cs" />
+    <Compile Include="hashing\HashDictionary.cs" />
+    <Compile Include="hashing\HashSet.cs" />
+    <Compile Include="heaps\IntervalHeap.cs" />
+    <Compile Include="linkedlists\LinkedList.cs" />
+    <Compile Include="trees\RedBlackTreeSet.cs" />
+    <Compile Include="trees\RedBlackTreeBag.cs" />
+    <Compile Include="trees\RedBlackTreeDictionary.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>

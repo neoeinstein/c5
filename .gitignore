@@ -6,7 +6,8 @@ release/
 *.old
 *.[Cc]ache
 *.suo
-*.user
+*.user*
+*.pidb
 _ReSharper*
 
 *.bak
