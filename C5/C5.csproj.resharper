@@ -1,0 +1,5 @@
+<Configuration>
+  <NamespaceFolders>
+    <SkipFolder>D70489CD-ABDA-48FF-BD1E-BE3F7495BE71/d:Interfaces</SkipFolder>
+  </NamespaceFolders>
+</Configuration>
