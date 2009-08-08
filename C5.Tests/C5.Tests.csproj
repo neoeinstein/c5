@@ -27,6 +27,12 @@
     <Reference Include="MbUnit, Version=3.0.6.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="Microsoft.Pex.Framework, Version=0.15.40714.1, Culture=neutral, PublicKeyToken=76a274db078248c8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.Pex.Graphs, Version=0.15.40714.1, Culture=neutral, PublicKeyToken=76a274db078248c8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Microsoft.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
@@ -42,8 +48,25 @@
     <Compile Include="Exceptions\ReadOnlyCollectionExceptionFixture.cs" />
     <Compile Include="Exceptions\UnlistenableEventExceptionFixture.cs" />
     <Compile Include="Exceptions\ViewDisposedExceptionFixture.cs" />
+    <Compile Include="Properties\PexAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestAssembly.cs" />
+    <Compile Include="SortingFixture.cs" />
+    <Compile Include="SortingFixture.HeapSort.g.cs">
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixture.InsertionSort.g.cs">
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixture.IntroSort_Full.g.cs">
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixture.IntroSort_Short.g.cs">
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SortingFixture.IntroSort_WorstCase.g.cs">
+      <DependentUpon>SortingFixture.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\C5\C5.csproj">
