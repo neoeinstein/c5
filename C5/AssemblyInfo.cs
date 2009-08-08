@@ -51,4 +51,8 @@ using System;
 [assembly: AssemblyVersion("1.1.0")]
 
 [assembly: CLSCompliant(true)]
-[assembly: InternalsVisibleTo("C5.Tests")]
+[assembly: InternalsVisibleTo("C5.Tests, PublicKey=" +
+    "00240000048000009400000006020000002400005253413100040000010001006b4f22553fee1554" +
+    "2afe14ba131bddc4537920e08bcc42606c606fcee57c6acaceef30a905761a217451725c5879140e" +
+    "b5144488799bfca2a1bc54c03e8b0b5819757d38ceab963ed13e27ed473aad5d34b59e2d92c1145b" +
+    "46b6f63c11d5397c43960da58addb445e48ac5cb929be0e76640bf4f8a68cbaa1d5c61e1b9f8c8c3")]
