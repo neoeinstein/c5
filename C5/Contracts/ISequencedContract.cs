@@ -32,12 +32,18 @@ namespace C5.Contracts
     {
         int ISequenced<T>.GetSequencedHashCode()
         {
-            throw new NotImplementedException();
+            return default(int);
         }
 
         bool ISequenced<T>.SequencedEquals(ISequenced<T> otherCollection)
         {
-            throw new NotImplementedException();
+            ISequenced<T> @this = this;
+            Contract.Ensures(otherCollection != null || Contract.Result<bool>() == false);
+            Contract.Ensures(@this.Count == otherCollection.Count || Contract.Result<bool>() == false);
+            Contract.Ensures(@this.GetUnsequencedHashCode() == otherCollection.GetUnsequencedHashCode() || Contract.Result<bool>() == false);
+            Contract.Ensures(@this.GetSequencedHashCode() == otherCollection.GetSequencedHashCode() || Contract.Result<bool>() == false);
+            Contract.Ensures(@this.UnsequencedEquals(otherCollection) || Contract.Result<bool>() == false);
+            return default(bool);
         }
 
         #region Interface Members not in Contract
