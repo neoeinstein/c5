@@ -163,6 +163,7 @@
     <Compile Include="Contracts\IDirectedCollectionValueContract.cs" />
     <Compile Include="Contracts\IDirectedEnumerableContract.cs" />
     <Compile Include="Contracts\IExtensibleContract.cs" />
+    <Compile Include="Contracts\IPersistentSortedContract.cs" />
     <Compile Include="Contracts\IPriorityQueueContract.cs" />
     <Compile Include="Contracts\IQueueContract.cs" />
     <Compile Include="Contracts\IStackContract.cs" />
