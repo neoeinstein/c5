@@ -20,12 +20,15 @@
 */
 
 using System;
+using System.Diagnostics.Contracts;
 using SCG = System.Collections.Generic;
+
 namespace C5
 {
     /// <summary>
     /// A dictionary with sorted keys.
     /// </summary>
+    [ContractClass(typeof(Contracts.ISortedDictionaryContract<,>))]
     public interface ISortedDictionary<K, V> : IDictionary<K, V>
     {
         /// <summary>
@@ -39,6 +42,7 @@ namespace C5
         /// </summary>
         /// <exception cref="NoSuchItemException"> if the collection is empty.</exception>
         /// <returns>The least item.</returns>
+        [Pure]
         KeyValuePair<K, V> FindMin();
 
 
@@ -55,6 +59,7 @@ namespace C5
         /// </summary>
         /// <exception cref="NoSuchItemException"> if the collection is empty.</exception>
         /// <returns>The largest item.</returns>
+        [Pure]
         KeyValuePair<K, V> FindMax();
 
 
@@ -78,6 +83,7 @@ namespace C5
         /// <param name="key">The key</param>
         /// <param name="res">The predecessor, if any</param>
         /// <returns>True if key has a predecessor</returns>
+        [Pure]
         bool TryPredecessor(K key, out KeyValuePair<K, V> res);
 
         /// <summary>
@@ -87,6 +93,7 @@ namespace C5
         /// <param name="key">The key</param>
         /// <param name="res">The successor, if any</param>
         /// <returns>True if the key has a successor</returns>
+        [Pure]
         bool TrySuccessor(K key, out KeyValuePair<K, V> res);
 
         /// <summary>
@@ -96,6 +103,7 @@ namespace C5
         /// <param name="key">The key</param>
         /// <param name="res">The predecessor, if any</param>
         /// <returns>True if key has a weak predecessor</returns>
+        [Pure]
         bool TryWeakPredecessor(K key, out KeyValuePair<K, V> res);
 
         /// <summary>
@@ -105,6 +113,7 @@ namespace C5
         /// <param name="key">The key</param>
         /// <param name="res">The weak successor, if any</param>
         /// <returns>True if the key has a weak successor</returns>
+        [Pure]
         bool TryWeakSuccessor(K key, out KeyValuePair<K, V> res);
 
         /// <summary>
@@ -113,6 +122,7 @@ namespace C5
         /// <exception cref="NoSuchItemException"> if there is no such entry. </exception>
         /// <param name="key">The key to compare to</param>
         /// <returns>The entry</returns>
+        [Pure]
         KeyValuePair<K, V> Predecessor(K key);
 
 
@@ -122,6 +132,7 @@ namespace C5
         /// <exception cref="NoSuchItemException"> if there is no such entry. </exception>
         /// <param name="key">The key to compare to</param>
         /// <returns>The entry</returns>
+        [Pure]
         KeyValuePair<K, V> Successor(K key);
 
 
@@ -131,6 +142,7 @@ namespace C5
         /// <exception cref="NoSuchItemException"> if there is no such entry. </exception>
         /// <param name="key">The key to compare to</param>
         /// <returns>The entry</returns>
+        [Pure]
         KeyValuePair<K, V> WeakPredecessor(K key);
 
 
@@ -140,6 +152,7 @@ namespace C5
         /// <exception cref="NoSuchItemException"> if there is no such entry. </exception>
         /// <param name="key">The key to compare to</param>
         /// <returns>The entry</returns>
+        [Pure]
         KeyValuePair<K, V> WeakSuccessor(K key);
 
         /// <summary>
@@ -179,6 +192,7 @@ namespace C5
         /// on this collection.</param>
         /// <returns>True if the cut function is zero somewhere
         /// on this collection.</returns>
+        [Pure]
         bool Cut(IComparable<K> cutFunction, out KeyValuePair<K, V> lowEntry, out bool lowIsValid, out KeyValuePair<K, V> highEntry, out bool highIsValid);
 
         /// <summary>
@@ -189,6 +203,7 @@ namespace C5
         /// </summary>
         /// <param name="bot">The lower bound (inclusive).</param>
         /// <returns>The result directed collection.</returns>
+        [Pure]
         IDirectedEnumerable<KeyValuePair<K, V>> RangeFrom(K bot);
 
 
@@ -201,6 +216,7 @@ namespace C5
         /// <param name="lowerBound">The lower bound (inclusive).</param>
         /// <param name="upperBound">The upper bound (exclusive).</param>
         /// <returns>The result directed collection.</returns>
+        [Pure]
         IDirectedEnumerable<KeyValuePair<K, V>> RangeFromTo(K lowerBound, K upperBound);
 
 
@@ -212,6 +228,7 @@ namespace C5
         /// </summary>
         /// <param name="top">The upper bound (exclusive).</param>
         /// <returns>The result directed collection.</returns>
+        [Pure]
         IDirectedEnumerable<KeyValuePair<K, V>> RangeTo(K top);
 
 
@@ -222,6 +239,7 @@ namespace C5
         /// invalidate the view so that further operations on the view throws InvalidView exceptions.</para>
         /// </summary>
         /// <returns>The result directed collection.</returns>
+        [Pure]
         IDirectedCollectionValue<KeyValuePair<K, V>> RangeAll();
 
 

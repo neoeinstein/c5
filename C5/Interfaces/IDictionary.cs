@@ -20,13 +20,16 @@
 */
 
 using System;
+using System.Diagnostics.Contracts;
 using SCG = System.Collections.Generic;
+
 namespace C5
 {
     /// <summary>
     /// A dictionary with keys of type K and values of type V. Equivalent to a
     /// finite partial map from K to V.
     /// </summary>
+    [ContractClass(typeof(Contracts.IDictionaryContract<,>))]
     public interface IDictionary<K, V> : ICollectionValue<KeyValuePair<K, V>>, ICloneable
     {
         /// <summary>
@@ -108,6 +111,7 @@ namespace C5
         /// </summary>
         /// <param name="items">The </param>
         /// <returns>True if all values in <code>items</code>is in this collection.</returns>
+        [Pure]
         bool ContainsAll<H>(SCG.IEnumerable<H> items) where H : K;
 
         /// <summary>
@@ -138,6 +142,7 @@ namespace C5
         /// </summary>
         /// <param name="key">The key to look for</param>
         /// <returns>True if key was found</returns>
+        [Pure]
         bool Contains(K key);
 
 
@@ -148,6 +153,7 @@ namespace C5
         /// <param name="key">The key to look for</param>
         /// <param name="val">On exit, the value of the entry</param>
         /// <returns>True if key was found</returns>
+        [Pure]
         bool Find(K key, out V val);
 
         /// <summary>
@@ -157,6 +163,7 @@ namespace C5
         /// <param name="key">The key to look for</param>
         /// <param name="val">On exit, the value of the entry</param>
         /// <returns>True if key was found</returns>
+        [Pure]
         bool Find(ref K key, out V val);
 
 
@@ -217,6 +224,7 @@ namespace C5
         /// Only avaliable in DEBUG builds???
         /// </summary>
         /// <returns>True if check does not fail.</returns>
+        [Pure]
         bool Check();
     }
 }
