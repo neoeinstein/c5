@@ -32,112 +32,194 @@ namespace C5.Contracts
     {
         T ISorted<T>.FindMin()
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+            return default(T);
         }
 
         T ISorted<T>.DeleteMin()
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+            Contract.Ensures(@this.Count == Contract.OldValue(@this.Count) - 1);
+            return default(T);
         }
 
         T ISorted<T>.FindMax()
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+            return default(T);
         }
 
         T ISorted<T>.DeleteMax()
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+            Contract.Ensures(@this.Count == Contract.OldValue(@this.Count) - 1);
+            return default(T);
         }
 
         SCG.IComparer<T> ISorted<T>.Comparer
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                Contract.Ensures(Contract.Result<SCG.IComparer<T>>() != null);
+                return default(SCG.IComparer<T>);
+            }
         }
 
         bool ISorted<T>.TryPredecessor(T item, out T res)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Ensures((@this.Comparer.Compare(item, @this.FindMin()) <= 0 && Contract.Result<bool>() == false) ||
+                             (@this.Comparer.Compare(item, @this.FindMin()) > 0 && Contract.Result<bool>() == true));
+            Contract.Ensures(@this.Comparer.Compare(item, @this.FindMin()) <= 0 || Equals(Contract.ValueAtReturn(out res), default(T)));
+            res = default(T);
+            return default(bool);
         }
 
         bool ISorted<T>.TrySuccessor(T item, out T res)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Ensures((@this.Comparer.Compare(@this.FindMax(), item) <= 0 && Contract.Result<bool>() == false) ||
+                             (@this.Comparer.Compare(@this.FindMax(), item) > 0 && Contract.Result<bool>() == true));
+            Contract.Ensures(@this.Comparer.Compare(@this.FindMax(), item) <= 0 || Equals(Contract.ValueAtReturn(out res), default(T)));
+            res = default(T);
+            return default(bool);
         }
 
         bool ISorted<T>.TryWeakPredecessor(T item, out T res)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Ensures((@this.Comparer.Compare(item, @this.FindMin()) < 0 && Contract.Result<bool>() == false) ||
+                             (@this.Comparer.Compare(item, @this.FindMin()) >= 0 && Contract.Result<bool>() == true));
+            Contract.Ensures(@this.Comparer.Compare(item, @this.FindMin()) < 0 || Equals(Contract.ValueAtReturn(out res), default(T)));
+            res = default(T);
+            return default(bool);
         }
 
         bool ISorted<T>.TryWeakSuccessor(T item, out T res)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Ensures((@this.Comparer.Compare(@this.FindMax(), item) < 0 && Contract.Result<bool>() == false) ||
+                             (@this.Comparer.Compare(@this.FindMax(), item) >= 0 && Contract.Result<bool>() == true));
+            Contract.Ensures(@this.Comparer.Compare(@this.FindMax(), item) < 0 || Equals(Contract.ValueAtReturn(out res), default(T)));
+            res = default(T);
+            return default(bool);
         }
 
         T ISorted<T>.Predecessor(T item)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<NoSuchItemException>(@this.Comparer.Compare(item, @this.FindMin()) > 0);
+            return default(T);
         }
 
         T ISorted<T>.Successor(T item)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<NoSuchItemException>(@this.Comparer.Compare(@this.FindMax(), item) > 0);
+            return default(T);
         }
 
         T ISorted<T>.WeakPredecessor(T item)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<NoSuchItemException>(@this.Comparer.Compare(item, @this.FindMin()) >= 0);
+            return default(T);
         }
 
         T ISorted<T>.WeakSuccessor(T item)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<NoSuchItemException>(@this.Comparer.Compare(@this.FindMax(), item) >= 0);
+            return default(T);
         }
 
         bool ISorted<T>.Cut(IComparable<T> cutFunction, out T low, out bool lowIsValid, out T high, out bool highIsValid)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<ArgumentNullException>(cutFunction != null, "cutFunction");
+            Contract.Ensures((@this.Exists(i => cutFunction.CompareTo(i) == 0) && Contract.Result<bool>() == true) ||
+                             (!@this.Exists(i => cutFunction.CompareTo(i) == 0) && Contract.Result<bool>() == false));
+            Contract.Ensures((@this.Exists(i => cutFunction.CompareTo(i) < 0) && Contract.ValueAtReturn(out lowIsValid) == true) ||
+                             (!@this.Exists(i => cutFunction.CompareTo(i) < 0) && Contract.ValueAtReturn(out lowIsValid) == false));
+            Contract.Ensures(@this.Exists(i => cutFunction.CompareTo(i) < 0) || Equals(Contract.ValueAtReturn(out low), default(T)));
+            Contract.Ensures((@this.Exists(i => cutFunction.CompareTo(i) > 0) && Contract.ValueAtReturn(out highIsValid) == true) ||
+                             (!@this.Exists(i => cutFunction.CompareTo(i) > 0) && Contract.ValueAtReturn(out highIsValid) == false));
+            Contract.Ensures(@this.Exists(i => cutFunction.CompareTo(i) > 0) || Equals(Contract.ValueAtReturn(out high), default(T)));
+            low = high = default(T);
+            lowIsValid = highIsValid = default(bool);
+            return default(bool);
         }
 
         IDirectedEnumerable<T> ISorted<T>.RangeFrom(T bot)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Ensures(Contract.Result<IDirectedEnumerable<T>>() != null);
+            Contract.Ensures(Contract.ForAll(Contract.Result<IDirectedEnumerable<T>>(), i => @this.Comparer.Compare(bot, i) <= 0));
+            return default(IDirectedEnumerable<T>);
         }
 
         IDirectedEnumerable<T> ISorted<T>.RangeFromTo(T bot, T top)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Ensures(Contract.Result<IDirectedEnumerable<T>>() != null);
+            Contract.Ensures(Contract.ForAll(Contract.Result<IDirectedEnumerable<T>>(), i => @this.Comparer.Compare(bot, i) <= 0));
+            Contract.Ensures(Contract.ForAll(Contract.Result<IDirectedEnumerable<T>>(), i => @this.Comparer.Compare(i, top) < 0));
+            return default(IDirectedEnumerable<T>);
         }
 
         IDirectedEnumerable<T> ISorted<T>.RangeTo(T top)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Ensures(Contract.Result<IDirectedEnumerable<T>>() != null);
+            Contract.Ensures(Contract.ForAll(Contract.Result<IDirectedEnumerable<T>>(), i => @this.Comparer.Compare(i, top) < 0));
+            return default(IDirectedEnumerable<T>);
         }
 
         IDirectedCollectionValue<T> ISorted<T>.RangeAll()
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Ensures(Contract.Result<IDirectedCollectionValue<T>>() != null);
+            Contract.Ensures(Contract.Result<IDirectedCollectionValue<T>>().Count == @this.Count);
+            return default(IDirectedCollectionValue<T>);
         }
 
         void ISorted<T>.AddSorted<U>(SCG.IEnumerable<U> items)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<ArgumentNullException>(items != null, "items");
+            Contract.Ensures(@this.Count >= Contract.OldValue(@this.Count));
+            Contract.Ensures(Contract.ForAll(items, i => @this.Contains(i)));
         }
 
         void ISorted<T>.RemoveRangeFrom(T low)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(!@this.Exists(i => @this.Comparer.Compare(low, i) <= 0));
+            Contract.Ensures(@this.Count <= Contract.OldValue(@this.Count));
         }
 
         void ISorted<T>.RemoveRangeFromTo(T low, T hi)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(!@this.Exists(i => @this.Comparer.Compare(low, i) <= 0 && @this.Comparer.Compare(i, hi) < 0));
+            Contract.Ensures(@this.Count <= Contract.OldValue(@this.Count));
         }
 
         void ISorted<T>.RemoveRangeTo(T hi)
         {
-            throw new NotImplementedException();
+            ISorted<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(!@this.Exists(i => @this.Comparer.Compare(i, hi) < 0));
+            Contract.Ensures(@this.Count <= Contract.OldValue(@this.Count));
         }
 
         #region Interface Members not in Contract
