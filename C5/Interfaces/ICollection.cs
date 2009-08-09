@@ -19,14 +19,16 @@
  SOFTWARE.
 */
 
-using System;
+using System.Diagnostics.Contracts;
 using SCG = System.Collections.Generic;
+
 namespace C5
 {
     /// <summary>
     /// The simplest interface of a main stream generic collection
     /// with lookup, insertion and removal operations. 
     /// </summary>
+    [ContractClass(typeof(Contracts.ICollectionContract<>))]
     public interface ICollection<T> : IExtensible<T>, SCG.ICollection<T>
     {
         //This is somewhat similar to the RandomAccess marker itf in java
@@ -66,6 +68,7 @@ namespace C5
         /// </summary>
         /// <param name="array">The array to copy to</param>
         /// <param name="index">The index at which to copy the first item</param>
+        [Pure]
         new void CopyTo(T[] array, int index);
 
         /// <summary>
@@ -78,6 +81,7 @@ namespace C5
         /// specified as constants in the code.</para>
         /// </summary>
         /// <returns>The unordered hashcode of this collection.</returns>
+        [Pure]
         int GetUnsequencedHashCode();
 
 
@@ -88,6 +92,7 @@ namespace C5
         /// </summary>
         /// <param name="otherCollection">The collection to compare to.</param>
         /// <returns>True if this collection and that contains the same items.</returns>
+        [Pure]
         bool UnsequencedEquals(ICollection<T> otherCollection);
 
 
@@ -97,6 +102,7 @@ namespace C5
         /// </summary>
         /// <param name="item">The value to check for.</param>
         /// <returns>True if the items is in this collection.</returns>
+        [Pure]
         new bool Contains(T item);
 
 
@@ -106,6 +112,7 @@ namespace C5
         /// </summary>
         /// <param name="item">The value to count.</param>
         /// <returns>The number of copies found.</returns>
+        [Pure]
         int ContainsCount(T item);
 
 
@@ -113,12 +120,14 @@ namespace C5
         /// 
         /// </summary>
         /// <returns></returns>
+        [Pure]
         ICollectionValue<T> UniqueItems();
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
+        [Pure]
         ICollectionValue<KeyValuePair<T, int>> ItemMultiplicities();
 
         /// <summary>
@@ -130,6 +139,7 @@ namespace C5
         /// <param name="items">The </param>
         /// <typeparam name="U"></typeparam>
         /// <returns>True if all values in <code>items</code>is in this collection.</returns>
+        [Pure]
         bool ContainsAll<U>(SCG.IEnumerable<U> items) where U : T;
 
 
@@ -140,6 +150,7 @@ namespace C5
         /// </summary>
         /// <param name="item">The value to look for.</param>
         /// <returns>True if the items is in this collection.</returns>
+        [Pure]
         bool Find(ref T item);
 
 
