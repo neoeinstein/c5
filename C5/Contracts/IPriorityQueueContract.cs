@@ -62,7 +62,11 @@ namespace C5.Contracts
 
         SCG.IComparer<T> IPriorityQueue<T>.Comparer
         {
-            get { return default(SCG.IComparer<T>); }
+            get
+            {
+                Contract.Ensures(Contract.Result<SCG.IComparer<T>>() != null);
+                return default(SCG.IComparer<T>);
+            }
         }
 
         T IPriorityQueue<T>.this[IPriorityQueueHandle<T> handle]
