@@ -20,13 +20,16 @@
 */
 
 using System;
+using System.Diagnostics.Contracts;
 using SCG = System.Collections.Generic;
+
 namespace C5
 {
     /// <summary>
     /// A collection where items are maintained in sorted order together
     /// with their indexes in that order.
     /// </summary>
+    [ContractClass(typeof(Contracts.IIndexedSortedContract<>))]
     public interface IIndexedSorted<T> : ISorted<T>, IIndexed<T>
     {
         /// <summary>
@@ -34,6 +37,7 @@ namespace C5
         /// </summary>
         /// <param name="bot">The lower bound (inclusive)</param>
         /// <returns>The number of matcing items.</returns>
+        [Pure]
         int CountFrom(T bot);
 
 
@@ -43,6 +47,7 @@ namespace C5
         /// <param name="bot">The lower bound (inclusive)</param>
         /// <param name="top">The upper bound (exclusive)</param>
         /// <returns>The number of matcing items.</returns>
+        [Pure]
         int CountFromTo(T bot, T top);
 
 
@@ -51,6 +56,7 @@ namespace C5
         /// </summary>
         /// <param name="top">The upper bound (exclusive)</param>
         /// <returns>The number of matcing items.</returns>
+        [Pure]
         int CountTo(T top);
 
 
@@ -59,6 +65,7 @@ namespace C5
         /// </summary>
         /// <param name="bot">The lower bound (inclusive).</param>
         /// <returns>The result directed collection.</returns>
+        [Pure]
         new IDirectedCollectionValue<T> RangeFrom(T bot);
 
 
@@ -68,6 +75,7 @@ namespace C5
         /// <param name="bot">The lower bound (inclusive).</param>
         /// <param name="top">The upper bound (exclusive).</param>
         /// <returns>The result directed collection.</returns>
+        [Pure]
         new IDirectedCollectionValue<T> RangeFromTo(T bot, T top);
 
 
@@ -76,6 +84,7 @@ namespace C5
         /// </summary>
         /// <param name="top">The upper bound (exclusive).</param>
         /// <returns>The result directed collection.</returns>
+        [Pure]
         new IDirectedCollectionValue<T> RangeTo(T top);
 
 
@@ -85,6 +94,7 @@ namespace C5
         /// </summary>
         /// <param name="predicate">The filter delegate defining the predicate.</param>
         /// <returns>The new indexed sorted collection.</returns>
+        [Pure]
         IIndexedSorted<T> FindAll(Predicate<T> predicate);
 
 
@@ -98,6 +108,7 @@ namespace C5
         /// <param name="mapper">The delegate definging the map.</param>
         /// <param name="comparer">The comparion relation to use for the result.</param>
         /// <returns>The new sorted collection.</returns>
+        [Pure]
         IIndexedSorted<V> Map<V>(Converter<T, V> mapper, SCG.IComparer<V> comparer);
     }
 }

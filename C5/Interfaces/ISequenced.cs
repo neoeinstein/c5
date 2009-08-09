@@ -19,8 +19,8 @@
  SOFTWARE.
 */
 
-using System;
-using SCG = System.Collections.Generic;
+using System.Diagnostics.Contracts;
+
 namespace C5
 {
     /// <summary>
@@ -32,6 +32,7 @@ namespace C5
     /// <i>This interface is usually implemented by explicit interface implementation,
     /// not as ordinary virtual methods.</i>
     /// </summary>
+    [ContractClass(typeof(Contracts.ISequencedContract<>))]
     public interface ISequenced<T> : ICollection<T>, IDirectedCollectionValue<T>
     {
         /// <summary>
@@ -40,6 +41,7 @@ namespace C5
         /// this collection.
         /// </summary>
         /// <returns>The sequence order hashcode of this collection.</returns>
+        [Pure]
         int GetSequencedHashCode();
 
 
@@ -49,6 +51,7 @@ namespace C5
         /// <param name="otherCollection">The sequenced collection to compare to.</param>
         /// <returns>True if this collection and that contains equal (according to
         /// this collection's itemequalityComparer) in the same sequence order.</returns>
+        [Pure]
         bool SequencedEquals(ISequenced<T> otherCollection);
     }
 }

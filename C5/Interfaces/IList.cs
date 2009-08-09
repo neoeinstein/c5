@@ -20,7 +20,9 @@
 */
 
 using System;
+using System.Diagnostics.Contracts;
 using SCG = System.Collections.Generic;
+
 namespace C5
 {
     /// <summary>
@@ -29,6 +31,7 @@ namespace C5
     ///
     /// NBNBNB: we need a description of the view functionality here!
     /// </summary>
+    [ContractClass(typeof(Contracts.IListContract<>))]
     public interface IList<T> : IIndexed<T>, IDisposable, SCG.IList<T>, System.Collections.IList
     {
         /// <summary>
@@ -90,6 +93,7 @@ namespace C5
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
+        [Pure]
         new bool Contains(T item);
 
         /// <summary>
@@ -97,6 +101,7 @@ namespace C5
         /// </summary>
         /// <param name="array"></param>
         /// <param name="index"></param>
+        [Pure]
         new void CopyTo(T[] array, int index);
 
         /// <summary>
@@ -116,6 +121,7 @@ namespace C5
         /// <param name="item">Item to search for.</param>
         /// <returns>Index of item from start. A negative number if item not found, 
         /// namely the one's complement of the index at which the Add operation would put the item.</returns>
+        [Pure]
         new int IndexOf(T item);
 
         /// <summary>
@@ -198,6 +204,7 @@ namespace C5
         /// </summary>
         /// <param name="filter">The filter delegate defining the predicate.</param>
         /// <returns>The new list.</returns>
+        [Pure]
         IList<T> FindAll(Predicate<T> filter);
 
         /// <summary>
@@ -207,6 +214,7 @@ namespace C5
         /// <typeparam name="V">The type of items of the new list</typeparam>
         /// <param name="mapper">The delegate defining the map.</param>
         /// <returns>The new list.</returns>
+        [Pure]
         IList<V> Map<V>(Converter<T, V> mapper);
 
         /// <summary>
@@ -217,6 +225,7 @@ namespace C5
         /// <param name="mapper">The delegate defining the map.</param>
         /// <param name="equalityComparer">The equalityComparer to use for the new list</param>
         /// <returns>The new list.</returns>
+        [Pure]
         IList<V> Map<V>(Converter<T, V> mapper, SCG.IEqualityComparer<V> equalityComparer);
 
         /// <summary>
@@ -249,6 +258,7 @@ namespace C5
         /// <param name="start">The index in this list of the start of the view.</param>
         /// <param name="count">The size of the view.</param>
         /// <returns>The new list view.</returns>
+        [Pure]
         IList<T> View(int start, int count);
 
         /// <summary>
@@ -257,6 +267,7 @@ namespace C5
         /// </summary>
         /// <param name="item">The item to find.</param>
         /// <returns>The new list view.</returns>
+        [Pure]
         IList<T> ViewOf(T item);
 
         /// <summary>
@@ -265,6 +276,7 @@ namespace C5
         /// </summary>
         /// <param name="item">The item to find.</param>
         /// <returns>The new list view.</returns>
+        [Pure]
         IList<T> LastViewOf(T item);
 
         /// <summary>
@@ -342,6 +354,7 @@ namespace C5
         /// </summary>
         /// <exception cref="NotComparableException">if T is not comparable</exception>
         /// <returns>True if the list is sorted, else false.</returns>
+        [Pure]
         bool IsSorted();
 
         /// <summary>

@@ -20,7 +20,9 @@
 */
 
 using System;
+using System.Diagnostics.Contracts;
 using SCG = System.Collections.Generic;
+
 namespace C5
 {
     /// <summary>
@@ -55,6 +57,7 @@ namespace C5
     /// by checking if the Comparer properties are equal. This is done a few places in this library
     /// for optimization purposes.</para>
     /// </summary>
+    [ContractClass(typeof(Contracts.ISortedContract<>))]
     public interface ISorted<T> : ISequenced<T>
     {
         /// <summary>
@@ -62,6 +65,7 @@ namespace C5
         /// </summary>
         /// <exception cref="NoSuchItemException"> if the collection is empty.</exception>
         /// <returns>The least item.</returns>
+        [Pure]
         T FindMin();
 
 
@@ -78,6 +82,7 @@ namespace C5
         /// </summary>
         /// <exception cref="NoSuchItemException"> if the collection is empty.</exception>
         /// <returns>The largest item.</returns>
+        [Pure]
         T FindMax();
 
 
@@ -101,6 +106,7 @@ namespace C5
         /// <param name="item">The item to find the predecessor for.</param>
         /// <param name="res">The predecessor, if any; otherwise the default value for T.</param>
         /// <returns>True if item has a predecessor; otherwise false.</returns>
+        [Pure]
         bool TryPredecessor(T item, out T res);
 
 
@@ -111,6 +117,7 @@ namespace C5
         /// <param name="item">The item to find the successor for.</param>
         /// <param name="res">The successor, if any; otherwise the default value for T.</param>
         /// <returns>True if item has a successor; otherwise false.</returns>
+        [Pure]
         bool TrySuccessor(T item, out T res);
 
 
@@ -121,6 +128,7 @@ namespace C5
         /// <param name="item">The item to find the weak predecessor for.</param>
         /// <param name="res">The weak predecessor, if any; otherwise the default value for T.</param>
         /// <returns>True if item has a weak predecessor; otherwise false.</returns>
+        [Pure]
         bool TryWeakPredecessor(T item, out T res);
 
 
@@ -131,6 +139,7 @@ namespace C5
         /// <param name="item">The item to find the weak successor for.</param>
         /// <param name="res">The weak successor, if any; otherwise the default value for T.</param>
         /// <returns>True if item has a weak successor; otherwise false.</returns>
+        [Pure]
         bool TryWeakSuccessor(T item, out T res);
 
 
@@ -142,6 +151,7 @@ namespace C5
         /// supplied  value is less than or equal to the minimum of this collection.)</exception>
         /// <param name="item">The item to find the predecessor for.</param>
         /// <returns>The predecessor.</returns>
+        [Pure]
         T Predecessor(T item);
 
 
@@ -153,6 +163,7 @@ namespace C5
         /// supplied  value is greater than or equal to the maximum of this collection.)</exception>
         /// <param name="item">The item to find the successor for.</param>
         /// <returns>The successor.</returns>
+        [Pure]
         T Successor(T item);
 
 
@@ -164,6 +175,7 @@ namespace C5
         /// supplied  value is less than the minimum of this collection.)</exception>
         /// <param name="item">The item to find the weak predecessor for.</param>
         /// <returns>The weak predecessor.</returns>
+        [Pure]
         T WeakPredecessor(T item);
 
 
@@ -175,6 +187,7 @@ namespace C5
         /// supplied  value is greater than the maximum of this collection.)</exception>
         ///<param name="item">The item to find the weak successor for.</param>
         /// <returns>The weak successor.</returns>
+        [Pure]
         T WeakSuccessor(T item);
 
 
@@ -215,6 +228,7 @@ namespace C5
         /// on this collection.</param>
         /// <returns>True if the cut function is zero somewhere
         /// on this collection.</returns>
+        [Pure]
         bool Cut(IComparable<T> cutFunction, out T low, out bool lowIsValid, out T high, out bool highIsValid);
 
 
@@ -226,6 +240,7 @@ namespace C5
         /// </summary>
         /// <param name="bot">The lower bound (inclusive).</param>
         /// <returns>The result directed collection.</returns>
+        [Pure]
         IDirectedEnumerable<T> RangeFrom(T bot);
 
 
@@ -238,6 +253,7 @@ namespace C5
         /// <param name="bot">The lower bound (inclusive).</param>
         /// <param name="top">The upper bound (exclusive).</param>
         /// <returns>The result directed collection.</returns>
+        [Pure]
         IDirectedEnumerable<T> RangeFromTo(T bot, T top);
 
 
@@ -249,6 +265,7 @@ namespace C5
         /// </summary>
         /// <param name="top">The upper bound (exclusive).</param>
         /// <returns>The result directed collection.</returns>
+        [Pure]
         IDirectedEnumerable<T> RangeTo(T top);
 
 
@@ -259,6 +276,7 @@ namespace C5
         /// invalidate the view so that further operations on the view throws InvalidView exceptions.</para>
         /// </summary>
         /// <returns>The result directed collection.</returns>
+        [Pure]
         IDirectedCollectionValue<T> RangeAll();
 
 

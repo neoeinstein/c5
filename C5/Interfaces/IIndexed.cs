@@ -20,12 +20,14 @@
 */
 
 using System;
-using SCG = System.Collections.Generic;
+using System.Diagnostics.Contracts;
+
 namespace C5
 {
     /// <summary>
     /// A sequenced collection, where indices of items in the order are maintained
     /// </summary>
+    [ContractClass(typeof(Contracts.IIndexedContract<>))]
     public interface IIndexed<T> : ISequenced<T>
     {
         /// <summary>
@@ -57,6 +59,7 @@ namespace C5
         /// <param name="item">Item to search for.</param>
         /// <returns>Index of item from start. A negative number if item not found, 
         /// namely the one's complement of the index at which the Add operation would put the item.</returns>
+        [Pure]
         int IndexOf(T item);
 
 
@@ -66,6 +69,7 @@ namespace C5
         /// <param name="item">Item to search for.</param>
         /// <returns>Index of of item from the end. A negative number if item not found, 
         /// namely the two-complement of the index at which the Add operation would put the item.</returns>
+        [Pure]
         int LastIndexOf(T item);
 
         /// <summary>
@@ -75,6 +79,7 @@ namespace C5
         /// <param name="predicate">A delegate 
         /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
         /// <returns>the index, if found, a negative value else</returns>
+        [Pure]
         int FindIndex(Predicate<T> predicate);
 
         /// <summary>
@@ -84,6 +89,7 @@ namespace C5
         /// <param name="predicate">A delegate 
         /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
         /// <returns>the index, if found, a negative value else</returns>
+        [Pure]
         int FindLastIndex(Predicate<T> predicate);
 
 
