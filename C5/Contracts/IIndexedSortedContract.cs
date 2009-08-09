@@ -32,42 +32,61 @@ namespace C5.Contracts
     {
         int IIndexedSorted<T>.CountFrom(T bot)
         {
-            throw new NotImplementedException();
+            IIndexedSorted<T> @this = this;
+            Contract.Ensures(Contract.Result<int>() >= 0 && Contract.Result<int>() <= @this.Count);
+            return default(int);
         }
 
         int IIndexedSorted<T>.CountFromTo(T bot, T top)
         {
-            throw new NotImplementedException();
+            IIndexedSorted<T> @this = this;
+            Contract.Ensures(Contract.Result<int>() >= 0 && Contract.Result<int>() <= @this.Count);
+            return default(int);
         }
 
         int IIndexedSorted<T>.CountTo(T top)
         {
-            throw new NotImplementedException();
+            IIndexedSorted<T> @this = this;
+            Contract.Ensures(Contract.Result<int>() >= 0 && Contract.Result<int>() <= @this.Count);
+            return default(int);
         }
 
         IDirectedCollectionValue<T> IIndexedSorted<T>.RangeFrom(T bot)
         {
-            throw new NotImplementedException();
+            IIndexedSorted<T> @this = this;
+            Contract.Ensures(Contract.Result<IDirectedCollectionValue<T>>().Count >= 0 && Contract.Result<IDirectedCollectionValue<T>>().Count <= @this.Count);
+            return default(IDirectedCollectionValue<T>);
         }
 
         IDirectedCollectionValue<T> IIndexedSorted<T>.RangeFromTo(T bot, T top)
         {
-            throw new NotImplementedException();
+            IIndexedSorted<T> @this = this;
+            Contract.Ensures(Contract.Result<IDirectedCollectionValue<T>>().Count >= 0 && Contract.Result<IDirectedCollectionValue<T>>().Count <= @this.Count);
+            return default(IDirectedCollectionValue<T>);
         }
 
         IDirectedCollectionValue<T> IIndexedSorted<T>.RangeTo(T top)
         {
-            throw new NotImplementedException();
+            IIndexedSorted<T> @this = this;
+            Contract.Ensures(Contract.Result<IDirectedCollectionValue<T>>().Count >= 0 && Contract.Result<IDirectedCollectionValue<T>>().Count <= @this.Count);
+            return default(IDirectedCollectionValue<T>);
         }
 
         IIndexedSorted<T> IIndexedSorted<T>.FindAll(Predicate<T> predicate)
         {
-            throw new NotImplementedException();
+            IIndexedSorted<T> @this = this;
+            Contract.Requires<ArgumentNullException>(predicate != null, "predicate");
+            Contract.Ensures(Contract.ForAll(Contract.Result<IIndexedSorted<T>>(), predicate));
+            return default(IIndexedSorted<T>);
         }
 
         IIndexedSorted<V> IIndexedSorted<T>.Map<V>(Converter<T, V> mapper, SCG.IComparer<V> comparer)
         {
-            throw new NotImplementedException();
+            IIndexedSorted<T> @this = this;
+            Contract.Requires<ArgumentNullException>(mapper != null, "mapper");
+            Contract.Requires<ArgumentNullException>(comparer != null, "comparer");
+            Contract.Ensures(Contract.Result<IIndexedSorted<V>>().Count == @this.Count);
+            return default(IIndexedSorted<V>);
         }
 
         #region Interface Members not in Contract
