@@ -20,12 +20,14 @@
 */
 
 using System;
-using SCG = System.Collections.Generic;
+using System.Diagnostics.Contracts;
+
 namespace C5
 {
     /// <summary>
     /// A sized generic collection, that can be enumerated backwards.
     /// </summary>
+    [ContractClass(typeof(Contracts.IDirectedCollectionValueContract<>))]
     public interface IDirectedCollectionValue<T> : ICollectionValue<T>, IDirectedEnumerable<T>
     {
         /// <summary>
@@ -35,6 +37,7 @@ namespace C5
         /// <code>foreach (T x in coll.Backwards()) {...}</code>
         /// </summary>
         /// <returns>The backwards collection.</returns>
+        [Pure]
         new IDirectedCollectionValue<T> Backwards();
 
         /// <summary>
@@ -45,6 +48,7 @@ namespace C5
         /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
         /// <param name="item"></param>
         /// <returns>True is such an item exists</returns>
+        [Pure]
         bool FindLast(Predicate<T> predicate, out T item);
     }
 }

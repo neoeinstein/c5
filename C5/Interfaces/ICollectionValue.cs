@@ -20,7 +20,9 @@
 */
 
 using System;
+using System.Diagnostics.Contracts;
 using SCG = System.Collections.Generic;
+
 namespace C5
 {
     /// <summary>
@@ -30,6 +32,7 @@ namespace C5
     /// collection. The main usage for this interface is to be the return type of 
     /// query operations on generic collection.
     /// </summary>
+    [ContractClass(typeof(Contracts.ICollectionValueContract<>))]
     public interface ICollectionValue<T> : SCG.IEnumerable<T>, IShowable
     {
         /// <summary>
@@ -99,6 +102,7 @@ namespace C5
         /// </summary>
         /// <param name="array">The array to copy to</param>
         /// <param name="index">The index at which to copy the first item</param>
+        [Pure]
         void CopyTo(T[] array, int index);
 
         /// <summary>
@@ -106,12 +110,14 @@ namespace C5
         /// enumerator would output them).
         /// </summary>
         /// <returns>The array</returns>
+        [Pure]
         T[] ToArray();
 
         /// <summary>
         /// Apply a delegate to all items of this collection.
         /// </summary>
         /// <param name="action">The delegate to apply</param>
+        [Pure]
         void Apply(Action<T> action);
 
 
@@ -122,6 +128,7 @@ namespace C5
         /// <param name="predicate">A  delegate 
         /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
         /// <returns>True is such an item exists</returns>
+        [Pure]
         bool Exists(Predicate<T> predicate);
 
         /// <summary>
@@ -132,6 +139,7 @@ namespace C5
         /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
         /// <param name="item"></param>
         /// <returns>True is such an item exists</returns>
+        [Pure]
         bool Find(Predicate<T> predicate, out T item);
 
 
@@ -141,6 +149,7 @@ namespace C5
         /// <param name="predicate">A delegate 
         /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
         /// <returns>True if all items satisfies the predicate</returns>
+        [Pure]
         bool All(Predicate<T> predicate);
 
         /// <summary>
@@ -154,6 +163,7 @@ namespace C5
         /// </summary>
         /// <exception cref="NoSuchItemException">if collection is empty.</exception>
         /// <returns></returns>
+        [Pure]
         T Choose();
 
         /// <summary>
@@ -162,6 +172,7 @@ namespace C5
         /// </summary>
         /// <param name="filter">The T->bool filter delegate defining the condition</param>
         /// <returns>The filtered enumerable</returns>
+        [Pure]
         SCG.IEnumerable<T> Filter(Predicate<T> filter);
     }
 }
