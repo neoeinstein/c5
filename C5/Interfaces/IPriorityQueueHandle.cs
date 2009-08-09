@@ -19,8 +19,6 @@
  SOFTWARE.
 */
 
-using System;
-using SCG = System.Collections.Generic;
 namespace C5
 {
     /// <summary>

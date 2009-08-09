@@ -19,14 +19,15 @@
  SOFTWARE.
 */
 
-using System;
-using SCG = System.Collections.Generic;
+using System.Diagnostics.Contracts;
+
 namespace C5
 {
     /// <summary>
     /// The interface describing the operations of a FIFO queue data structure.
     /// </summary>
     /// <typeparam name="T">The item type</typeparam>
+    [ContractClass(typeof(Contracts.IQueueContract<>))]
     public interface IQueue<T> : IDirectedCollectionValue<T>
     {
         /// <summary>

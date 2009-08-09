@@ -19,8 +19,8 @@
  SOFTWARE.
 */
 
-using System;
-using SCG = System.Collections.Generic;
+using System.Diagnostics.Contracts;
+
 namespace C5
 {
     //TODO: decide if this should extend ICollection
@@ -28,6 +28,7 @@ namespace C5
     /// The interface describing the operations of a LIFO stack data structure.
     /// </summary>
     /// <typeparam name="T">The item type</typeparam>
+    [ContractClass(typeof(Contracts.IStackContract<>))]
     public interface IStack<T> : IDirectedCollectionValue<T>
     {
         /// <summary>

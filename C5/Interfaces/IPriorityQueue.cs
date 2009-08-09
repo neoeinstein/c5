@@ -19,8 +19,9 @@
  SOFTWARE.
 */
 
-using System;
+using System.Diagnostics.Contracts;
 using SCG = System.Collections.Generic;
+
 namespace C5
 {
     /// <summary>
@@ -34,6 +35,7 @@ namespace C5
     /// A priority queue typically only holds numeric priorities associated with some objects
     /// maintained separately in other collection objects.
     /// </summary>
+    [ContractClass(typeof(Contracts.IPriorityQueueContract<>))]
     public interface IPriorityQueue<T> : IExtensible<T>
     {
         /// <summary>
