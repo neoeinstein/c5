@@ -159,6 +159,7 @@
     <Compile Include="Builtin.cs" />
     <Compile Include="CollectionValueBase.cs" />
     <Compile Include="Comparer.cs" />
+    <Compile Include="Contracts\IDirectedEnumerableContract.cs" />
     <Compile Include="EnumerableBase.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="EventTypeEnum.cs" />

@@ -19,13 +19,15 @@
  SOFTWARE.
 */
 
-using System;
+using System.Diagnostics.Contracts;
 using SCG = System.Collections.Generic;
+
 namespace C5
 {
     /// <summary>
     /// A generic collection, that can be enumerated backwards.
     /// </summary>
+    [ContractClass(typeof(Contracts.IDirectedEnumerableContract<>))]
     public interface IDirectedEnumerable<T> : SCG.IEnumerable<T>
     {
         /// <summary>
@@ -35,6 +37,7 @@ namespace C5
         /// <code>foreach (T x in coll.Backwards()) {...}</code>
         /// </summary>
         /// <returns>The backwards collection.</returns>
+        [Pure]
         IDirectedEnumerable<T> Backwards();
 
 
