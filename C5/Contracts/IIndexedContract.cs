@@ -31,47 +31,105 @@ namespace C5.Contracts
     {
         T IIndexed<T>.this[int index]
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                IIndexed<T> @this = this;
+                Contract.Requires<IndexOutOfRangeException>(index < @this.Count);
+                return default(T);
+            }
         }
 
         Speed IIndexed<T>.IndexingSpeed
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                Contract.Ensures(Enum.IsDefined(typeof(Speed), Contract.Result<Speed>()));
+                return default(Speed);
+            }
         }
 
         IDirectedCollectionValue<T> IIndexed<T>.this[int start, int count]
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                IIndexed<T> @this = this;
+                Contract.Requires<ArgumentOutOfRangeException>(start < @this.Count, "start");
+                Contract.Requires<ArgumentOutOfRangeException>(count >= 0, "count");
+                Contract.Requires<ArgumentOutOfRangeException>(start + count < @this.Count, "count");
+                Contract.Ensures(Contract.Result<IDirectedCollectionValue<T>>() != null);
+                Contract.Ensures(Contract.Result<IDirectedCollectionValue<T>>().Count == count);
+                return default(IDirectedCollectionValue<T>);
+            }
         }
 
         int IIndexed<T>.IndexOf(T item)
         {
-            throw new NotImplementedException();
+            IIndexed<T> @this = this;
+            Contract.Ensures(~(@this.Count + 1) < Contract.Result<int>() && Contract.Result<int>() < @this.Count);
+            Contract.Ensures((@this.Contains(item) && Contract.Result<int>() >= 0) ||
+                             (!@this.Contains(item) && Contract.Result<int>() < 0));
+            Contract.Ensures((Contract.Result<int>() >= 0 && Contract.Result<int>() <= @this.LastIndexOf(item)) ||
+                             (Contract.Result<int>() < 0 && Contract.Result<int>() == @this.LastIndexOf(item)));
+            Contract.Ensures(@this.EqualityComparer.Equals(@this[Contract.Result<int>()], item));
+            return default(int);
         }
 
         int IIndexed<T>.LastIndexOf(T item)
         {
-            throw new NotImplementedException();
+            IIndexed<T> @this = this;
+            Contract.Ensures(~(@this.Count + 1) < Contract.Result<int>() && Contract.Result<int>() < @this.Count);
+            Contract.Ensures((@this.Contains(item) && Contract.Result<int>() >= 0) ||
+                             (!@this.Contains(item) && Contract.Result<int>() < 0));
+            Contract.Ensures((Contract.Result<int>() >= 0 && Contract.Result<int>() >= @this.IndexOf(item)) ||
+                             (Contract.Result<int>() < 0 && Contract.Result<int>() == @this.IndexOf(item)));
+            Contract.Ensures(@this.EqualityComparer.Equals(@this[Contract.Result<int>()], item));
+            return default(int);
         }
 
         int IIndexed<T>.FindIndex(Predicate<T> predicate)
         {
-            throw new NotImplementedException();
+            IIndexed<T> @this = this;
+            Contract.Requires<ArgumentNullException>(predicate != null, "predicate");
+            Contract.Ensures(-1 <= Contract.Result<int>() && Contract.Result<int>() < @this.Count);
+            Contract.Ensures((@this.Exists(predicate) && Contract.Result<int>() >= 0) ||
+                             (!@this.Exists(predicate) && Contract.Result<int>() == -1));
+            Contract.Ensures((Contract.Result<int>() >= 0 && Contract.Result<int>() <= @this.FindLastIndex(predicate)) ||
+                             (Contract.Result<int>() < 0 && Contract.Result<int>() == @this.FindLastIndex(predicate)));
+            Contract.Ensures(predicate(@this[Contract.Result<int>()]));
+            return default(int);
         }
 
         int IIndexed<T>.FindLastIndex(Predicate<T> predicate)
         {
-            throw new NotImplementedException();
+            IIndexed<T> @this = this;
+            Contract.Requires<ArgumentNullException>(predicate != null, "predicate");
+            Contract.Ensures(-1 <= Contract.Result<int>() && Contract.Result<int>() < @this.Count);
+            Contract.Ensures((@this.Exists(predicate) && Contract.Result<int>() >= 0) ||
+                             (!@this.Exists(predicate) && Contract.Result<int>() == -1));
+            Contract.Ensures((Contract.Result<int>() >= 0 && Contract.Result<int>() >= @this.FindIndex(predicate)) ||
+                             (Contract.Result<int>() < 0 && Contract.Result<int>() == @this.FindIndex(predicate)));
+            Contract.Ensures(predicate(@this[Contract.Result<int>()]));
+            return default(int);
         }
 
         T IIndexed<T>.RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            IIndexed<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<IndexOutOfRangeException>(index < @this.Count);
+            Contract.Ensures(@this.Count == Contract.OldValue(@this.Count) - 1);
+            Contract.Ensures(@this.EqualityComparer.Equals(Contract.Result<T>(), Contract.OldValue(@this[index])));
+            return default(T);
         }
 
         void IIndexed<T>.RemoveInterval(int start, int count)
         {
-            throw new NotImplementedException();
+            IIndexed<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<ArgumentOutOfRangeException>(start < @this.Count, "start");
+            Contract.Requires<ArgumentOutOfRangeException>(count >= 0, "count");
+            Contract.Requires<ArgumentOutOfRangeException>(start + count < @this.Count, "count");
+            Contract.Ensures(@this.Count == Contract.OldValue(@this.Count) - count);
         }
 
         #region Interface Members not in Contract
