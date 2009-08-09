@@ -162,6 +162,7 @@
     <Compile Include="Contracts\ICollectionValueContract.cs" />
     <Compile Include="Contracts\IDirectedCollectionValueContract.cs" />
     <Compile Include="Contracts\IDirectedEnumerableContract.cs" />
+    <Compile Include="Contracts\IExtensibleContract.cs" />
     <Compile Include="EnumerableBase.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="EventTypeEnum.cs" />

@@ -20,7 +20,9 @@
 */
 
 using System;
+using System.Diagnostics.Contracts;
 using SCG = System.Collections.Generic;
+
 namespace C5
 {
     /// <summary>
@@ -28,6 +30,7 @@ namespace C5
     /// of the main stream generic collection interfaces and the priority queue interface,
     /// <see cref="T:C5.ICollection{T}"/> and <see cref="T:C5.IPriorityQueue{T}"/>.
     /// </summary>
+    [ContractClass(typeof(Contracts.IExtensibleContract<>))]
     public interface IExtensible<T> : ICollectionValue<T>, ICloneable
     {
         /// <summary>
@@ -89,6 +92,7 @@ namespace C5
         /// <i>This is only relevant for developers of the library</i>
         /// </summary>
         /// <returns>True if check was passed.</returns>
+        [Pure]
         bool Check();
     }
 }
