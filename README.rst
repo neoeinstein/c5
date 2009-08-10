@@ -11,31 +11,36 @@ Originally written by Niels Kokholm and Peter Sestoft at the `IT University of C
 __ `ITU C5`_
 
 Organization
-------------
+============
 This repository is separated into 3 main branches, a tracking branch, and a documentation branch.
 
-The three main branches are ``master``, ``contracts``, and ``pex``. The ``master`` branch is the main line of development intended to work on the .NET 2.0 framework and equivalents. ``contracts`` is based on ``master`` but also contains definitions for `code contracts`__. Code contracts are a .NET 4.0 feature, also released as a library and utility in pre-4.0 versions of the framework. The third branch, ``pex``, is based on the ``contracts`` branch and includes additional unit tests designed to be instrumented by Pex_, a parameterized unit test generator.
+**master**
+  This branch is the main line of development intended to work on the .NET 2.0 framework and equivalents. `Github master`_.
+**contracts**
+  This branch is based on ``master`` but also contains definitions for `code contracts`__. Code contracts are a .NET 4.0 feature, also released as a library and utility in pre-4.0 versions of the framework. `Github contracts`_.
+**pex**
+  This branch is based on the ``contracts`` branch and includes additional unit tests designed to be instrumented by Pex_, a parameterized unit test generator. `Github pex`_.
+**itu**
+  The tracking branch, this branch tracks the state of development by the original maintainers since the release of v1.1.0. As there has been no known development, this branch has only the initial commit, from which this project is based. `Github itu`_.
+**doc**
+  The documentation branch, this branch is an independent branch which contains documentation for the C5 library, including the C5 Book. The source code of the book is unavailable, so as development continues, the book may fall out of sync with the library, though this hasn't happened yet. `Github doc`_.
 
 __ `Microsoft Code Contracts`_
 
-The tracking branch, ``itu`` tracks the state of development by the original maintainers since the release of v1.1.0. As there has been no known development, this branch has only the initial commit, from which this project is based.
-
-The documentation branch, ``doc``, is an independent branch which contains documentation for the C5 library, including the C5 Book. The source code of the book is unavailable, so as development continues, the book may fall out of sync with the library, though this hasn't happened yet.
-
 Source
-------
+======
 Source code for the C5 library can be obtained from the `github repository`__.
 
 __ `C5 Github`_
 
 Development
------------
+===========
 The library's source is organized into source, test, and example directories. The main source of the library is included in the ``C5/`` directory. The tests are split between the ``nunit`` and ``C5.Tests/`` directories. The ``nunit/`` directory contains legacy tests from the original ITU release, while the ``C5.Tests/`` will contain all new tests. As test coverage from ``C5.Tests/`` increases, the legacy tests will be removed. This is part of a greater initiative to improve the maintainability of the library.
 
 The ``UserGuideExamples/`` directory includes several source files demonstrating how to use the C5 library to various ends, many of which are examples in the `C5 Book`_.
 
 Questions/Help
---------------
+==============
 The `#c5`__ channel has been set up on FreeNode for any C5-related questions.
 
 __ irc://irc.freenode.net/#c5
@@ -45,5 +50,10 @@ __ irc://irc.freenode.net/#c5
 .. _`Microsoft Code Contracts`: http://research.microsoft.com/projects/contracts
 .. _Pex: http://research.microsoft.com/projects/pex
 .. _`C5 Github`: http://github.com/neoeinstein/c5
+.. _`Github master`: http://github.com/neoeinstein/c5/tree/master
+.. _`Github contracts`: http://github.com/neoeinstein/c5/tree/contracts
+.. _`Github pex`: http://github.com/neoeinstein/c5/tree/pex
+.. _`Github itu`: http://github.com/neoeinstein/c5/tree/itu
+.. _`Github doc`: http://github.com/neoeinstein/c5/tree/doc
 .. _`C5 Book`: http://github.com/neoeinstein/c5/raw/doc/C5%20book.pdf
 .. _`ECMA-335`: http://www.ecma-international.org/publications/standards/Ecma-335.htm
