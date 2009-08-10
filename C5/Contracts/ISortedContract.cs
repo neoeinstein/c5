@@ -34,6 +34,7 @@ namespace C5.Contracts
         {
             ISorted<T> @this = this;
             Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+            Contract.Ensures(@this.All(i => @this.Comparer.Compare(Contract.Result<T>(), i) <= 0));
             return default(T);
         }
 
@@ -43,6 +44,7 @@ namespace C5.Contracts
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
             Contract.Ensures(@this.Count == Contract.OldValue(@this.Count) - 1);
+            Contract.Ensures(@this.All(i => @this.Comparer.Compare(Contract.Result<T>(), i) <= 0));
             return default(T);
         }
 
@@ -50,6 +52,7 @@ namespace C5.Contracts
         {
             ISorted<T> @this = this;
             Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+            Contract.Ensures(@this.All(i => @this.Comparer.Compare(i, Contract.Result<T>()) <= 0));
             return default(T);
         }
 
@@ -59,6 +62,7 @@ namespace C5.Contracts
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
             Contract.Ensures(@this.Count == Contract.OldValue(@this.Count) - 1);
+            Contract.Ensures(@this.All(i => @this.Comparer.Compare(i, Contract.Result<T>()) <= 0));
             return default(T);
         }
 
