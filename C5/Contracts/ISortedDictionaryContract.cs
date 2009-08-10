@@ -32,117 +32,209 @@ namespace C5.Contracts
     {
         ISorted<K> ISortedDictionary<K, V>.Keys
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                ISortedDictionary<K, V> @this = this;
+                Contract.Ensures(Contract.Result<ISorted<K>>() != null);
+                Contract.Ensures(Contract.Result<ISorted<K>>().Count == @this.Count);
+                return default(ISorted<K>);
+            }
         }
 
         KeyValuePair<K, V> ISortedDictionary<K, V>.FindMin()
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+            Contract.Ensures(@this.All(kvp => @this.Comparer.Compare(Contract.Result<KeyValuePair<K, V>>().Key, kvp.Key) <= 0));
+            return default(KeyValuePair<K, V>);
         }
 
         KeyValuePair<K, V> ISortedDictionary<K, V>.DeleteMin()
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+            Contract.Ensures(@this.Count == Contract.OldValue(@this.Count) - 1);
+            Contract.Ensures(@this.All(kvp => @this.Comparer.Compare(Contract.Result<KeyValuePair<K, V>>().Key, kvp.Key) <= 0));
+            return default(KeyValuePair<K, V>);
         }
 
         KeyValuePair<K, V> ISortedDictionary<K, V>.FindMax()
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+            Contract.Ensures(@this.All(kvp => @this.Comparer.Compare(kvp.Key, Contract.Result<KeyValuePair<K, V>>().Key) <= 0));
+            return default(KeyValuePair<K, V>);
         }
 
         KeyValuePair<K, V> ISortedDictionary<K, V>.DeleteMax()
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+            Contract.Ensures(@this.Count == Contract.OldValue(@this.Count) - 1);
+            Contract.Ensures(@this.All(kvp => @this.Comparer.Compare(kvp.Key, Contract.Result<KeyValuePair<K, V>>().Key) <= 0));
+            return default(KeyValuePair<K, V>);
         }
 
         SCG.IComparer<K> ISortedDictionary<K, V>.Comparer
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                Contract.Ensures(Contract.Result<SCG.IComparer<K>>() != null);
+                return default(SCG.IComparer<K>);
+            }
         }
 
-        bool ISortedDictionary<K, V>.TryPredecessor(K key, out KeyValuePair<K, V> res)
+        bool ISortedDictionary<K, V>.TryPredecessor(K item, out KeyValuePair<K, V> res)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Ensures((@this.Comparer.Compare(item, @this.FindMin().Key) <= 0 && Contract.Result<bool>() == false) ||
+                             (@this.Comparer.Compare(item, @this.FindMin().Key) > 0 && Contract.Result<bool>() == true));
+            Contract.Ensures(@this.Comparer.Compare(item, @this.FindMin().Key) <= 0 || Equals(Contract.ValueAtReturn(out res), default(K)));
+            res = default(KeyValuePair<K, V>);
+            return default(bool);
         }
 
-        bool ISortedDictionary<K, V>.TrySuccessor(K key, out KeyValuePair<K, V> res)
+        bool ISortedDictionary<K, V>.TrySuccessor(K item, out KeyValuePair<K, V> res)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Ensures((@this.Comparer.Compare(@this.FindMax().Key, item) <= 0 && Contract.Result<bool>() == false) ||
+                             (@this.Comparer.Compare(@this.FindMax().Key, item) > 0 && Contract.Result<bool>() == true));
+            Contract.Ensures(@this.Comparer.Compare(@this.FindMax().Key, item) <= 0 || Equals(Contract.ValueAtReturn(out res), default(K)));
+            res = default(KeyValuePair<K, V>);
+            return default(bool);
         }
 
-        bool ISortedDictionary<K, V>.TryWeakPredecessor(K key, out KeyValuePair<K, V> res)
+        bool ISortedDictionary<K, V>.TryWeakPredecessor(K item, out KeyValuePair<K, V> res)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Ensures((@this.Comparer.Compare(item, @this.FindMin().Key) < 0 && Contract.Result<bool>() == false) ||
+                             (@this.Comparer.Compare(item, @this.FindMin().Key) >= 0 && Contract.Result<bool>() == true));
+            Contract.Ensures(@this.Comparer.Compare(item, @this.FindMin().Key) < 0 || Equals(Contract.ValueAtReturn(out res), default(K)));
+            res = default(KeyValuePair<K, V>);
+            return default(bool);
         }
 
-        bool ISortedDictionary<K, V>.TryWeakSuccessor(K key, out KeyValuePair<K, V> res)
+        bool ISortedDictionary<K, V>.TryWeakSuccessor(K item, out KeyValuePair<K, V> res)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Ensures((@this.Comparer.Compare(@this.FindMax().Key, item) < 0 && Contract.Result<bool>() == false) ||
+                             (@this.Comparer.Compare(@this.FindMax().Key, item) >= 0 && Contract.Result<bool>() == true));
+            Contract.Ensures(@this.Comparer.Compare(@this.FindMax().Key, item) < 0 || Equals(Contract.ValueAtReturn(out res), default(K)));
+            res = default(KeyValuePair<K, V>);
+            return default(bool);
         }
 
-        KeyValuePair<K, V> ISortedDictionary<K, V>.Predecessor(K key)
+        KeyValuePair<K, V> ISortedDictionary<K, V>.Predecessor(K item)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<NoSuchItemException>(@this.Comparer.Compare(item, @this.FindMin().Key) > 0);
+            return default(KeyValuePair<K, V>);
         }
 
-        KeyValuePair<K, V> ISortedDictionary<K, V>.Successor(K key)
+        KeyValuePair<K, V> ISortedDictionary<K, V>.Successor(K item)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<NoSuchItemException>(@this.Comparer.Compare(@this.FindMax().Key, item) > 0);
+            return default(KeyValuePair<K, V>);
         }
 
-        KeyValuePair<K, V> ISortedDictionary<K, V>.WeakPredecessor(K key)
+        KeyValuePair<K, V> ISortedDictionary<K, V>.WeakPredecessor(K item)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<NoSuchItemException>(@this.Comparer.Compare(item, @this.FindMin().Key) >= 0);
+            return default(KeyValuePair<K, V>);
         }
 
-        KeyValuePair<K, V> ISortedDictionary<K, V>.WeakSuccessor(K key)
+        KeyValuePair<K, V> ISortedDictionary<K, V>.WeakSuccessor(K item)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<NoSuchItemException>(@this.Comparer.Compare(@this.FindMax().Key, item) >= 0);
+            return default(KeyValuePair<K, V>);
         }
 
-        bool ISortedDictionary<K, V>.Cut(IComparable<K> cutFunction, out KeyValuePair<K, V> lowEntry, out bool lowIsValid, out KeyValuePair<K, V> highEntry, out bool highIsValid)
+        bool ISortedDictionary<K, V>.Cut(IComparable<K> cutFunction, out KeyValuePair<K, V> low, out bool lowIsValid, out KeyValuePair<K, V> high, out bool highIsValid)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<ArgumentNullException>(cutFunction != null, "cutFunction");
+            Contract.Ensures((@this.Exists(kvp => cutFunction.CompareTo(kvp.Key) == 0) && Contract.Result<bool>() == true) ||
+                             (!@this.Exists(kvp => cutFunction.CompareTo(kvp.Key) == 0) && Contract.Result<bool>() == false));
+            Contract.Ensures((@this.Exists(kvp => cutFunction.CompareTo(kvp.Key) < 0) && Contract.ValueAtReturn(out lowIsValid) == true) ||
+                             (!@this.Exists(kvp => cutFunction.CompareTo(kvp.Key) < 0) && Contract.ValueAtReturn(out lowIsValid) == false));
+            Contract.Ensures(@this.Exists(kvp => cutFunction.CompareTo(kvp.Key) < 0) || Equals(Contract.ValueAtReturn(out low), default(K)));
+            Contract.Ensures((@this.Exists(kvp => cutFunction.CompareTo(kvp.Key) > 0) && Contract.ValueAtReturn(out highIsValid) == true) ||
+                             (!@this.Exists(kvp => cutFunction.CompareTo(kvp.Key) > 0) && Contract.ValueAtReturn(out highIsValid) == false));
+            Contract.Ensures(@this.Exists(kvp => cutFunction.CompareTo(kvp.Key) > 0) || Equals(Contract.ValueAtReturn(out high), default(K)));
+            low = high = default(KeyValuePair<K, V>);
+            lowIsValid = highIsValid = default(bool);
+            return default(bool);
         }
 
         IDirectedEnumerable<KeyValuePair<K, V>> ISortedDictionary<K, V>.RangeFrom(K bot)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Ensures(Contract.Result<IDirectedEnumerable<KeyValuePair<K, V>>>() != null);
+            Contract.Ensures(Contract.ForAll(Contract.Result<IDirectedEnumerable<KeyValuePair<K, V>>>(), kvp => @this.Comparer.Compare(bot, kvp.Key) <= 0));
+            return default(IDirectedEnumerable<KeyValuePair<K, V>>);
         }
 
-        IDirectedEnumerable<KeyValuePair<K, V>> ISortedDictionary<K, V>.RangeFromTo(K lowerBound, K upperBound)
+        IDirectedEnumerable<KeyValuePair<K, V>> ISortedDictionary<K, V>.RangeFromTo(K bot, K top)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Ensures(Contract.Result<IDirectedEnumerable<KeyValuePair<K, V>>>() != null);
+            Contract.Ensures(Contract.ForAll(Contract.Result<IDirectedEnumerable<KeyValuePair<K, V>>>(), kvp => @this.Comparer.Compare(bot, kvp.Key) <= 0));
+            Contract.Ensures(Contract.ForAll(Contract.Result<IDirectedEnumerable<KeyValuePair<K, V>>>(), kvp => @this.Comparer.Compare(kvp.Key, top) < 0));
+            return default(IDirectedEnumerable<KeyValuePair<K, V>>);
         }
 
         IDirectedEnumerable<KeyValuePair<K, V>> ISortedDictionary<K, V>.RangeTo(K top)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Ensures(Contract.Result<IDirectedEnumerable<KeyValuePair<K, V>>>() != null);
+            Contract.Ensures(Contract.ForAll(Contract.Result<IDirectedEnumerable<KeyValuePair<K, V>>>(), kvp => @this.Comparer.Compare(kvp.Key, top) < 0));
+            return default(IDirectedEnumerable<KeyValuePair<K, V>>);
         }
 
         IDirectedCollectionValue<KeyValuePair<K, V>> ISortedDictionary<K, V>.RangeAll()
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Ensures(Contract.Result<IDirectedCollectionValue<KeyValuePair<K, V>>>() != null);
+            Contract.Ensures(Contract.Result<IDirectedCollectionValue<KeyValuePair<K, V>>>().Count == @this.Count);
+            return default(IDirectedCollectionValue<KeyValuePair<K, V>>);
         }
 
         void ISortedDictionary<K, V>.AddSorted(SCG.IEnumerable<KeyValuePair<K, V>> items)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<ArgumentNullException>(items != null, "items");
+            Contract.Ensures(@this.Count >= Contract.OldValue(@this.Count));
+            Contract.Ensures(Contract.ForAll(items, kvp => @this.Contains(kvp.Key)));
         }
 
         void ISortedDictionary<K, V>.RemoveRangeFrom(K low)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(!@this.Exists(kvp => @this.Comparer.Compare(low, kvp.Key) <= 0));
+            Contract.Ensures(@this.Count <= Contract.OldValue(@this.Count));
         }
 
         void ISortedDictionary<K, V>.RemoveRangeFromTo(K low, K hi)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(!@this.Exists(kvp => @this.Comparer.Compare(low, kvp.Key) <= 0 && @this.Comparer.Compare(kvp.Key, hi) < 0));
+            Contract.Ensures(@this.Count <= Contract.OldValue(@this.Count));
         }
 
         void ISortedDictionary<K, V>.RemoveRangeTo(K hi)
         {
-            throw new NotImplementedException();
+            ISortedDictionary<K, V> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(!@this.Exists(kvp => @this.Comparer.Compare(kvp.Key, hi) < 0));
+            Contract.Ensures(@this.Count <= Contract.OldValue(@this.Count));
         }
 
         #region Interface Members not in Contract
