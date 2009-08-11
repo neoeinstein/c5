@@ -32,43 +32,66 @@ namespace C5.Contracts
     {
         T IList<T>.First
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                IList<T> @this = this;
+                Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+                return default(T);
+            }
         }
 
         T IList<T>.Last
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                IList<T> @this = this;
+                Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+                return default(T);
+            }
         }
 
         bool IList<T>.FIFO
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return default(bool); }
+            set {  }
         }
 
         T IList<T>.RemoveAt(int index)
         {
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            Contract.Requires<IndexOutOfRangeException>(0 <= index && index < @this.Count);
             throw new NotImplementedException();
         }
 
         void IList<T>.Insert(IList<T> pointer, T item)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
         }
 
         void IList<T>.InsertFirst(T item)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
         }
 
         void IList<T>.InsertLast(T item)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
         }
 
         void IList<T>.InsertAll<U>(int index, SCG.IEnumerable<U> items)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            Contract.Requires<IndexOutOfRangeException>(0 <= index && index < @this.Count);
         }
 
         IList<T> IList<T>.FindAll(Predicate<T> filter)
@@ -88,17 +111,26 @@ namespace C5.Contracts
 
         T IList<T>.Remove()
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            return default(T);
         }
 
         T IList<T>.RemoveFirst()
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            return default(T);
         }
 
         T IList<T>.RemoveLast()
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            return default(T);
         }
 
         IList<T> IList<T>.View(int start, int count)
@@ -153,6 +185,7 @@ namespace C5.Contracts
 
         IList<T> IList<T>.Span(IList<T> otherView)
         {
+            Contract.Requires<ArgumentNullException>(otherView != null, "otherView");
             throw new NotImplementedException();
         }
 
@@ -168,38 +201,57 @@ namespace C5.Contracts
 
         bool IList<T>.IsSorted(SCG.IComparer<T> comparer)
         {
-            throw new NotImplementedException();
+            Contract.Requires<ArgumentNullException>(comparer != null, "comparer");
+            return default(bool);
         }
 
         void IList<T>.Sort()
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
         }
 
         void IList<T>.Sort(SCG.IComparer<T> comparer)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ArgumentNullException>(comparer != null, "comparer");
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
         }
 
         void IList<T>.Shuffle()
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
         }
 
         void IList<T>.Shuffle(Random rnd)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
         }
 
         T IList<T>.this[int index]
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get
+            {
+                IList<T> @this = this;
+                Contract.Requires<IndexOutOfRangeException>(0 <= index && index < @this.Count);
+                return default(T);
+            }
+            set
+            {
+                IList<T> @this = this;
+                Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+                Contract.Requires<IndexOutOfRangeException>(0 <= index && index < @this.Count);
+            }
         }
 
         bool IList<T>.Remove(T item)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            return default(bool);
         }
 
         int IList<T>.IndexOf(T item)
@@ -219,17 +271,22 @@ namespace C5.Contracts
 
         bool IList<T>.Add(T item)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            return default(bool);
         }
 
         void IList<T>.CopyTo(T[] array, int index)
         {
-            throw new NotImplementedException();
+            Contract.Requires<ArgumentNullException>(array != null, "array");
         }
 
         void IList<T>.Clear()
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
         }
 
         bool IList<T>.Contains(T item)
