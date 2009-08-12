@@ -159,7 +159,7 @@
     <Compile Include="Builtin.cs" />
     <Compile Include="CollectionValueBase.cs" />
     <Compile Include="Comparer.cs" />
-    <Compile Include="Contracts\ContractUtil.cs" />
+    <Compile Include="Contracts\Logical.cs" />
     <Compile Include="Contracts\ICollectionContract.cs" />
     <Compile Include="Contracts\ICollectionValueContract.cs" />
     <Compile Include="Contracts\IDictionaryContract.cs" />
