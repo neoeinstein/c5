@@ -36,6 +36,7 @@ namespace C5.Contracts
             {
                 IList<T> @this = this;
                 Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+                Contract.Ensures(ReferenceEquals(Contract.Result<T>(), @this[0]));
                 return default(T);
             }
         }
@@ -46,6 +47,7 @@ namespace C5.Contracts
             {
                 IList<T> @this = this;
                 Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
+                Contract.Ensures(ReferenceEquals(Contract.Result<T>(), @this[@this.Count - 1]));
                 return default(T);
             }
         }
@@ -68,6 +70,8 @@ namespace C5.Contracts
         void IList<T>.Insert(IList<T> pointer, T item)
         {
             IList<T> @this = this;
+            Contract.Requires<ArgumentNullException>(pointer != null, "pointer");
+            Contract.Requires<NotAViewException>(@this == pointer.Underlying);
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
         }
@@ -77,6 +81,7 @@ namespace C5.Contracts
             IList<T> @this = this;
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            Contract.Ensures(@this.EqualityComparer.Equals(@this.First, item));
         }
 
         void IList<T>.InsertLast(T item)
@@ -84,23 +89,26 @@ namespace C5.Contracts
             IList<T> @this = this;
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            Contract.Ensures(@this.EqualityComparer.Equals(@this.Last, item));
         }
 
         void IList<T>.InsertAll<U>(int index, SCG.IEnumerable<U> items)
         {
             IList<T> @this = this;
+            Contract.Requires<IndexOutOfRangeException>(0 <= index && index < @this.Count);
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
-            Contract.Requires<IndexOutOfRangeException>(0 <= index && index < @this.Count);
         }
 
         IList<T> IList<T>.FindAll(Predicate<T> filter)
         {
+            Contract.Ensures(Contract.Result<IList<T>>() != null);
             throw new NotImplementedException();
         }
 
         IList<V> IList<T>.Map<V>(Converter<T, V> mapper)
         {
+            Contract.Ensures(Contract.Result<IList<T>>() != null);
             throw new NotImplementedException();
         }
 
@@ -122,6 +130,7 @@ namespace C5.Contracts
             IList<T> @this = this;
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            Contract.Ensures(@this.EqualityComparer.Equals(Contract.OldValue(@this.First), Contract.Result<T>()));
             return default(T);
         }
 
@@ -130,21 +139,25 @@ namespace C5.Contracts
             IList<T> @this = this;
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            Contract.Ensures(@this.EqualityComparer.Equals(Contract.OldValue(@this.Last), Contract.Result<T>()));
             return default(T);
         }
 
         IList<T> IList<T>.View(int start, int count)
         {
+            Contract.Ensures(Contract.Result<IList<T>>() != null);
             throw new NotImplementedException();
         }
 
         IList<T> IList<T>.ViewOf(T item)
         {
+            Contract.Ensures(Contract.Result<IList<T>>() != null);
             throw new NotImplementedException();
         }
 
         IList<T> IList<T>.LastViewOf(T item)
         {
+            Contract.Ensures(Contract.Result<IList<T>>() != null);
             throw new NotImplementedException();
         }
 
@@ -165,43 +178,100 @@ namespace C5.Contracts
 
         IList<T> IList<T>.Slide(int offset)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ViewDisposedException>(!@this.IsValid);
+            Contract.Requires<NotAViewException>(@this.Underlying != null);
+            Contract.Requires<ArgumentOutOfRangeException>(0 <= offset + Contract.OldValue(@this.Offset), "offset");
+            Contract.Requires<ArgumentOutOfRangeException>(offset + Contract.OldValue(@this.Offset) + @this.Count <= @this.Underlying.Count, "offset");
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(@this.Offset == Contract.OldValue(@this.Offset) + offset);
+            Contract.Ensures(@this.Count == Contract.OldValue(@this.Count));
+            Contract.Ensures(ReferenceEquals(Contract.Result<IList<T>>(), @this));
+            Contract.Ensures(@this.IsValid);
+            return default(IList<T>);
         }
 
         IList<T> IList<T>.Slide(int offset, int size)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ViewDisposedException>(!@this.IsValid);
+            Contract.Requires<NotAViewException>(@this.Underlying != null);
+            Contract.Requires<ArgumentOutOfRangeException>(0 <= offset + Contract.OldValue(@this.Offset), "offset");
+            Contract.Requires<ArgumentOutOfRangeException>(offset + Contract.OldValue(@this.Offset) <= @this.Underlying.Count, "offset");
+            Contract.Requires<ArgumentOutOfRangeException>(size >= 0, "size");
+            Contract.Requires<ArgumentOutOfRangeException>(offset + Contract.OldValue(@this.Offset) + size <= @this.Underlying.Count, "size");
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(@this.Offset == Contract.OldValue(@this.Offset) + offset);
+            Contract.Ensures(@this.Count == size);
+            Contract.Ensures(ReferenceEquals(Contract.Result<IList<T>>(), @this));
+            Contract.Ensures(@this.IsValid);
+            return default(IList<T>);
         }
 
         bool IList<T>.TrySlide(int offset)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ViewDisposedException>(!@this.IsValid);
+            Contract.Requires<NotAViewException>(@this.Underlying != null);
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(
+                Logical.Equivalence(
+                    0 <= offset + Contract.OldValue(@this.Offset) &&
+                    offset + Contract.OldValue(@this.Offset) + @this.Count <= @this.Underlying.Count,
+                    Contract.Result<bool>));
+            Contract.Ensures(@this.Offset == Contract.OldValue(@this.Offset) + (Contract.Result<bool>() ? offset : 0));
+            Contract.Ensures(@this.Count == Contract.OldValue(@this.Count));
+            Contract.Ensures(@this.IsValid);
+            return default(bool);
         }
 
         bool IList<T>.TrySlide(int offset, int size)
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ViewDisposedException>(!@this.IsValid);
+            Contract.Requires<NotAViewException>(@this.Underlying != null);
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(
+                Logical.Equivalence(
+                    0 <= offset + Contract.OldValue(@this.Offset) &&
+                    offset + Contract.OldValue(@this.Offset) + size <= @this.Underlying.Count &&
+                    0 <= size,
+                    Contract.Result<bool>));
+            Contract.Ensures(@this.Offset == Contract.OldValue(@this.Offset) + (Contract.Result<bool>() ? offset : 0));
+            Contract.Ensures(@this.Count == size);
+            Contract.Ensures(@this.IsValid);
+            return default(bool);
         }
 
         IList<T> IList<T>.Span(IList<T> otherView)
         {
             Contract.Requires<ArgumentNullException>(otherView != null, "otherView");
+            Contract.Ensures(Contract.Result<IList<T>>() != null);
             throw new NotImplementedException();
         }
 
         void IList<T>.Reverse()
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(Contract.OldValue(@this.Count) == @this.Count);
+            Contract.Ensures(Contract.ForAll(0, @this.Count,
+                i => ReferenceEquals(Contract.OldValue(@this[i]), @this[@this.Count - i - 1])));
         }
 
         bool IList<T>.IsSorted()
         {
-            throw new NotImplementedException();
+            IList<T> @this = this;
+            Contract.Ensures(@this.IsSorted(Comparer<T>.Default));
+            return default(bool);
         }
 
         bool IList<T>.IsSorted(SCG.IComparer<T> comparer)
         {
+            IList<T> @this = this;
             Contract.Requires<ArgumentNullException>(comparer != null, "comparer");
+            Contract.Ensures(@this.IsEmpty ||
+                             Contract.ForAll(1, @this.Count, i => comparer.Compare(@this[i - 1], @this[i]) <= 0));
             return default(bool);
         }
 
@@ -209,6 +279,8 @@ namespace C5.Contracts
         {
             IList<T> @this = this;
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(Contract.OldValue(@this.Count) == @this.Count);
+            Contract.Ensures(@this.IsSorted());
         }
 
         void IList<T>.Sort(SCG.IComparer<T> comparer)
@@ -216,18 +288,22 @@ namespace C5.Contracts
             IList<T> @this = this;
             Contract.Requires<ArgumentNullException>(comparer != null, "comparer");
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(Contract.OldValue(@this.Count) == @this.Count);
+            Contract.Ensures(@this.IsSorted(comparer));
         }
 
         void IList<T>.Shuffle()
         {
             IList<T> @this = this;
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(Contract.OldValue(@this.Count) == @this.Count);
         }
 
         void IList<T>.Shuffle(Random rnd)
         {
             IList<T> @this = this;
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+            Contract.Ensures(Contract.OldValue(@this.Count) == @this.Count);
         }
 
         T IList<T>.this[int index]
@@ -241,8 +317,9 @@ namespace C5.Contracts
             set
             {
                 IList<T> @this = this;
-                Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
                 Contract.Requires<IndexOutOfRangeException>(0 <= index && index < @this.Count);
+                Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
+                Contract.Ensures(Contract.OldValue(@this.Count) == @this.Count);
             }
         }
 
@@ -251,22 +328,38 @@ namespace C5.Contracts
             IList<T> @this = this;
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            Contract.Ensures(Logical.Implication(@this.Contains(item), Contract.Result<bool>));
+            Contract.Ensures(Logical.Implication(Contract.Result<bool>(), ()=> Contract.OldValue(@this.Count) - 1 == @this.Count));
+            Contract.Ensures(Logical.Implication(!Contract.Result<bool>(), ()=> Contract.OldValue(@this.Count) == @this.Count));
             return default(bool);
         }
 
         int IList<T>.IndexOf(T item)
         {
-            throw new NotImplementedException();
+            IIndexed<T> @this = this;
+            Contract.Ensures(~(@this.Count + 1) < Contract.Result<int>() && Contract.Result<int>() < @this.Count);
+            Contract.Ensures(Logical.Equivalence(Contract.Result<int>() >= 0, () => @this.Contains(item)));
+            Contract.Ensures((Contract.Result<int>() >= 0)
+                                 ? Contract.Result<int>() <= @this.LastIndexOf(item)
+                                 : Contract.Result<int>() == @this.LastIndexOf(item));
+            Contract.Ensures(@this.EqualityComparer.Equals(@this[Contract.Result<int>()], item));
+            return default(int);
         }
 
         int IList<T>.Count
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                IList<T> @this = this;
+                Contract.Ensures(Contract.Result<int>() >= 0);
+                Contract.Ensures(Logical.Equivalence(Contract.Result<int>() == 0, () => @this.IsEmpty));
+                return default(int);
+            }
         }
 
         bool IList<T>.IsReadOnly
         {
-            get { throw new NotImplementedException(); }
+            get { return default(bool); }
         }
 
         bool IList<T>.Add(T item)
@@ -279,7 +372,12 @@ namespace C5.Contracts
 
         void IList<T>.CopyTo(T[] array, int index)
         {
+            IList<T> @this = this;
             Contract.Requires<ArgumentNullException>(array != null, "array");
+            Contract.Requires<ArgumentOutOfRangeException>(index <= array.GetUpperBound(0), "index");
+            Contract.Requires<ArgumentOutOfRangeException>(index >= array.GetLowerBound(0), "index");
+            Contract.Requires<ArgumentException>(index + @this.Count <= array.Length, "array");
+            Contract.Requires(index + @this.Count <= array.GetUpperBound(0), "Starting at index, collection will not fit in array");
         }
 
         void IList<T>.Clear()
@@ -287,6 +385,7 @@ namespace C5.Contracts
             IList<T> @this = this;
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Requires<FixedSizeCollectionException>(!@this.IsFixedSize);
+            Contract.Ensures(@this.IsEmpty);
         }
 
         bool IList<T>.Contains(T item)
