@@ -47,11 +47,15 @@
     <Compile Include="arrays\HashedArrayList.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Builtin.cs" />
+    <Compile Include="Events\ClearedEventArgs.cs" />
+    <Compile Include="Events\ClearedRangeEventArgs.cs" />
     <Compile Include="CollectionValueBase.cs" />
     <Compile Include="Comparer.cs" />
+    <Compile Include="Events\Delegates.cs" />
     <Compile Include="EnumerableBase.cs" />
     <Compile Include="EnumerationDirection.cs" />
-    <Compile Include="EventTypeEnum.cs" />
+    <Compile Include="Events\EventBlock.cs" />
+    <Compile Include="Events\EventTypeEnum.cs" />
     <Compile Include="Exceptions\CollectionModifiedException.cs" />
     <Compile Include="Exceptions\DuplicateNotAllowedException.cs" />
     <Compile Include="Exceptions\FixedSizeCollectionException.cs" />
@@ -66,7 +70,6 @@
     <Compile Include="Exceptions\ViewDisposedException.cs" />
     <Compile Include="Formatting.cs" />
     <Compile Include="Hashers.cs" />
-    <Compile Include="Events.cs" />
     <Compile Include="Collections.cs" />
     <Compile Include="Dictionaries.cs" />
     <Compile Include="Interfaces\ICollection.cs" />
@@ -86,7 +89,10 @@
     <Compile Include="Interfaces\ISorted.cs" />
     <Compile Include="Interfaces\ISortedDictionary.cs" />
     <Compile Include="Interfaces\IStack.cs" />
+    <Compile Include="Events\ItemAtEventArgs.cs" />
+    <Compile Include="Events\ItemCountEventArgs.cs" />
     <Compile Include="linkedlists\HashedLinkedList.cs" />
+    <Compile Include="Events\ProxyEventBlock.cs" />
     <Compile Include="Random.cs" />
     <Compile Include="Records.cs" />
     <Compile Include="Sorting.cs" />
@@ -108,6 +114,8 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>
