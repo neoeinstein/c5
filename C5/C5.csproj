@@ -50,7 +50,7 @@
     <Compile Include="CollectionValueBase.cs" />
     <Compile Include="Comparer.cs" />
     <Compile Include="EnumerableBase.cs" />
-    <Compile Include="Enums.cs" />
+    <Compile Include="EnumerationDirection.cs" />
     <Compile Include="EventTypeEnum.cs" />
     <Compile Include="Exceptions\CollectionModifiedException.cs" />
     <Compile Include="Exceptions\DuplicateNotAllowedException.cs" />
@@ -90,6 +90,7 @@
     <Compile Include="Random.cs" />
     <Compile Include="Records.cs" />
     <Compile Include="Sorting.cs" />
+    <Compile Include="Speed.cs" />
     <Compile Include="ViewSupport.cs" />
     <Compile Include="MappedEnumerators.cs" />
     <Compile Include="WrappedArray.cs" />
