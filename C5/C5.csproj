@@ -97,8 +97,9 @@
     <Compile Include="Records.cs" />
     <Compile Include="Sorting.cs" />
     <Compile Include="Speed.cs" />
-    <Compile Include="ViewSupport.cs" />
+    <Compile Include="MutualViewPosition.cs" />
     <Compile Include="MappedEnumerators.cs" />
+    <Compile Include="WeakViewList.cs" />
     <Compile Include="WrappedArray.cs" />
     <Compile Include="Wrappers.cs" />
     <Compile Include="arrays\ArrayList.cs" />
