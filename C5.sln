@@ -3,8 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C5", "C5\C5.csproj", "{D70489CD-ABDA-48FF-BD1E-BE3F7495BE71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nunit", "nunit\nunit.csproj", "{08CBFDEB-A2E2-4F0E-A4E1-B996B05569DE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D70489CD-ABDA-48FF-BD1E-BE3F7495BE71} = {D70489CD-ABDA-48FF-BD1E-BE3F7495BE71}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserGuideExamples", "UserGuideExamples\UserGuideExamples.csproj", "{B2A29FF2-A5C5-4F07-8CE7-FF5D744D7562}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D70489CD-ABDA-48FF-BD1E-BE3F7495BE71} = {D70489CD-ABDA-48FF-BD1E-BE3F7495BE71}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Strong Name Key", "Strong Name Key", "{2EEE2D02-D5DD-4FED-926C-8BEEE21570ED}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,6 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Strong Name Key", "Strong N
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C5.Tests", "C5.Tests\C5.Tests.csproj", "{71E033DE-B26A-4AEE-982F-0997AA63D1F9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D70489CD-ABDA-48FF-BD1E-BE3F7495BE71} = {D70489CD-ABDA-48FF-BD1E-BE3F7495BE71}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
