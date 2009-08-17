@@ -110,7 +110,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>
-    <PreBuildEvent>"$(SolutionDir)lib\PreProcess\PreProcess.exe" $(ProjectDir)</PreBuildEvent>
+    <PreBuildEvent>"$(SolutionDir)lib\PreProcess\PreProcess.exe" "$(ProjectDir)"</PreBuildEvent>
     <PostBuildEvent />
   </PropertyGroup>
 </Project>
