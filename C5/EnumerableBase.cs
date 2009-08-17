@@ -45,16 +45,16 @@ namespace C5
         
         protected static int countItems(SCG.IEnumerable<T> items)
         {
-            var collectionValue = items as ICollectionValue<T>;
+            ICollectionValue<T> collectionValue = items as ICollectionValue<T>;
             if (collectionValue != null)
                 return collectionValue.Count;
 
-            var scgCollection = items as SCG.ICollection<T>;
+            SCG.ICollection<T> scgCollection = items as SCG.ICollection<T>;
             if (scgCollection != null)
                 return scgCollection.Count;
 
             int count = 0;
-            foreach (var item in items)
+            foreach (T item in items)
                 ++count;
 
             return count;
