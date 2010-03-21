@@ -108,7 +108,7 @@ namespace C5.Contracts
 
         IList<V> IList<T>.Map<V>(Converter<T, V> mapper)
         {
-            Contract.Ensures(Contract.Result<IList<T>>() != null);
+            Contract.Ensures(Contract.Result<IList<V>>() != null);
             throw new NotImplementedException();
         }
 
@@ -181,8 +181,8 @@ namespace C5.Contracts
             IList<T> @this = this;
             Contract.Requires<ViewDisposedException>(!@this.IsValid);
             Contract.Requires<NotAViewException>(@this.Underlying != null);
-            Contract.Requires<ArgumentOutOfRangeException>(0 <= offset + Contract.OldValue(@this.Offset), "offset");
-            Contract.Requires<ArgumentOutOfRangeException>(offset + Contract.OldValue(@this.Offset) + @this.Count <= @this.Underlying.Count, "offset");
+            Contract.Requires<ArgumentOutOfRangeException>(0 <= offset + @this.Offset, "offset");
+            Contract.Requires<ArgumentOutOfRangeException>(offset + @this.Offset + @this.Count <= @this.Underlying.Count, "offset");
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Ensures(@this.Offset == Contract.OldValue(@this.Offset) + offset);
             Contract.Ensures(@this.Count == Contract.OldValue(@this.Count));
@@ -196,10 +196,10 @@ namespace C5.Contracts
             IList<T> @this = this;
             Contract.Requires<ViewDisposedException>(!@this.IsValid);
             Contract.Requires<NotAViewException>(@this.Underlying != null);
-            Contract.Requires<ArgumentOutOfRangeException>(0 <= offset + Contract.OldValue(@this.Offset), "offset");
-            Contract.Requires<ArgumentOutOfRangeException>(offset + Contract.OldValue(@this.Offset) <= @this.Underlying.Count, "offset");
+            Contract.Requires<ArgumentOutOfRangeException>(0 <= offset + @this.Offset, "offset");
+            Contract.Requires<ArgumentOutOfRangeException>(offset + @this.Offset <= @this.Underlying.Count, "offset");
             Contract.Requires<ArgumentOutOfRangeException>(size >= 0, "size");
-            Contract.Requires<ArgumentOutOfRangeException>(offset + Contract.OldValue(@this.Offset) + size <= @this.Underlying.Count, "size");
+            Contract.Requires<ArgumentOutOfRangeException>(offset + @this.Offset + size <= @this.Underlying.Count, "size");
             Contract.Requires<ReadOnlyCollectionException>(!@this.IsReadOnly);
             Contract.Ensures(@this.Offset == Contract.OldValue(@this.Offset) + offset);
             Contract.Ensures(@this.Count == size);
