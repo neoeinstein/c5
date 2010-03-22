@@ -181,6 +181,7 @@
     <Compile Include="Builtin.cs" />
     <Compile Include="CollectionValueBase.cs" />
     <Compile Include="Comparer.cs" />
+    <Compile Include="Contracts\Enums.cs" />
     <Compile Include="Contracts\Logical.cs" />
     <Compile Include="Contracts\ICollectionContract.cs" />
     <Compile Include="Contracts\ICollectionValueContract.cs" />
