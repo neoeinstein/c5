@@ -37,6 +37,8 @@ Development
 ===========
 The library's source is organized into source, test, and example directories. The main source of the library is included in the ``C5/`` directory. The tests are split between the ``nunit`` and ``C5.Tests/`` directories. The ``nunit/`` directory contains legacy tests from the original ITU release, while the ``C5.Tests/`` will contain all new tests. As test coverage from ``C5.Tests/`` increases, the legacy tests will be removed. This is part of a greater initiative to improve the maintainability of the library.
 
+When working on the project, ensure that ``core.autocrlf`` is enabled to prevent end-of-line issues from occurring as Visual Studio 2010 prefers to use ``CRLF`` line endings and will do so for new line breaks even in files that were fully composed of ``LF`` line endings.
+
 The ``UserGuideExamples/`` directory includes several source files demonstrating how to use the C5 library to various ends, many of which are examples in the `C5 Book`_.
 
 Questions/Help
