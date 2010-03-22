@@ -32,7 +32,7 @@ namespace C5.Contracts
         IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards()
         {
             IDirectedEnumerable<T> @this = this;
-            Contract.Ensures((Contract.Result<IDirectedEnumerable<T>>().Direction == EnumerationDirection.Forwards && @this.Direction == EnumerationDirection.Backwards) || @this.Direction == EnumerationDirection.Forwards);
+            Contract.Ensures(Logical.Equivalence(@this.Direction == EnumerationDirection.Forwards, Contract.Result<IDirectedEnumerable<T>>().Direction == EnumerationDirection.Backwards));
             Contract.Ensures(Contract.Result<IDirectedEnumerable<T>>() != null);
             return default(IDirectedEnumerable<T>);
         }
@@ -41,7 +41,7 @@ namespace C5.Contracts
         {
             get
             {
-                Contract.Ensures(Enum.IsDefined(typeof(EnumerationDirection), Contract.Result<EnumerationDirection>()));
+                Contract.Ensures(Enums.IsValidEnumerationDirection(Contract.Result<EnumerationDirection>()));
                 return default(EnumerationDirection);
             }
         }

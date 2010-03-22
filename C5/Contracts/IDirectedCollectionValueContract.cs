@@ -32,7 +32,7 @@ namespace C5.Contracts
         IDirectedCollectionValue<T> IDirectedCollectionValue<T>.Backwards()
         {
             IDirectedCollectionValue<T> @this = this;
-            Contract.Ensures((Contract.Result<IDirectedCollectionValue<T>>().Direction == EnumerationDirection.Forwards && @this.Direction == EnumerationDirection.Backwards) || @this.Direction == EnumerationDirection.Forwards);
+            Contract.Ensures(Logical.Equivalence(@this.Direction == EnumerationDirection.Forwards, Contract.Result<IDirectedCollectionValue<T>>().Direction == EnumerationDirection.Backwards));
             Contract.Ensures(Contract.Result<IDirectedCollectionValue<T>>() != null);
             return default(IDirectedCollectionValue<T>);
         }
@@ -41,7 +41,7 @@ namespace C5.Contracts
         {
             IDirectedCollectionValue<T> @this = this;
             Contract.Requires<ArgumentNullException>(predicate != null, "predicate");
-            Contract.Ensures(Contract.Exists(@this, predicate) && Contract.ValueAtReturn(out item) != null);
+            Contract.Ensures(Logical.Implication(!Contract.Exists(@this, predicate), Contract.ValueAtReturn(out item).Equals(default(T))));
             item = default(T);
             return default(bool);
         }

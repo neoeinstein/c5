@@ -34,7 +34,7 @@ namespace C5.Contracts
         {
             get
             {
-                Contract.Ensures((Contract.Result<EventTypeEnum>() & ~EventTypeEnum.All) == 0);
+                Contract.Ensures(Enums.IsValidEventType(Contract.Result<EventTypeEnum>()));
                 return default(EventTypeEnum);
             }
         }
@@ -43,7 +43,7 @@ namespace C5.Contracts
         {
             get
             {
-                Contract.Ensures((Contract.Result<EventTypeEnum>() & ~EventTypeEnum.All) == 0);
+                Contract.Ensures(Enums.IsValidEventType(Contract.Result<EventTypeEnum>()));
                 return default(EventTypeEnum);
             }
         }
@@ -143,7 +143,7 @@ namespace C5.Contracts
             get
             {
                 ICollectionValue<T> @this = this;
-                Contract.Ensures((@this.Count == 0 && Contract.Result<bool>() == true) || Contract.Result<bool>() == false);
+                Contract.Ensures(Logical.Equivalence(Contract.Result<bool>() == true, () => @this.Count == 0));
                 return default(bool);
             }
         }
@@ -153,7 +153,7 @@ namespace C5.Contracts
             get
             {
                 ICollectionValue<T> @this = this;
-                Contract.Ensures((Contract.Result<int>() == 0 && @this.IsEmpty) || !@this.IsEmpty);
+                Contract.Ensures(Logical.Equivalence(Contract.Result<int>() == 0, () => @this.IsEmpty));
                 return default(int);
             }
         }
@@ -162,7 +162,7 @@ namespace C5.Contracts
         {
             get
             {
-                Contract.Ensures(Enum.IsDefined(typeof(Speed), Contract.Result<Speed>()));
+                Contract.Ensures(Enums.IsValidSpeed(Contract.Result<Speed>()));
                 return default(Speed);
             }
         }
@@ -181,7 +181,6 @@ namespace C5.Contracts
         {
             ICollectionValue<T> @this = this;
             Contract.Ensures(Contract.Result<T[]>() != null);
-            Contract.Ensures(Contract.Result<T[]>().Length == @this.Count);
             return default(T[]);
         }
 
@@ -194,7 +193,7 @@ namespace C5.Contracts
         {
             ICollectionValue<T> @this = this;
             Contract.Requires<ArgumentNullException>(predicate != null, "predicate");
-            Contract.Ensures(Contract.Result<bool>() == true && Contract.Exists(@this, predicate));
+            Contract.Ensures(Logical.Equivalence(Contract.Result<bool>() == true, () => Contract.Exists(@this, predicate)));
             return default(bool);
         }
 
@@ -202,7 +201,8 @@ namespace C5.Contracts
         {
             ICollectionValue<T> @this = this;
             Contract.Requires<ArgumentNullException>(predicate != null, "predicate");
-            Contract.Ensures(Contract.Exists(@this, predicate) && Contract.ValueAtReturn(out item) != null);
+            Contract.Ensures(Logical.Equivalence(Contract.Result<bool>() == true, () => Contract.Exists(@this, predicate)));
+            Contract.Ensures(Contract.Result<bool>() == true || object.Equals(Contract.ValueAtReturn<T>(out item), default(T)));
             item = default(T);
             return default(bool);
         }
@@ -211,14 +211,14 @@ namespace C5.Contracts
         {
             ICollectionValue<T> @this = this;
             Contract.Requires<ArgumentNullException>(predicate != null, "predicate");
-            Contract.Ensures(Contract.Result<bool>() == true && Contract.ForAll(@this, predicate));
+            Contract.Ensures(Logical.Equivalence(Contract.Result<bool>() == true, () => Contract.ForAll(@this, predicate)));
             return default(bool);
         }
 
         T ICollectionValue<T>.Choose()
         {
             ICollectionValue<T> @this = this;
-            Contract.Requires(!@this.IsEmpty);
+            Contract.Requires<NoSuchItemException>(!@this.IsEmpty);
             return default(T);
         }
 
