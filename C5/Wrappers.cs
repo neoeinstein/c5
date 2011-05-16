@@ -1958,6 +1958,63 @@ namespace C5
     }
 
     /// <summary>
+    /// A read-only wrapper for a generic indexable stack (allows indexing).
+    /// 
+    /// <para>Suitable for wrapping a <see cref="T:C5.CircularQueue`1"/></para>
+    /// </summary>
+    /// <typeparam name="T">The item type.</typeparam>
+    public class GuardedStack<T> : GuardedDirectedCollectionValue<T>, IStack<T>
+    {
+        #region Fields
+
+        IStack<T> stack;
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Wrap a stack in a read-only wrapper
+        /// </summary>
+        /// <param name="stack">The stack</param>
+        public GuardedStack(IStack<T> stack) : base(stack) { this.stack = stack; }
+
+        #endregion
+
+        #region IStack<T> Members
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        public bool AllowsDuplicates { get { return stack.AllowsDuplicates; } }
+
+        /// <summary>
+        /// Index into the wrapped stack
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public T this[int i] { get { return stack[i]; } }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <returns>-</returns>
+        public void Push(T item)
+        { throw new ReadOnlyCollectionException("Stack cannot be modified through this guard object"); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <returns>-</returns>
+        public T Pop()
+        { throw new ReadOnlyCollectionException("Stack cannot be modified through this guard object"); }
+
+        #endregion
+    }
+
+    /// <summary>
     /// A read-only wrapper for a dictionary.
     ///
     /// <i>Suitable for wrapping a HashDictionary. <see cref="T:C5.HashDictionary`2"/></i>
