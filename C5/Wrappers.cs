@@ -1070,7 +1070,94 @@ namespace C5
         #endregion
     }
 
+    /// <summary>
+    /// Read-only wrapper for indexed collections
+    ///
+    /// <i>Suitable for wrapping Lists, TreeSet, TreeBag and SortedArray</i>
+    /// </summary>
+    public class GuardedIndexed<T> : GuardedSequenced<T>, IIndexed<T>
+    {
+        #region Fields
 
+        IIndexed<T> indexed;
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Wrap an indexed collection in a read-only wrapper
+        /// </summary>
+        /// <param name="list">the indexed collection</param>
+        public GuardedIndexed(IIndexed<T> list)
+            : base(list)
+        { this.indexed = list; }
+
+        #endregion
+
+        #region IIndexed<T> Members
+
+        /// <summary>
+        /// </summary>
+        /// <value>The i'th item of the wrapped indexed collection</value>
+        public T this[int i] { get { return indexed[i]; } }
+
+        /// <summary>
+        /// </summary>
+        /// <value></value>
+        public virtual Speed IndexingSpeed { get { return indexed.IndexingSpeed; } }
+
+        /// <summary>
+        /// </summary>
+        /// <value>A directed collection of the items in the indicated interval of the wrapped collection</value>
+        public IDirectedCollectionValue<T> this[int start, int end]
+        { get { return new GuardedDirectedCollectionValue<T>(indexed[start, end]); } }
+
+
+        /// <summary>
+        /// Find the (first) index of an item in the wrapped collection
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public int IndexOf(T item) { return indexed.IndexOf(item); }
+
+
+        /// <summary>
+        /// Find the last index of an item in the wrapped collection
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public int LastIndexOf(T item) { return indexed.LastIndexOf(item); }
+
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public T RemoveAt(int i)
+        { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
+
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        public void RemoveInterval(int start, int count)
+        { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
+
+        #endregion
+
+        /// <summary>
+        /// Returns a read-only wrapped clone of the wrapped collection
+        /// </summary>
+        /// <returns></returns>
+        public override object Clone()
+        {
+            return new GuardedIndexed<T>((IIndexed<T>)(indexed.Clone()));
+        }
+    }
 
     /// <summary>
     /// Read-only wrapper for indexed sorted collections
