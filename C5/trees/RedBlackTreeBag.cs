@@ -20,7 +20,7 @@
 */
 
 #define MAINTAIN_SIZE
-#define BAGnot
+#define BAG
 #define NCP
 
 #if BAG
@@ -34,9 +34,9 @@ using System;
 using SCG = System.Collections.Generic;
 
 // NOTE NOTE NOTE NOTE
-// This source file is used to produce both TreeSet<T> and TreeBag<T>
+// This source file is used to produce both TreeBag<T> and TreeBag<T>
 // It should be copied to a file called TreeBag.cs in which all code mentions of 
-// TreeSet is changed to TreeBag and the preprocessor symbol BAG is defined.
+// TreeBag is changed to TreeBag and the preprocessor symbol BAG is defined.
 // NOTE: there may be problems with documentation comments.
 
 namespace C5
@@ -44,7 +44,7 @@ namespace C5
 #if BAG
   /// <summary>
   /// An implementation of Red-Black trees as an indexed, sorted collection with bag semantics,
-  /// cf. <a href="litterature.htm#CLRS">CLRS</a>. (<see cref="T:C5.TreeSet`1"/> for an 
+  /// cf. <a href="litterature.htm#CLRS">CLRS</a>. (<see cref="T:C5.TreeBag`1"/> for an 
   /// implementation with set semantics).
   /// <br/>
   /// The comparer (sorting order) may be either natural, because the item type is comparable 
@@ -71,7 +71,7 @@ namespace C5
   /// </summary>
 #endif
   [Serializable]
-  public class TreeSet<T> : SequencedBase<T>, IIndexedSorted<T>, IPersistentSorted<T>
+  public class TreeBag<T> : SequencedBase<T>, IIndexedSorted<T>, IPersistentSorted<T>
   {
     #region Fields
 
@@ -310,7 +310,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NotComparableException">If <code>T</code> is not comparable.
     /// </exception>
-    public TreeSet() : this(Comparer<T>.Default, EqualityComparer<T>.Default) { }
+    public TreeBag() : this(Comparer<T>.Default, EqualityComparer<T>.Default) { }
 
 
     /// <summary>
@@ -324,7 +324,7 @@ namespace C5
     /// </para>
     /// </summary>
     /// <param name="comparer">The external comparer</param>
-    public TreeSet(SCG.IComparer<T> comparer) : this(comparer, new ComparerZeroHashCodeEqualityComparer<T>(comparer)) { }
+    public TreeBag(SCG.IComparer<T> comparer) : this(comparer, new ComparerZeroHashCodeEqualityComparer<T>(comparer)) { }
 
     /// <summary>
     /// Create a red-black tree collection with an external comparer and an external
@@ -332,7 +332,7 @@ namespace C5
     /// </summary>
     /// <param name="comparer">The external comparer</param>
     /// <param name="equalityComparer">The external item equalityComparer</param>
-    public TreeSet(SCG.IComparer<T> comparer, SCG.IEqualityComparer<T> equalityComparer)
+    public TreeBag(SCG.IComparer<T> comparer, SCG.IEqualityComparer<T> equalityComparer)
       : base(equalityComparer)
     {
       if (comparer == null)
@@ -342,7 +342,7 @@ namespace C5
 
     #endregion
 
-    #region TreeSet.Enumerator nested class
+    #region TreeBag.Enumerator nested class
 
     /// <summary>
     /// An enumerator for a red-black tree collection. Based on an explicit stack
@@ -352,7 +352,7 @@ namespace C5
     internal class Enumerator : SCG.IEnumerator<T>
     {
       #region Private Fields
-      TreeSet<T> tree;
+      TreeBag<T> tree;
 
       bool valid = false;
 
@@ -370,7 +370,7 @@ namespace C5
       /// Create a tree enumerator
       /// </summary>
       /// <param name="tree">The red-black tree to enumerate</param>
-      public Enumerator(TreeSet<T> tree)
+      public Enumerator(TreeBag<T> tree)
       {
         this.tree = tree;
         stamp = tree.stamp;
@@ -503,7 +503,7 @@ namespace C5
     internal class SnapEnumerator : SCG.IEnumerator<T>
     {
       #region Private Fields
-      TreeSet<T> tree;
+      TreeBag<T> tree;
 
       bool valid = false;
 
@@ -526,7 +526,7 @@ namespace C5
       /// collection
       /// </summary>
       /// <param name="tree">The snapshot</param>
-      public SnapEnumerator(TreeSet<T> tree)
+      public SnapEnumerator(TreeBag<T> tree)
       {
         this.tree = tree;
         stamp = tree.stamp;
@@ -1256,7 +1256,7 @@ namespace C5
         blackheight++;
       }
 
-      root = TreeSet<T>.maketreer(ref head, blackheight, maxred, red);
+      root = TreeBag<T>.maketreer(ref head, blackheight, maxred, red);
       blackdepth = blackheight;
       size = z;
 #if BAG
@@ -2147,7 +2147,7 @@ private bool removeIterativePhase2(Node cursor, int level)
       //Well, it is unclear how efficient it would be.
       //We could use a marking method!?
 #warning how does this work together with persistence?
-      TreeSet<T> t = (TreeSet<T>)MemberwiseClone();
+      TreeBag<T> t = (TreeBag<T>)MemberwiseClone();
 
       T jtem = default(T);
       t.clear();
@@ -2232,7 +2232,7 @@ private bool removeIterativePhase2(Node cursor, int level)
     {
       if (!isValid)
         throw new ViewDisposedException("Snapshot has been disposed");
-      TreeSet<T> res = new TreeSet<T>(comparer);
+      TreeBag<T> res = new TreeBag<T>(comparer);
       SCG.IEnumerator<T> e = GetEnumerator();
       Node head = null, tail = null;
       int z = 0;
@@ -2288,7 +2288,7 @@ private bool removeIterativePhase2(Node cursor, int level)
         blackheight++;
       }
 
-      res.root = TreeSet<T>.maketreer(ref head, blackheight, maxred, red);
+      res.root = TreeBag<T>.maketreer(ref head, blackheight, maxred, red);
       res.blackdepth = blackheight;
       res.size = z;
 #if BAG
@@ -2313,13 +2313,13 @@ private bool removeIterativePhase2(Node cursor, int level)
     {
       if (!isValid)
         throw new ViewDisposedException("Snapshot has been disposed");
-      TreeSet<V> res = new TreeSet<V>(c);
+      TreeBag<V> res = new TreeBag<V>(c);
 
       if (size == 0)
         return res;
 
       SCG.IEnumerator<T> e = GetEnumerator();
-      TreeSet<V>.Node head = null, tail = null;
+      TreeBag<V>.Node head = null, tail = null;
       V oldv = default(V);
       int z = 0;
 #if BAG
@@ -2341,7 +2341,7 @@ private bool removeIterativePhase2(Node cursor, int level)
 
         if (head == null)
         {
-          head = tail = new TreeSet<V>.Node();
+          head = tail = new TreeBag<V>.Node();
           z++;
         }
         else
@@ -2361,7 +2361,7 @@ private bool removeIterativePhase2(Node cursor, int level)
 #if BAG
           tail.size = tail.items;
 #endif
-          tail.right = new TreeSet<V>.Node();
+          tail.right = new TreeBag<V>.Node();
           tail = tail.right;
           z++;
         }
@@ -2384,7 +2384,7 @@ private bool removeIterativePhase2(Node cursor, int level)
         blackheight++;
       }
 
-      res.root = TreeSet<V>.maketreer(ref head, blackheight, maxred, red);
+      res.root = TreeBag<V>.maketreer(ref head, blackheight, maxred, red);
       res.blackdepth = blackheight;
       res.size = size;
       return res;
@@ -2828,10 +2828,10 @@ private bool removeIterativePhase2(Node cursor, int level)
 
       readonly bool forwards;
 
-      readonly TreeSet<T> tree;
+      readonly TreeBag<T> tree;
 
 
-      internal Interval(TreeSet<T> tree, int start, int count, bool forwards)
+      internal Interval(TreeBag<T> tree, int start, int count, bool forwards)
       {
 #if NCP
         if (tree.isSnapShot)
@@ -3849,7 +3849,7 @@ private bool removeIterativePhase2(Node cursor, int level)
         snapList.Prev = lastLiveSnapRef;
         lastLiveSnapRef.Next = snapList;
       }
-      return ((TreeSet<T>)_snapshot).generation;
+      return ((TreeBag<T>)_snapshot).generation;
     }
 
     [Serializable]
@@ -3857,7 +3857,7 @@ private bool removeIterativePhase2(Node cursor, int level)
     {
       public SnapRef Prev, Next;
       public WeakReference Tree;
-      public SnapRef(TreeSet<T> tree) { Tree = new WeakReference(tree); }
+      public SnapRef(TreeBag<T> tree) { Tree = new WeakReference(tree); }
       public void Dispose()
       {
         Next.Prev = Prev;
@@ -3889,8 +3889,8 @@ private bool removeIterativePhase2(Node cursor, int level)
           SnapRef someSnapRef = snapList.Prev;
           while (someSnapRef != null)
           {
-            TreeSet<T> lastsnap;
-            if ((lastsnap = someSnapRef.Tree.Target as TreeSet<T>) != null)
+            TreeBag<T> lastsnap;
+            if ((lastsnap = someSnapRef.Tree.Target as TreeBag<T>) != null)
               lastsnap.snapDispose();
             someSnapRef = someSnapRef.Prev;
           }
@@ -3924,7 +3924,7 @@ private bool removeIterativePhase2(Node cursor, int level)
       if (isSnapShot)
         throw new InvalidOperationException("Cannot snapshot a snapshot");
 
-      TreeSet<T> res = (TreeSet<T>)MemberwiseClone();
+      TreeBag<T> res = (TreeBag<T>)MemberwiseClone();
       SnapRef newSnapRef = new SnapRef(res);
       res.isReadOnlyBase = true;
       res.isSnapShot = true;
@@ -3949,7 +3949,7 @@ private bool removeIterativePhase2(Node cursor, int level)
 
     #endregion
 
-    #region TreeSet.Range nested class
+    #region TreeBag.Range nested class
 
     internal class Range : DirectedCollectionValueBase<T>, IDirectedCollectionValue<T>
     {
@@ -3957,7 +3957,7 @@ private bool removeIterativePhase2(Node cursor, int level)
       //indicate whether the bound is present (we canot rely on default(T))
       private int stamp, size;
 
-      private TreeSet<T> basis;
+      private TreeBag<T> basis;
 
       private T lowend, highend;
 
@@ -3967,7 +3967,7 @@ private bool removeIterativePhase2(Node cursor, int level)
 
 
       [Tested]
-      public Range(TreeSet<T> basis, bool haslowend, T lowend, bool hashighend, T highend, EnumerationDirection direction)
+      public Range(TreeBag<T> basis, bool haslowend, T lowend, bool hashighend, T highend, EnumerationDirection direction)
       {
         this.basis = basis;
         stamp = basis.stamp;
@@ -3987,7 +3987,7 @@ private bool removeIterativePhase2(Node cursor, int level)
       #region IEnumerable<T> Members
 
 
-      #region TreeSet.Range.Enumerator nested class
+      #region TreeBag.Range.Enumerator nested class
 
       internal class Enumerator : SCG.IEnumerator<T>
       {
@@ -4575,12 +4575,12 @@ private bool removeIterativePhase2(Node cursor, int level)
     #region ICloneable Members
 
     /// <summary>
-    /// Make a shallow copy of this TreeSet.
+    /// Make a shallow copy of this TreeBag.
     /// </summary>
     /// <returns></returns>
     public virtual object Clone()
     {
-      TreeSet<T> clone = new TreeSet<T>(comparer, EqualityComparer);
+      TreeBag<T> clone = new TreeBag<T>(comparer, EqualityComparer);
       //TODO: make sure the TreeBag AddSorted copies tree bags smartly!!!
       clone.AddSorted(this);
       return clone;

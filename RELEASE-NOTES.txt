@@ -1,6 +1,13 @@
 RELEASE NOTES FOR C5 GENERIC COLLECTION LIBRARY FOR C#/CLI
 ------------------------------
 
+Release 1.1.1 of 2010-12-17
+
+ * Fixed 5 bugs found since the 1.1.0 release.  Only one of this is
+   likely to break code: the specification and implementation of the
+   range indexer this[i,n] on TreeSet was wrong.
+
+
 Release 1.1.0 of 2008-02-10
 
 New functionality:
@@ -30,7 +37,7 @@ New functionality:
    the classes that implement it.
 
  * Event raising on SortedDictionary<T> finally implemented, thanks to
-   Markus Griep.  Hence all unit tests should now succeed.
+   Marcus Griep.  Hence all unit tests should now succeed.
 
  * The missing custom comparers and equality comparers have been added
    for all primitive types except bool.  

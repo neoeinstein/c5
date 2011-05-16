@@ -22,7 +22,7 @@
 // C5 example: graph copying 2005-11-08
 
 // Compile with 
-//   csc /r:C5.dll Toposort.cs 
+//   csc /r:C5.dll Graphcopy.cs 
 
 using System;
 using System.Text;

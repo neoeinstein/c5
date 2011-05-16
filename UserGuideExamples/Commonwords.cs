@@ -54,8 +54,7 @@ namespace Commonwords {
       // Sorting.IntroSort(frequency, 0, frequency.Length, new FreqOrder());
       Sorting.IntroSort(frequency, 0, frequency.Length, 
           new DelegateComparer<KeyValuePair<String,int>>
-                        (delegate(KeyValuePair<String,int> p1, 
-                                  KeyValuePair<String,int> p2)
+                        ((p1, p2) => 
                         { 
                           int major = p2.Value.CompareTo(p1.Value);
                           return major != 0 ? major : p1.Key.CompareTo(p2.Key);
