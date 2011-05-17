@@ -460,7 +460,249 @@ namespace C5
         #endregion
     }
 
+    /// <summary>
+    /// A read-only wrapper for an <see cref="T:C5.IExtensible`1"/>.
+    /// </summary>
+    public class GuardedExtensible<T> : GuardedCollectionValue<T>, IExtensible<T>
+    {
+        #region Fields
 
+        IExtensible<T> extensible;
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Wrap an IExtensible&lt;T&gt; in a read-only wrapper
+        /// </summary>
+        /// <param name="extensible">the collection to wrap</param>
+        public GuardedExtensible(IExtensible<T> extensible)
+            : base(extensible)
+        { this.extensible = extensible; }
+
+        #endregion
+
+        #region IExtensible<T> Members
+
+        /// <summary>
+        /// (This is a read-only wrapper)
+        /// </summary>
+        /// <value>True</value>
+        public virtual bool IsReadOnly { get { return true; } }
+
+        /// <summary>
+        /// Check  wrapped collection for internal consistency
+        /// </summary>
+        /// <returns>True if check passed</returns>
+        public virtual bool Check() { return extensible.Check(); }
+
+        /// <summary> </summary>
+        /// <value>False if wrapped collection has set semantics</value>
+        public virtual bool AllowsDuplicates { get { return extensible.AllowsDuplicates; } }
+
+        //TODO: the equalityComparer should be guarded
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        public virtual SCG.IEqualityComparer<T> EqualityComparer { get { return extensible.EqualityComparer; } }
+
+        /// <summary>
+        /// By convention this is true for any collection with set semantics.
+        /// </summary>
+        /// <value>True if only one representative of a group of equal items 
+        /// is kept in the collection together with the total count.</value>
+        public virtual bool DuplicatesByCounting { get { return extensible.DuplicatesByCounting; } }
+
+
+        /// <summary> </summary>
+        /// <value>True if wrapped collection is empty</value>
+        public override bool IsEmpty { get { return extensible.IsEmpty; } }
+
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public virtual bool Add(T item)
+        { throw new ReadOnlyCollectionException(); }
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <param name="items"></param>
+        public virtual void AddAll(SCG.IEnumerable<T> items)
+        { throw new ReadOnlyCollectionException(); }
+
+        #endregion
+
+        #region ICloneable Members
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public virtual object Clone()
+        {
+            return new GuardedExtensible<T>((IExtensible<T>)(extensible.Clone()));
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// A read-only wrapper for a priority queue
+    ///
+    /// <i>This is mainly interesting as a base of other guard classes</i>
+    /// </summary>
+    public class GuardedPriorityQueue<T> : GuardedExtensible<T>, IPriorityQueue<T>
+    {
+        #region Fields
+
+        IPriorityQueue<T> priorityQueue;
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Wrap a priority queue in a read-only wrapper
+        /// </summary>
+        /// <param name="priorityQueue"></param>
+        public GuardedPriorityQueue(IPriorityQueue<T> priorityQueue) : base(priorityQueue) { this.priorityQueue = priorityQueue; }
+
+        #endregion
+
+        #region IPriorityQueue<T> Members
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public virtual T this[IPriorityQueueHandle<T> handle]
+        {
+            get { return priorityQueue[handle]; }
+            set { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <param name="handle"></param>
+        /// <param name="item"></param>
+        public virtual bool Add(ref IPriorityQueueHandle<T> handle, T item)
+        { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <param name="handle"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public virtual bool Find(IPriorityQueueHandle<T> handle, out T item)
+        { return priorityQueue.Find(handle, out item); }
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public virtual T Delete(IPriorityQueueHandle<T> handle)
+        { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
+
+        /// <summary>
+        /// Find the minimum of the wrapped collection
+        /// </summary>
+        /// <returns>The minimum</returns>
+        public virtual T FindMin() { return priorityQueue.FindMin(); }
+
+        /// <summary>
+        /// Find the minimum of the wrapped collection
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public virtual T FindMin(out IPriorityQueueHandle<T> handle)
+        { return priorityQueue.FindMin(out handle); }
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <returns></returns>
+        public virtual T DeleteMin()
+        { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public virtual T DeleteMin(out IPriorityQueueHandle<T> handle)
+        { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
+
+        /// <summary>
+        /// Find the maximum of the wrapped collection
+        /// </summary>
+        /// <returns>The maximum</returns>
+        public virtual T FindMax() { return priorityQueue.FindMax(); }
+
+        /// <summary>
+        /// Find the maximum of the wrapped collection
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public virtual T FindMax(out IPriorityQueueHandle<T> handle)
+        { return priorityQueue.FindMax(out handle); }
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <returns></returns>
+        public virtual T DeleteMax()
+        { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public virtual T DeleteMax(out IPriorityQueueHandle<T> handle)
+        { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
+
+        /// <summary>
+        /// </summary>
+        /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
+        /// <param name="handle"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public virtual T Replace(IPriorityQueueHandle<T> handle, T item)
+        { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
+
+        //TODO: we should guard the comparer!
+        /// <summary>
+        /// The comparer object supplied at creation time for the underlying collection
+        /// </summary>
+        /// <value>The comparer</value>
+        public virtual SCG.IComparer<T> Comparer { get { return priorityQueue.Comparer; } }
+
+        #endregion
+
+        #region IClonable Members
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override object Clone()
+        {
+            return new GuardedPriorityQueue<T>((IPriorityQueue<T>)(priorityQueue.Clone()));
+        }
+
+        #endregion
+    }
 
     /// <summary>
     /// A read-only wrapper for an <see cref="T:C5.ICollection`1"/>,
