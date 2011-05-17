@@ -20,7 +20,6 @@
 */
 
 using System;
-using System.Diagnostics;
 using SCG = System.Collections.Generic;
 namespace C5
 {
@@ -322,7 +321,7 @@ namespace C5
     /// </summary>
     /// <param name="a">The delegate to apply</param>
     //TODO: change this to throw an exception?
-    public virtual void Apply(Act<T> a) { collectionvalue.Apply(a); }
+    public virtual void Apply(Action<T> a) { collectionvalue.Apply(a); }
 
 
     /// <summary>
@@ -332,7 +331,7 @@ namespace C5
     /// <param name="filter">A filter delegate 
     /// (<see cref="T:C5.Filter`1"/>) defining the predicate</param>
     /// <returns>True is such an item exists</returns>
-    public virtual bool Exists(Fun<T, bool> filter) { return collectionvalue.Exists(filter); }
+    public virtual bool Exists(Func<T, bool> filter) { return collectionvalue.Exists(filter); }
 
     /// <summary>
     /// 
@@ -340,7 +339,7 @@ namespace C5
     /// <param name="filter"></param>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool Find(Fun<T, bool> filter, out T item) { return collectionvalue.Find(filter, out item); }
+    public virtual bool Find(Func<T, bool> filter, out T item) { return collectionvalue.Find(filter, out item); }
 
     /// <summary>
     /// Check if all items in the wrapped enumerable satisfies a specific predicate.
@@ -348,7 +347,7 @@ namespace C5
     /// <param name="filter">A filter delegate 
     /// (<see cref="T:C5.Filter`1"/>) defining the predicate</param>
     /// <returns>True if all items satisfies the predicate</returns>
-    public virtual bool All(Fun<T, bool> filter) { return collectionvalue.All(filter); }
+    public virtual bool All(Func<T, bool> filter) { return collectionvalue.All(filter); }
 
     /// <summary>
     /// Create an enumerable, enumerating the items of this collection that satisfies 
@@ -356,7 +355,7 @@ namespace C5
     /// </summary>
     /// <param name="filter">The T->bool filter delegate defining the condition</param>
     /// <returns>The filtered enumerable</returns>
-    public virtual SCG.IEnumerable<T> Filter(Fun<T, bool> filter) { return collectionvalue.Filter(filter); }
+    public virtual SCG.IEnumerable<T> Filter(Func<T, bool> filter) { return collectionvalue.Filter(filter); }
 
     /// <summary>
     /// Choose some item of this collection. 
@@ -441,7 +440,7 @@ namespace C5
     /// <param name="predicate"></param>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool FindLast(Fun<T, bool> predicate, out T item) { return directedcollection.FindLast(predicate, out item); }
+    public virtual bool FindLast(Func<T, bool> predicate, out T item) { return directedcollection.FindLast(predicate, out item); }
 
     #endregion
 
@@ -551,9 +550,8 @@ namespace C5
     /// Check if all items in the argument is in the wrapped collection
     /// </summary>
     /// <param name="items">The items</param>
-    /// <typeparam name="U"></typeparam>
     /// <returns>True if so</returns>
-    public virtual bool ContainsAll<U>(SCG.IEnumerable<U> items) where U : T { return collection.ContainsAll(items); }
+    public virtual bool ContainsAll(SCG.IEnumerable<T> items) { return collection.ContainsAll(items); }
 
     /// <summary> 
     /// Search for an item in the wrapped collection
@@ -639,9 +637,8 @@ namespace C5
     /// <summary>
     /// </summary>
     /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
-    /// <typeparam name="U"></typeparam>
     /// <param name="items"></param>
-    public virtual void RemoveAll<U>(SCG.IEnumerable<U> items) where U : T
+    public virtual void RemoveAll(SCG.IEnumerable<T> items)
     { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
 
     /// <summary>
@@ -654,9 +651,8 @@ namespace C5
     /// <summary>
     /// </summary>
     /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
-    /// <typeparam name="U"></typeparam>
     /// <param name="items"></param>
-    public virtual void RetainAll<U>(SCG.IEnumerable<U> items) where U : T
+    public virtual void RetainAll(SCG.IEnumerable<T> items)
     { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
 
     /// <summary>
@@ -711,9 +707,8 @@ namespace C5
     /// <summary>
     /// </summary>
     /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
-    /// <typeparam name="U"></typeparam>
     /// <param name="items"></param>
-    public virtual void AddAll<U>(SCG.IEnumerable<U> items) where U : T
+    public virtual void AddAll(SCG.IEnumerable<T> items)
     { throw new ReadOnlyCollectionException(); }
 
     #endregion
@@ -762,9 +757,9 @@ namespace C5
     /// specific predicate in this collection and return the index of the first one.
     /// </summary>
     /// <param name="predicate">A delegate 
-    /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
+    /// (<see cref="T:Func`2"/> with <code>R == bool</code>) defining the predicate</param>
     /// <returns>the index, if found, a negative value else</returns>
-    public int FindIndex(Fun<T, bool> predicate)
+    public int FindIndex(Func<T, bool> predicate)
     {
       IIndexed<T> indexed = sequenced as IIndexed<T>;
       if (indexed != null)
@@ -784,9 +779,9 @@ namespace C5
     /// specific predicate in this collection and return the index of the last one.
     /// </summary>
     /// <param name="predicate">A delegate 
-    /// (<see cref="T:C5.Fun`2"/> with <code>R == bool</code>) defining the predicate</param>
+    /// (<see cref="T:Func`2"/> with <code>R == bool</code>) defining the predicate</param>
     /// <returns>the index, if found, a negative value else</returns>
-    public int FindLastIndex(Fun<T, bool> predicate)
+    public int FindLastIndex(Func<T, bool> predicate)
     {
       IIndexed<T> indexed = sequenced as IIndexed<T>;
       if (indexed != null)
@@ -837,7 +832,7 @@ namespace C5
     /// <param name="predicate"></param>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool FindLast(Fun<T, bool> predicate, out T item) { return sequenced.FindLast(predicate, out item); }
+    public virtual bool FindLast(Func<T, bool> predicate, out T item) { return sequenced.FindLast(predicate, out item); }
 
     #endregion
 
@@ -1027,8 +1022,7 @@ namespace C5
     /// </summary>
     /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
     /// <param name="items"></param>
-    /// <typeparam name="U"></typeparam>
-    public void AddSorted<U>(SCG.IEnumerable<U> items) where U : T
+    public void AddSorted(SCG.IEnumerable<T> items)
     { throw new ReadOnlyCollectionException("Collection cannot be modified through this guard object"); }
 
     /// <summary>
@@ -1205,7 +1199,7 @@ namespace C5
     /// </summary>
     /// <param name="f"></param>
     /// <returns></returns>
-    public IIndexedSorted<T> FindAll(Fun<T, bool> f)
+    public IIndexedSorted<T> FindAll(Func<T, bool> f)
     { return indexedsorted.FindAll(f); }
 
 
@@ -1216,7 +1210,7 @@ namespace C5
     /// <param name="m"></param>
     /// <param name="c">The comparer to use in the result</param>
     /// <returns></returns>
-    public IIndexedSorted<V> Map<V>(Fun<T, V> m, SCG.IComparer<V> c)
+    public IIndexedSorted<V> Map<V>(Func<T, V> m, SCG.IComparer<V> c)
     { return indexedsorted.Map(m, c); }
 
     #endregion
@@ -1443,7 +1437,7 @@ namespace C5
     /// <exception cref="ReadOnlyCollectionException"> since this is a read-only wrappper</exception>
     /// <param name="i"></param>
     /// <param name="items"></param>
-    public void InsertAll<U>(int i, SCG.IEnumerable<U> items) where U : T
+    public void InsertAll(int i, SCG.IEnumerable<T> items)
     { throw new ReadOnlyCollectionException("List is read only"); }
 
 
@@ -1452,7 +1446,7 @@ namespace C5
     /// </summary>
     /// <param name="filter">The filter to use</param>
     /// <returns></returns>
-    public IList<T> FindAll(Fun<T, bool> filter) { return innerlist.FindAll(filter); }
+    public IList<T> FindAll(Func<T, bool> filter) { return innerlist.FindAll(filter); }
 
 
     /// <summary>
@@ -1461,7 +1455,7 @@ namespace C5
     /// <typeparam name="V">The type of items of the new list</typeparam>
     /// <param name="mapper">The mapper to use.</param>
     /// <returns>The mapped list</returns>
-    public IList<V> Map<V>(Fun<T, V> mapper) { return innerlist.Map(mapper); }
+    public IList<V> Map<V>(Func<T, V> mapper) { return innerlist.Map(mapper); }
 
     /// <summary>
     /// Perform Map on the wrapped list. The result is <b>not</b> necessarily read-only.
@@ -1470,7 +1464,7 @@ namespace C5
     /// <param name="mapper">The delegate defining the map.</param>
     /// <param name="itemequalityComparer">The itemequalityComparer to use for the new list</param>
     /// <returns>The new list.</returns>
-    public IList<V> Map<V>(Fun<T, V> mapper, SCG.IEqualityComparer<V> itemequalityComparer) { return innerlist.Map(mapper, itemequalityComparer); }
+    public IList<V> Map<V>(Func<T, V> mapper, SCG.IEqualityComparer<V> itemequalityComparer) { return innerlist.Map(mapper, itemequalityComparer); }
 
     /// <summary>
     /// </summary>
@@ -1996,7 +1990,7 @@ namespace C5
     /// <summary>
     /// 
     /// </summary>
-    public virtual Fun<K, V> Fun { get { return delegate(K k) { return this[k]; }; } }
+    public virtual Func<K, V> Func { get { return delegate(K k) { return this[k]; }; } }
 
     /// <summary>
     /// </summary>
