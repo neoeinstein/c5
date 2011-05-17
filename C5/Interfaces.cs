@@ -648,6 +648,17 @@ namespace C5
         /// <returns></returns>
         T this[int index] { get; }
         /// <summary>
+        /// Gets the the item from the top of the stack without popping it.
+        /// </summary>
+        /// <returns>The next item to be popped from the stack.</returns>
+        T Peek();
+        /// <summary>
+        /// Get the <paramref name="index"/>'th element of from the top of the stack.
+        /// </summary>
+        /// <param name="index">Index from the top of the stack. The top of the stack has index 0.</param>
+        /// <returns>The <paramref name="index"/>'th item from the top of the stack.</returns>
+        T Peek(int index);
+        /// <summary>
         /// Push an item to the top of the stack.
         /// </summary>
         /// <param name="item">The item</param>
@@ -676,6 +687,17 @@ namespace C5
         /// <param name="index"></param>
         /// <returns></returns>
         T this[int index] { get; }
+        /// <summary>
+        /// Gets the the item from the front of the queue without dequeueing it.
+        /// </summary>
+        /// <returns>The next item to be dequeued.</returns>
+        T PeekQueue();
+        /// <summary>
+        /// Get the <paramref name="index"/>'th element of the queue.
+        /// </summary>
+        /// <param name="index">Index from the front of the queue. The front of the queue has index 0.</param>
+        /// <returns>The <paramref name="index"/>'th item from the front of the queue.</returns>
+        T PeekQueue(int index);
         /// <summary>
         /// Enqueue an item at the back of the queue. 
         /// </summary>

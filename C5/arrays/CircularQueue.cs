@@ -123,6 +123,24 @@ namespace C5
             }
         }
 
+        /// <summary>
+        /// Gets the the item from the front of the queue without dequeueing it.
+        /// </summary>
+        /// <returns>The next item to be dequeued.</returns>
+        public virtual T PeekQueue()
+        {
+            return this[0];
+        }
+
+        /// <summary>
+        /// Get the <paramref name="i"/>'th element of the queue.
+        /// </summary>
+        /// <param name="i">Index from the front of the queue. The front of the queue has index 0.</param>
+        /// <returns>The <paramref name="i"/>'th item from the front of the queue.</returns>
+        public virtual T PeekQueue(int i)
+        {
+            return this[i];
+        }
 
         /// <summary>
         /// 
@@ -161,6 +179,25 @@ namespace C5
             if (ActiveEvents != 0)
                 raiseForRemove(retval);
             return retval;
+        }
+
+        /// <summary>
+        /// Gets the the item from the top of the stack without popping it.
+        /// </summary>
+        /// <returns>The next item to be popped from the stack.</returns>
+        public virtual T Peek()
+        {
+            return this[Count - 1];
+        }
+
+        /// <summary>
+        /// Get the <paramref name="i"/>'th element of from the top of the stack.
+        /// </summary>
+        /// <param name="i">Index from the top of the stack. The top of the stack has index 0.</param>
+        /// <returns>The <paramref name="i"/>'th item from the top of the stack.</returns>
+        public virtual T Peek(int i)
+        {
+            return this[Count - 1 - i];
         }
 
         /// <summary>

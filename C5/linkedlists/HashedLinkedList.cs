@@ -2142,7 +2142,6 @@ namespace C5
             get
             {
                 return Speed.Constant;
-
             }
         }
 
