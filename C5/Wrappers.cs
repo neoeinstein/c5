@@ -410,6 +410,15 @@ namespace C5
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return UnderlyingCollectionValue.ToString();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="format"></param>
         /// <param name="formatProvider"></param>
         /// <returns></returns>
